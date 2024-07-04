@@ -27,6 +27,7 @@ app.post('/openai', async function (req, res) {
     const completion = await openai.chat.completions.create({
       messages: [{ role: 'system', content: req.body.prompt }],
       model: 'gpt-3.5-turbo-1106',
+      temperature: 1.5,
     });
 
     const message = completion.choices[0].message.content ?? '';
