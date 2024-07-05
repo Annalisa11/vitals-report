@@ -1,6 +1,7 @@
 /* eslint-disable no-empty-pattern */
 import { useState } from 'react';
 import axios from 'axios';
+import '../styles/Jokes.scss';
 
 interface Joke {
   setup: string;
