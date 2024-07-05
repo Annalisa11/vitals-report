@@ -16,11 +16,20 @@ interface Vitals {
   isLow: boolean;
 }
 
+type Joke = {
+  setup: string;
+  punchline: string;
+};
+
 const App: React.FC = () => {
   const [vitals, setVitals] = useState<Vitals | null>(null);
   const [sarcasticComment, setSarcasticComment] = useState<string>('');
   const BASE_URL = import.meta.env.VITE_API_URL;
   const [loading, setLoading] = useState<boolean>(false);
+  const [joke, setJoke] = useState<Joke>({
+    setup: '',
+    punchline: '',
+  });
 
   useEffect(() => {
     const fetchVitals = async () => {
@@ -44,10 +53,37 @@ const App: React.FC = () => {
     )}. Avoid using specific values from the vitals. Address the text to David.`;
 
     const response = await axios.post(`${BASE_URL}/openai`, { prompt: prompt });
-    console.log('openai res', response);
 
     setSarcasticComment(response.data.message);
     setLoading(false);
+  };
+
+  const getJoke = async () => {
+    const response = await axios.get(
+      'https://official-joke-api.appspot.com/jokes/random'
+    );
+    const res = response.data;
+    setJoke({
+      setup: res.setup,
+      punchline: res.punchline,
+    });
+  };
+
+  const getTrendEmoji = (trendArrow: number) => {
+    switch (trendArrow) {
+      case 1:
+        return '⬆️ Sky-high! Calm down, champ';
+      case 2:
+        return '⬇️ Nose dive! Oopsie daisy';
+      case 3:
+        return '➡️ Flatline. Yawn...';
+      case 4:
+        return '↗️ Slight bump. Almost trying';
+      case 5:
+        return '⤴️ On the up! Look at you go';
+      default:
+        return '🤷‍♂️ Who knows? ';
+    }
   };
 
   return (
@@ -82,7 +118,8 @@ const App: React.FC = () => {
                   <strong>Glucose Units:</strong> {vitals.GlucoseUnits}
                 </p>
                 <p>
-                  <strong>Trend Arrow:</strong> {vitals.TrendArrow}
+                  <strong>Trend Arrow:</strong>{' '}
+                  {getTrendEmoji(vitals.TrendArrow)}
                 </p>
               </div>
             </div>
@@ -97,6 +134,17 @@ const App: React.FC = () => {
         ) : (
           <p>Loading...</p>
         )}
+        <div className='jokes'>
+          <h2>Do something for David</h2>
+          <p>
+            Life's tough for David. He's battling diabetes and could use a good
+            laugh. Be a friend and brighten his day — hit him with a joke!
+          </p>
+          <button onClick={getJoke}>Get me a Joke</button>
+          <div>
+            <div>{joke.setup}</div> {joke.punchline}
+          </div>
+        </div>
       </main>
     </div>
   );
