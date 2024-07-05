@@ -16,20 +16,18 @@ interface Vitals {
   isLow: boolean;
 }
 
-type Joke = {
+interface Joke {
   setup: string;
   punchline: string;
-};
+}
 
 const App: React.FC = () => {
   const [vitals, setVitals] = useState<Vitals | null>(null);
   const [sarcasticComment, setSarcasticComment] = useState<string>('');
-  const BASE_URL = import.meta.env.VITE_API_URL;
   const [loading, setLoading] = useState<boolean>(false);
-  const [joke, setJoke] = useState<Joke>({
-    setup: '',
-    punchline: '',
-  });
+  const [joke, setJoke] = useState<Joke>({ setup: '', punchline: '' });
+
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchVitals = async () => {
@@ -48,25 +46,29 @@ const App: React.FC = () => {
 
   const generateSarcasticComment = async (vitals: Vitals) => {
     setLoading(true);
-    const prompt = `Generate a message with a very short heading with a fitting emoji, followed by a short, funny and sarcastic text that comments on these diabetes vitals:  ${JSON.stringify(
+    const prompt = `Generate a message with a very short heading with a fitting emoji, followed by a short, funny and sarcastic text that comments on these diabetes vitals: ${JSON.stringify(
       vitals
     )}. Avoid using specific values from the vitals. Address the text to David.`;
 
-    const response = await axios.post(`${BASE_URL}/openai`, { prompt: prompt });
-
-    setSarcasticComment(response.data.message);
-    setLoading(false);
+    try {
+      const response = await axios.post(`${BASE_URL}/openai`, { prompt });
+      setSarcasticComment(response.data.message);
+    } catch (error) {
+      console.error('Error generating sarcastic comment:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getJoke = async () => {
-    const response = await axios.get(
-      'https://official-joke-api.appspot.com/jokes/random'
-    );
-    const res = response.data;
-    setJoke({
-      setup: res.setup,
-      punchline: res.punchline,
-    });
+    try {
+      const response = await axios.get(
+        'https://official-joke-api.appspot.com/jokes/random'
+      );
+      setJoke(response.data);
+    } catch (error) {
+      console.error('Error fetching joke:', error);
+    }
   };
 
   const getTrendEmoji = (trendArrow: number) => {
@@ -82,7 +84,7 @@ const App: React.FC = () => {
       case 5:
         return '⤴️ On the up! Look at you go';
       default:
-        return '🤷‍♂️ Who knows? ';
+        return '🤷‍♂️ Who knows?';
     }
   };
 
@@ -141,9 +143,12 @@ const App: React.FC = () => {
             laugh. Be a friend and brighten his day — hit him with a joke!
           </p>
           <button onClick={getJoke}>Get me a Joke</button>
-          <div>
-            <div>{joke.setup}</div> {joke.punchline}
-          </div>
+          {joke.setup && (
+            <div className='joke'>
+              <p>{joke.setup}</p>
+              <p>{joke.punchline}</p>
+            </div>
+          )}
         </div>
       </main>
     </div>
