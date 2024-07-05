@@ -1,47 +1,24 @@
 /* eslint-disable no-empty-pattern */
-import React, { useEffect, useState } from 'react';
-import { VitalsType } from '../App';
-import axios from 'axios';
-import { BASE_URL } from '../config';
+import { useEffect } from 'react';
 import '../styles/Vitals.scss';
+import { useVitals } from '../hooks/useVitals';
+import { useAIComment } from '../hooks/useAIComment';
 
 interface Props {}
 
 const Vitals = ({}: Props) => {
-  const [vitals, setVitals] = useState<VitalsType | null>(null);
-  const [sarcasticComment, setSarcasticComment] = useState<string>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const { data: vitals, isLoading: vitalsLoading } = useVitals();
+  const {
+    mutate: generateComment,
+    data: sarcasticComment,
+    isPending: commentLoading,
+  } = useAIComment();
 
   useEffect(() => {
-    const fetchVitals = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/vitals`);
-        const data: VitalsType = response.data;
-        setVitals(data);
-        generateSarcasticComment(data);
-      } catch (error) {
-        console.error('Error fetching vitals:', error);
-      }
-    };
-
-    fetchVitals();
-  }, []);
-
-  const generateSarcasticComment = async (vitals: VitalsType) => {
-    setLoading(true);
-    const prompt = `Generate a message with a very short heading with a fitting emoji, followed by a short, funny and sarcastic text that comments on these diabetes vitals: ${JSON.stringify(
-      vitals
-    )}. Avoid using specific values from the vitals. Address the text to David.`;
-
-    try {
-      const response = await axios.post(`${BASE_URL}/openai`, { prompt });
-      setSarcasticComment(response.data.message);
-    } catch (error) {
-      console.error('Error generating sarcastic comment:', error);
-    } finally {
-      setLoading(false);
+    if (vitals) {
+      generateComment(vitals);
     }
-  };
+  }, [vitals, generateComment]);
 
   const getTrendEmoji = (trendArrow: number) => {
     switch (trendArrow) {
@@ -60,7 +37,7 @@ const Vitals = ({}: Props) => {
     }
   };
 
-  return vitals ? (
+  return vitals && !vitalsLoading ? (
     <div
       className={`reading ${
         vitals.isHigh ? 'red' : vitals.isLow ? 'blue' : 'green'
@@ -90,7 +67,11 @@ const Vitals = ({}: Props) => {
         </div>
       </div>
       <div className='comment'>
-        {loading ? <div className='loader'></div> : <p>{sarcasticComment}</p>}
+        {commentLoading ? (
+          <div className='loader'></div>
+        ) : (
+          <p>{sarcasticComment}</p>
+        )}
       </div>
     </div>
   ) : (

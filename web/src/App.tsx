@@ -2,6 +2,7 @@ import React from 'react';
 import './App.scss';
 import Vitals from './components/Vitals';
 import Jokes from './components/Jokes';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 export type VitalsType = {
   FactoryTimestamp: string;
@@ -17,18 +18,22 @@ export type VitalsType = {
   isLow: boolean;
 };
 
+const queryClient = new QueryClient();
+
 const App: React.FC = () => {
   return (
-    <div className='app'>
-      <header className='app-header'>
-        <h1>Best Report EVER</h1>
-        <h2>Your daily dose of David</h2>
-      </header>
-      <main>
-        <Vitals />
-        <Jokes />
-      </main>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className='app'>
+        <header className='app-header'>
+          <h1>Best Report EVER</h1>
+          <h2>Your daily dose of David</h2>
+        </header>
+        <main>
+          <Vitals />
+          <Jokes />
+        </main>
+      </div>
+    </QueryClientProvider>
   );
 };
 
