@@ -1,7 +1,7 @@
-/* eslint-disable no-empty-pattern */
 import { useState } from 'react';
 import axios from 'axios';
 import '../styles/Jokes.scss';
+import Logo from '../assets/whatsapp.svg?react';
 
 interface Joke {
   setup: string;
@@ -22,6 +22,11 @@ const Jokes = () => {
     }
   };
 
+  const createWhatsappShareLink = (joke: Joke) => {
+    const message = `${joke.setup} - ${joke.punchline}`;
+    return `https://wa.me/?text=${encodeURIComponent(message)}`;
+  };
+
   return (
     <div className='jokes'>
       <h2>Do something for David</h2>
@@ -31,10 +36,21 @@ const Jokes = () => {
       </p>
       <button onClick={getJoke}>Get me a Joke</button>
       {joke.setup && (
-        <div className='joke'>
-          <p>{joke.setup}</p>
-          <p>{joke.punchline}</p>
-        </div>
+        <>
+          <div className='joke'>
+            <p>{joke.setup}</p>
+            <p>{joke.punchline}</p>
+          </div>
+          <a
+            href={createWhatsappShareLink(joke)}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='logo-link'
+          >
+            <Logo className='logo' />
+            <span>Share on WhatsApp</span>
+          </a>
+        </>
       )}
     </div>
   );

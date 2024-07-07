@@ -13,3 +13,31 @@
   padding: 1rem 2rem;
   margin-top: 1rem;
 }
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: var(--green-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  text-decoration: none;
+  color: var(--dark-color);
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken(#93f9b9, 10%);
+  }
+
+  .logo {
+    width: 24px;
+    height: 24px;
+    color: var(--dark-color);
+  }
+
+  span {
+    font-size: 1rem;
+  }
+}
