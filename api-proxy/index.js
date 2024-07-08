@@ -57,4 +57,5 @@ app.post('/openai', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Api proxy is running on port ${PORT}`);
+  console.log(`> Dummy Data in use: ${USE_DUMMY_DATA}`);
 });
