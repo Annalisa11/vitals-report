@@ -18,7 +18,6 @@ const openai = new OpenAI({
 });
 
 app.get('/vitals', async (req, res) => {
-  console.log(USE_DUMMY_DATA);
   if (USE_DUMMY_DATA) {
     res.send(dummyData.vitals);
   } else {
@@ -50,7 +49,7 @@ app.post('/openai', async (req, res) => {
       res.send({ message });
     } catch (error) {
       console.error('Error generating completion:', error);
-      res.status(500).send({ error: true });
+      res.status(500).send('Error fetching ai completion');
     }
   }
 });
