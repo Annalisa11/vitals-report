@@ -1,0 +1,50 @@
+[
+  {
+    "Timestamp": "2024-07-04T07:30:00Z",
+    "ValueInMgPerDl": 95
+  },
+  {
+    "Timestamp": "2024-07-04T09:00:00Z",
+    "ValueInMgPerDl": 110
+  },
+  {
+    "Timestamp": "2024-07-04T11:30:00Z",
+    "ValueInMgPerDl": 85
+  },
+  {
+    "Timestamp": "2024-07-04T13:00:00Z",
+    "ValueInMgPerDl": 120
+  },
+  {
+    "Timestamp": "2024-07-04T15:30:00Z",
+    "ValueInMgPerDl": 140
+  },
+  {
+    "Timestamp": "2024-07-04T17:00:00Z",
+    "ValueInMgPerDl": 130
+  },
+  {
+    "Timestamp": "2024-07-04T18:30:00Z",
+    "ValueInMgPerDl": 115
+  },
+  {
+    "Timestamp": "2024-07-04T20:00:00Z",
+    "ValueInMgPerDl": 125
+  },
+  {
+    "Timestamp": "2024-07-04T22:30:00Z",
+    "ValueInMgPerDl": 105
+  },
+  {
+    "Timestamp": "2024-07-05T00:00:00Z",
+    "ValueInMgPerDl": 90
+  },
+  {
+    "Timestamp": "2024-07-05T02:30:00Z",
+    "ValueInMgPerDl": 85
+  },
+  {
+    "Timestamp": "2024-07-05T04:00:00Z",
+    "ValueInMgPerDl": 100
+  }
+]
