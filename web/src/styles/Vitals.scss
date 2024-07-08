@@ -1,8 +1,13 @@
+@import '../reusables.scss';
+
 .glucose {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: var(--green-color);
   border-radius: 2rem;
-  padding: 2rem 5rem;
   width: fit-content;
+  padding: 2rem 5rem;
 }
 
 .reading {
@@ -17,10 +22,12 @@
   gap: 2rem;
   justify-content: space-between;
   width: 100%;
+  flex-direction: column;
+  align-items: center;
 
-  @media (max-width: 430px) {
-    flex-direction: column;
-    align-items: center;
+  @include breakpoint('medium') {
+    flex-direction: row;
+    align-items: initial;
   }
 }
 
@@ -32,9 +39,10 @@
 .glucose p span {
   font-size: initial;
   font-weight: bold;
+  display: block;
 
-  @media (max-width: 430px) {
-    display: block;
+  @include breakpoint('medium') {
+    display: initial;
   }
 }
 

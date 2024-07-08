@@ -1,0 +1,25 @@
+// Variables
+
+:root {
+  --dark-color: hsl(208, 37%, 20%);
+  --dark-color-20: hsla(208, 37%, 20%, 0.2);
+  --green-color: #93f9b9;
+}
+
+$breakpoints: (
+  'medium': 768px,
+  'large': 1440px,
+);
+
+// Mixins
+
+@mixin breakpoint($size) {
+  $breakpoint: map-get($breakpoints, $size);
+  @if $breakpoint {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  } @else {
+    @warn "No value found for breakpoint: #{$size}";
+  }
+}
