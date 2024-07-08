@@ -53,6 +53,11 @@ Navigate into the backend folder, the `api-proxy` folder, and run the server.
 cd api-proxy
 node index.js
 ```
+if you want the server to restart every time you change something in the backend files, run this instead: 
+```
+cd api-proxy
+npm run server
+```
 
 **Frontend**  
 
