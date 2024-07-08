@@ -41,7 +41,7 @@ VITE_API_URL=http://localhost:5000          // use the real url of where your se
 
 ## Run the Project
 
-🚨 Install all dependencies with `npm install` in the respective web and api-proxy folders if you run the server/frontend for the first time.  
+🚨 Install all dependencies with `npm install` in the respective `web` and `api-proxy` folders if you run the server/frontend for the first time.  
 
 
 **Backend**   
@@ -71,7 +71,7 @@ project-root
 │   ├── .env       // write your environment varibales here
 │   ├── package.json    
 │   └── ...
-├── frontend    
+├── web   // frontend    
 │   ├── src
 │   │   ├── assets   // put any img, svg etc here
 │   │   ├── components   // put any component files here (feel free to nest it further)
@@ -84,3 +84,14 @@ project-root
 └── README.md 
 ```
 
+## Build With
+
+**Backend**   
+- Node.js
+- Express
+
+**Frontend**
+- React
+- Vite
+- SCSS
+- Typescript
