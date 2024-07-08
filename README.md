@@ -10,6 +10,7 @@ Well, us too :)
 - [Environment Variables](#environment-variables)
 - [Run the Project](#run-the-project)
 - [Project Structure](#project-structure)
+- [Built With](#built-with)
 
 ## Getting Started
 
@@ -84,7 +85,7 @@ project-root
 └── README.md 
 ```
 
-## Build With
+## Built With
 
 **Backend**   
 - Node.js
