@@ -1,7 +1,7 @@
 # Vitals Report
 
 Always wanted to keep track on your friend's diabetes vitals?  
-Well, us too :)
+Well, same :)
 
 ## Table of Contents
 
@@ -101,3 +101,5 @@ project-root
 - Vite
 - SCSS
 - Typescript
+- Tanstack Query
+- Recharts
