@@ -31,9 +31,8 @@ const App: React.FC = () => {
         </header>
         <main>
           <Vitals />
-          <Jokes />
-          huhu
           <GlucoseChart />
+          <Jokes />
         </main>
       </div>
     </QueryClientProvider>

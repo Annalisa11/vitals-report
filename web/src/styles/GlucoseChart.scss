@@ -1,0 +1,18 @@
+@import '../reusables.scss';
+
+.custom-tooltip {
+  border: 1px solid rgb(186, 186, 186);
+  background-color: white;
+  color: var(--dark-color);
+  padding: 1rem;
+  border-radius: 12px;
+
+  & .value {
+    color: green;
+
+    & small {
+      font-size: x-small;
+      color: grey;
+    }
+  }
+}

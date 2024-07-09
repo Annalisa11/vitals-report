@@ -22,7 +22,9 @@ app.get('/vitals', async (req, res) => {
     res.send(dummyData.vitals);
   } else {
     try {
-      const response = await axios.get(`${process.env.API_URL}/cgm?type=current`);
+      const response = await axios.get(
+        `${process.env.API_URL}/cgm?type=current`
+      );
       res.send(response.data);
     } catch (error) {
       console.error('Error fetching vitals:', error);
@@ -36,8 +38,8 @@ app.get('/history', async (req, res) => {
     const response = await axios.get(`${process.env.API_URL}/cgm?type=graph`);
     res.send(response.data);
   } catch (error) {
-    console.error('Error fetching vitals:', error);
-    res.status(500).send('Error fetching vitals');
+    console.error('Error fetching history:', error);
+    res.status(500).send('Error fetching history');
   }
 });
 
