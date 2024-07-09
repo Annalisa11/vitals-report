@@ -18,6 +18,24 @@ main {
 }
 
 .chart {
-  width: 100%;
-  height: max-content;
+  &__label-x {
+    color: black;
+    height: 20px;
+  }
+  &__date {
+    font-size: x-small;
+    font-weight: bold;
+    display: block;
+  }
+}
+
+svg.recharts-surface {
+  height: calc(100% + 4rem) !important;
+}
+
+.recharts-y-axis .recharts-cartesian-axis-tick:first-child line {
+  stroke: none;
+}
+.recharts-y-axis .recharts-cartesian-axis-tick:first-child text {
+  font-size: 0;
 }
