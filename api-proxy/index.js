@@ -18,11 +18,11 @@ const openai = new OpenAI({
 });
 
 app.get('/vitals', async (req, res) => {
-  if (USE_DUMMY_DATA) {
+  if (USE_DUMMY_DATA === true) {
     res.send(dummyData.vitals);
   } else {
     try {
-      const response = await axios.get(process.env.API_URL);
+      const response = await axios.get(`${process.env.API_URL}/cgm?type=current`);
       res.send(response.data);
     } catch (error) {
       console.error('Error fetching vitals:', error);
@@ -31,8 +31,18 @@ app.get('/vitals', async (req, res) => {
   }
 });
 
+app.get('/history', async (req, res) => {
+  try {
+    const response = await axios.get(`${process.env.API_URL}/cgm?type=graph`);
+    res.send(response.data);
+  } catch (error) {
+    console.error('Error fetching vitals:', error);
+    res.status(500).send('Error fetching vitals');
+  }
+});
+
 app.post('/openai', async (req, res) => {
-  if (USE_DUMMY_DATA) {
+  if (USE_DUMMY_DATA === true) {
     res.send(dummyData.openai);
   } else {
     try {
