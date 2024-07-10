@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { ReactElement } from 'react';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -166,74 +167,80 @@ const GlucoseChart: React.FC = () => {
 
   const data = history;
   return (
-    <ResponsiveContainer width='100%' height={300}>
-      <AreaChart data={data} margin={{ top: 0, left: 0, right: 0, bottom: 0 }}>
-        <defs>
-          <linearGradient id='colorUv' x1='0' y1='0' x2='0' y2='1'>
-            <stop offset='5%' stopColor='#82ca9d' stopOpacity={0.8} />
-            <stop offset='95%' stopColor='#82ca9d' stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <XAxis
-          dataKey='Timestamp'
-          tickFormatter={(value) => dayjs(value).format('HH:mm')}
-          minTickGap={60}
-        />
-        <YAxis
-          domain={['dataMin - 30', 'dataMax + 30']}
-          mirror
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={(tick, index) => (index !== 0 ? tick : '')}
-        />
-        <Tooltip
-          content={({ active, payload }) => (
-            <CustomTooltip active={active} payload={payload} />
+    <div className='glucose-chart'>
+      <h2>12h of David</h2>
+      <ResponsiveContainer width='100%' height={300}>
+        <AreaChart
+          data={data}
+          margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+        >
+          <defs>
+            <linearGradient id='colorUv' x1='0' y1='0' x2='0' y2='1'>
+              <stop offset='5%' stopColor='#82ca9d' stopOpacity={0.8} />
+              <stop offset='95%' stopColor='#82ca9d' stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis
+            dataKey='Timestamp'
+            tickFormatter={(value) => dayjs(value).format('HH:mm')}
+            minTickGap={60}
+          />
+          <YAxis
+            domain={['dataMin - 30', 'dataMax + 30']}
+            mirror
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={(tick, index) => (index !== 0 ? tick : '')}
+          />
+          <Tooltip
+            content={({ active, payload }) => (
+              <CustomTooltip active={active} payload={payload} />
+            )}
+          />
+          <ReferenceLine y={80} stroke='lightgrey' strokeOpacity={0.5} />
+          <ReferenceLine y={130} stroke='lightgrey' strokeOpacity={0.5} />
+
+          {showExtraChartContent && (
+            <>
+              <ReferenceLine
+                x={findClosestDateToToday(data)}
+                stroke='lightblue'
+                label={{ value: 'TODAY', fill: 'dodgerblue' }}
+              />
+              <ReferenceArea
+                ifOverflow='hidden'
+                x1={'2024-07-04T13:00:00Z'}
+                x2={'2024-07-09T20:00:00Z'}
+                stroke='blue'
+                strokeOpacity={0.2}
+                fillOpacity={0.2}
+                label={(a) => {
+                  console.log('REF AREA', a);
+                  return (
+                    <NightLogo
+                      width={24}
+                      height={24}
+                      fill='blue'
+                      fillOpacity={0.3}
+                      x={a.viewBox.x + (a.viewBox.width - 24) / 2}
+                      y={a.viewBox.y + 10}
+                    />
+                  );
+                }}
+              />
+            </>
           )}
-        />
-        <ReferenceLine y={80} stroke='lightgrey' strokeOpacity={0.5} />
-        <ReferenceLine y={130} stroke='lightgrey' strokeOpacity={0.5} />
 
-        {showExtraChartContent && (
-          <>
-            <ReferenceLine
-              x={findClosestDateToToday(data)}
-              stroke='lightblue'
-              label={{ value: 'TODAY', fill: 'dodgerblue' }}
-            />
-            <ReferenceArea
-              ifOverflow='hidden'
-              x1={'2024-07-04T13:00:00Z'}
-              x2={'2024-07-09T20:00:00Z'}
-              stroke='blue'
-              strokeOpacity={0.2}
-              fillOpacity={0.2}
-              label={(a) => {
-                console.log('REF AREA', a);
-                return (
-                  <NightLogo
-                    width={24}
-                    height={24}
-                    fill='blue'
-                    fillOpacity={0.3}
-                    x={a.viewBox.x + (a.viewBox.width - 24) / 2}
-                    y={a.viewBox.y + 10}
-                  />
-                );
-              }}
-            />
-          </>
-        )}
-
-        <Area
-          type='monotone'
-          dataKey='ValueInMgPerDl'
-          stroke='#82ca9d'
-          fillOpacity={1}
-          fill='url(#colorUv)'
-        />
-      </AreaChart>
-    </ResponsiveContainer>
+          <Area
+            type='monotone'
+            dataKey='ValueInMgPerDl'
+            stroke='#82ca9d'
+            fillOpacity={1}
+            fill='url(#colorUv)'
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

@@ -1,25 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-empty-pattern */
 import { useEffect } from 'react';
 import '../styles/Vitals.scss';
 import { useVitals } from '../hooks/useVitals';
 import { useAIComment } from '../hooks/useAIComment';
+import { VitalsType } from '../App';
 
-interface Props {}
+interface Props {
+  vitals: VitalsType | undefined;
+  vitalsLoading: boolean;
+}
 
-const Vitals = ({}: Props) => {
-  const { data: vitals, isLoading: vitalsLoading } = useVitals();
-  const {
-    mutate: generateComment,
-    data: sarcasticComment,
-    isPending: commentLoading,
-  } = useAIComment();
-
-  useEffect(() => {
-    if (vitals) {
-      generateComment(vitals);
-    }
-  }, [vitals, generateComment]);
-
+const Vitals = ({ vitals, vitalsLoading }: Props) => {
   const getTrendEmoji = (trendArrow: number) => {
     switch (trendArrow) {
       case 1:
@@ -65,13 +57,6 @@ const Vitals = ({}: Props) => {
             <strong>Trend Arrow:</strong> {getTrendEmoji(vitals.TrendArrow)}
           </p>
         </div>
-      </div>
-      <div className='comment'>
-        {commentLoading ? (
-          <div className='loader'></div>
-        ) : (
-          <p>{sarcasticComment}</p>
-        )}
       </div>
     </div>
   ) : (

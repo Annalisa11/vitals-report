@@ -2,8 +2,9 @@ import React from 'react';
 import './App.scss';
 import Vitals from './components/Vitals';
 import Jokes from './components/Jokes';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import GlucoseChart from './components/GlucoseChart';
+import { useVitals } from './hooks/useVitals';
+import AiComment from './components/AiComment';
 
 export type VitalsType = {
   FactoryTimestamp: string;
@@ -19,23 +20,22 @@ export type VitalsType = {
   isLow: boolean;
 };
 
-const queryClient = new QueryClient();
-
 const App: React.FC = () => {
+  const { data: vitals, isLoading: vitalsLoading } = useVitals();
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <div className='app'>
-        <header className='app-header'>
-          <h1>Best Report EVER</h1>
-          <h2>Your daily dose of David</h2>
-        </header>
-        <main>
-          <Vitals />
-          <GlucoseChart />
-          <Jokes />
-        </main>
-      </div>
-    </QueryClientProvider>
+    <div className='app'>
+      <header className='app-header'>
+        <h1>Best Report EVER</h1>
+        <h2>Your daily dose of David</h2>
+      </header>
+      <main>
+        <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />
+        <GlucoseChart />
+        <AiComment vitals={vitals} />
+        <Jokes />
+      </main>
+    </div>
   );
 };
 
