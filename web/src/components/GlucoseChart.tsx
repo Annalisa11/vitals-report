@@ -168,7 +168,7 @@ const GlucoseChart: React.FC = () => {
   const data = history;
   return (
     <div className='glucose-chart'>
-      <h2>12h of David</h2>
+      <h2>Last 12h of David</h2>
       <ResponsiveContainer width='100%' height={300}>
         <AreaChart
           data={data}

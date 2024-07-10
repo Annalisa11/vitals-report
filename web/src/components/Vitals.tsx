@@ -5,6 +5,11 @@ import '../styles/Vitals.scss';
 import { useVitals } from '../hooks/useVitals';
 import { useAIComment } from '../hooks/useAIComment';
 import { VitalsType } from '../App';
+import dayjs from 'dayjs';
+import 'dayjs/locale/de';
+import localizedFormat from 'dayjs/plugin/localizedFormat'; // ES 2015
+
+dayjs.extend(localizedFormat);
 
 interface Props {
   vitals: VitalsType | undefined;
@@ -44,17 +49,20 @@ const Vitals = ({ vitals, vitalsLoading }: Props) => {
         </div>
         <div className='stats'>
           <p>
-            <strong>Timestamp:</strong> {vitals.Timestamp}
+            <strong>Timestamp:</strong>
+            {dayjs(vitals.Timestamp).format('L LT')}
           </p>
           <p>
-            <strong>Trend:</strong>{' '}
+            <strong>Trend:</strong>
             {vitals.TrendMessage || 'No significant change'}
           </p>
           <p>
-            <strong>Glucose Units:</strong> {vitals.GlucoseUnits}
+            <strong>Glucose Units:</strong>
+            {vitals.GlucoseUnits}
           </p>
           <p>
-            <strong>Trend Arrow:</strong> {getTrendEmoji(vitals.TrendArrow)}
+            <strong>Trend Arrow:</strong>
+            <div>{getTrendEmoji(vitals.TrendArrow)}</div>
           </p>
         </div>
       </div>
