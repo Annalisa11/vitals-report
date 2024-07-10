@@ -45,10 +45,10 @@ const Jokes = () => {
             href={createWhatsappShareLink(joke)}
             target='_blank'
             rel='noopener noreferrer'
-            className='logo-link'
+            className='share-button'
           >
-            <Logo className='logo' />
-            <span>Share on WhatsApp</span>
+            <Logo className='share-button__logo' />
+            <span className='share-button__label'>Share on WhatsApp</span>
           </a>
         </>
       )}

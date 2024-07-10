@@ -54,8 +54,8 @@ const GlucoseChart: React.FC = () => {
         fill='#666'
       >
         <div data-xmlns='http://www.w3.org/1999/xhtml'>
-          <span className='chart__label-x'>{time}</span>
-          <small className='chart__date'>{date}</small>
+          <span className='tick__time'>{time}</span>
+          <small className='tick__date'>{date}</small>
         </div>
       </foreignObject>
     );
@@ -102,8 +102,8 @@ const GlucoseChart: React.FC = () => {
 
       return (
         <div className='custom-tooltip'>
-          <div className='chart__label-x'>{time.format('HH:mm')}</div>
-          <div className='value'>
+          <div className='custom-tooltip__label'>{time.format('HH:mm')}</div>
+          <div className='custom-tooltip__value'>
             {payload[0].value} <small>mg/dL</small>
           </div>
         </div>

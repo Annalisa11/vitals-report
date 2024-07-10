@@ -1,8 +1,5 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.app {
+  padding-bottom: 4rem;
 }
 
 main {
@@ -11,31 +8,4 @@ main {
   flex-direction: column;
   place-content: center;
   gap: 4rem;
-}
-
-.app {
-  padding-bottom: 4rem;
-}
-
-.chart {
-  &__label-x {
-    color: black;
-    height: 20px;
-  }
-  &__date {
-    font-size: x-small;
-    font-weight: bold;
-    display: block;
-  }
-}
-
-svg.recharts-surface {
-  height: calc(100% + 4rem) !important;
-}
-
-.recharts-y-axis .recharts-cartesian-axis-tick:first-child line {
-  stroke: none;
-}
-.recharts-y-axis .recharts-cartesian-axis-tick:first-child text {
-  font-size: 0;
 }

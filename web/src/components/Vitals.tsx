@@ -20,34 +20,30 @@ const Vitals = ({ vitals, vitalsLoading }: Props) => {
   const getTrendEmoji = (trendArrow: number) => {
     switch (trendArrow) {
       case 1:
-        return '⬆️ Sky-high! Calm down, champ';
-      case 2:
         return '⬇️ Nose dive! Oopsie daisy';
+      case 2:
+        return '↘️ Slight dip! Still on the move';
       case 3:
         return '➡️ Flatline. Yawn...';
       case 4:
         return '↗️ Slight bump. Almost trying';
       case 5:
-        return '⤴️ On the up! Look at you go';
+        return '⬆️ Sky-high! Calm down, chamxp';
       default:
         return '🤷‍♂️ Who knows?';
     }
   };
 
   return vitals && !vitalsLoading ? (
-    <div
-      className={`reading ${
-        vitals.isHigh ? 'red' : vitals.isLow ? 'blue' : 'green'
-      }`}
-    >
-      <div className='stats-container'>
-        <div className='glucose'>
-          <p>
+    <div className='vitals'>
+      <div className='vitals__container'>
+        <div className='vitals__glucose'>
+          <p className='vitals__glucose-text'>
             {vitals.ValueInMgPerDl}
-            <span> mg/dL</span>
+            <span className='vitals__glucose-unit'> mg/dL</span>
           </p>
         </div>
-        <div className='stats'>
+        <div className='vitals__stats'>
           <p>
             <strong>Timestamp:</strong>
             {dayjs(vitals.Timestamp).format('L LT')}

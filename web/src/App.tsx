@@ -25,7 +25,7 @@ const App: React.FC = () => {
 
   return (
     <div className='app'>
-      <header className='app-header'>
+      <header className='app__header'>
         <h1>Best Report EVER</h1>
         <h2>Your daily dose of David</h2>
       </header>

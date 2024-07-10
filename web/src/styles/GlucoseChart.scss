@@ -1,18 +1,45 @@
 @import '../reusables.scss';
 
-.custom-tooltip {
-  border: 1px solid rgb(186, 186, 186);
-  background-color: white;
-  color: var(--dark-color);
-  padding: 1rem;
-  border-radius: 12px;
+.glucose-chart {
+  .custom-tooltip {
+    border: 1px solid rgb(186, 186, 186);
+    background-color: white;
+    color: var(--dark-color);
+    padding: 1rem;
+    border-radius: 12px;
 
-  & .value {
-    color: green;
+    &__label {
+      color: black;
+      height: 20px;
+    }
 
-    & small {
-      font-size: x-small;
-      color: grey;
+    &__value {
+      color: green;
+
+      & small {
+        font-size: x-small;
+        color: grey;
+      }
     }
   }
+
+  .tick {
+    &__date {
+      font-size: x-small;
+      font-weight: bold;
+      display: block;
+    }
+  }
+}
+
+svg.recharts-surface {
+  height: calc(100% + 4rem) !important;
+}
+
+// removes the first tick of the y-axis
+.recharts-y-axis .recharts-cartesian-axis-tick:first-child line {
+  stroke: none;
+}
+.recharts-y-axis .recharts-cartesian-axis-tick:first-child text {
+  font-size: 0;
 }
