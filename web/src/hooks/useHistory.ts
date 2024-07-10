@@ -13,6 +13,5 @@ export const useHistory = () => {
   return useQuery<VitalsType[], Error>({
     queryKey: ['history'],
     queryFn: fetchHistory,
-    refetchInterval: 60 * 60 * 1000,
   });
 };
