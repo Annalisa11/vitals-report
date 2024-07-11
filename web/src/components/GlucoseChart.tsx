@@ -119,10 +119,10 @@ const GlucoseChart: React.FC = () => {
   const findClosestDateToToday = (
     data: VitalsType[] | ChartData[] | undefined
   ) => {
-    if (!data) {
-      return;
-    }
     const todayStart = dayjs().startOf('day');
+    if (!data || dayjs(data[0].Timestamp).isAfter(todayStart)) {
+      return undefined;
+    }
     const todaysDates = data.filter((item) =>
       dayjs(item.Timestamp).isSame(todayStart, 'day')
     );
@@ -210,6 +210,7 @@ const GlucoseChart: React.FC = () => {
           {showExtraChartContent && (
             <>
               <ReferenceLine
+                ifOverflow='hidden'
                 x={findClosestDateToToday(data)}
                 stroke='lightblue'
                 label={{ value: 'TODAY', fill: 'dodgerblue' }}
@@ -221,14 +222,14 @@ const GlucoseChart: React.FC = () => {
                 stroke='blue'
                 strokeOpacity={0.2}
                 fillOpacity={0.2}
-                label={(a) => (
+                label={(content) => (
                   <NightLogo
                     width={24}
                     height={24}
                     fill='blue'
                     fillOpacity={0.3}
-                    x={a.viewBox.x + (a.viewBox.width - 24) / 2}
-                    y={a.viewBox.y + 10}
+                    x={content.viewBox.x + (content.viewBox.width - 24) / 2}
+                    y={content.viewBox.y + 10}
                   />
                 )}
               />

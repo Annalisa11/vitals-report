@@ -5,6 +5,7 @@ import Jokes from './components/Jokes';
 import GlucoseChart from './components/GlucoseChart';
 import { useVitals } from './hooks/useVitals';
 import AiComment from './components/AiComment';
+import GlucoseScoreChart from './components/GlucoseScoreChart';
 
 export type VitalsType = {
   FactoryTimestamp: string;
@@ -32,6 +33,7 @@ const App: React.FC = () => {
       <main>
         <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />
         <GlucoseChart />
+        <GlucoseScoreChart />
         <AiComment vitals={vitals} />
         <Jokes />
       </main>

@@ -8,7 +8,7 @@ const dummyData = require('./dummyData');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const USE_DUMMY_DATA = process.env.USE_DUMMY_DATA ?? true;
+const USE_DUMMY_DATA = process.env.USE_DUMMY_DATA === 'true' ?? true;
 
 app.use(cors());
 app.use(express.json());
@@ -68,5 +68,5 @@ app.post('/openai', async (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Api proxy is running on port ${PORT}`);
-  console.log(`> Dummy Data in use: ${USE_DUMMY_DATA}`);
+  console.log(`> Dummy Data in use: ${USE_DUMMY_DATA === true}`);
 });
