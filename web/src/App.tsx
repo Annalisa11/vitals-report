@@ -37,6 +37,7 @@ const App: React.FC = () => {
     mutateGlucoseScore({ inRange: 20, belowRange: 40, aboveRange: 20 });
   };
 
+  const showButton = false;
   return (
     <div className='app'>
       <header className='app__header'>
@@ -48,10 +49,14 @@ const App: React.FC = () => {
         <GlucoseChart />
         <div className='glucose-score'>
           <GlucoseScoreChart />
-          <button onClick={getGlucoseScore}>get score</button>
-          <div>{glucoseScoreComment}</div>
+          {showButton && (
+            <>
+              <button onClick={getGlucoseScore}>get score</button>
+              <div>{glucoseScoreComment}</div>
+            </>
+          )}
+          <AiComment vitals={vitals} />
         </div>
-        <AiComment vitals={vitals} />
         <Jokes />
       </main>
     </div>
