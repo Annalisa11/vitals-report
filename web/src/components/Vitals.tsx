@@ -1,9 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-empty-pattern */
-import { useEffect } from 'react';
 import '../styles/Vitals.scss';
-import { useVitals } from '../hooks/useVitals';
-import { useAIComment } from '../hooks/useAIComment';
 import { VitalsType } from '../App';
 import dayjs from 'dayjs';
 import 'dayjs/locale/de';

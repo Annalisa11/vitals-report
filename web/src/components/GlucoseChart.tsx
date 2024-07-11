@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { ReactElement } from 'react';
+import React from 'react';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import isToday from 'dayjs/plugin/isToday';
@@ -96,7 +96,6 @@ const GlucoseChart: React.FC = () => {
     payload: any;
   }) => {
     if (active && payload && payload.length) {
-      console.log('tooltip payload', payload);
       const time = dayjs(payload[0].payload.Timestamp);
       const date = dayjs(payload[0].payload.Timestamp);
 
@@ -131,20 +130,40 @@ const GlucoseChart: React.FC = () => {
     return closest[0].Timestamp;
   };
 
-  const findNightTime = (data: VitalsType[] | ChartData[] | undefined) => {
+  const findNightTime = (
+    data: VitalsType[] | ChartData[] | undefined,
+    instance: 'first' | 'last'
+  ) => {
     if (!data) {
       return;
     }
-    const nightDates = data.filter((date) =>
-      dayjs(date.Timestamp).isBetween(dayjs('23:00Z'), dayjs('06:00Z'))
-    );
+    const todayStart = dayjs().startOf('day');
+    const todayNightStart = todayStart.set('hour', 23);
+    const todayNightEnd = todayStart.add(1, 'day').set('hour', 6);
 
-    const sorted = nightDates.sort((a, b) =>
-      dayjs(a.Timestamp).isAfter(b.Timestamp) ? 1 : -1
-    );
+    const yesterdayNightStart = todayStart.subtract(1, 'day').set('hour', 23);
+    const yesterdayNightEnd = todayStart.set('hour', 6);
 
-    console.log('sorted', sorted);
-    return sorted.length > 0 ? sorted.pop()?.Timestamp : undefined;
+    const nightDates = data.filter((date) => {
+      const currentDate = dayjs(date.Timestamp);
+      return (
+        currentDate.isBetween(todayNightStart, todayNightEnd, null, '[]') ||
+        currentDate.isBetween(
+          yesterdayNightStart,
+          yesterdayNightEnd,
+          null,
+          '[]'
+        )
+      );
+    });
+
+    if (nightDates.length === 0) {
+      return undefined;
+    }
+
+    const first = nightDates[0].Timestamp;
+    const last = nightDates[nightDates.length - 1].Timestamp;
+    return instance === 'first' ? first : last;
   };
 
   const { data: history } = useHistory();
@@ -163,7 +182,7 @@ const GlucoseChart: React.FC = () => {
       </foreignObject>
     );
   };
-  const showExtraChartContent = false;
+  const showExtraChartContent = true;
 
   const data = history;
   return (
@@ -208,25 +227,22 @@ const GlucoseChart: React.FC = () => {
                 label={{ value: 'TODAY', fill: 'dodgerblue' }}
               />
               <ReferenceArea
-                ifOverflow='hidden'
-                x1={'2024-07-04T13:00:00Z'}
-                x2={'2024-07-09T20:00:00Z'}
+                ifOverflow='visible'
+                x1={findNightTime(data, 'first')}
+                x2={findNightTime(data, 'last')}
                 stroke='blue'
                 strokeOpacity={0.2}
                 fillOpacity={0.2}
-                label={(a) => {
-                  console.log('REF AREA', a);
-                  return (
-                    <NightLogo
-                      width={24}
-                      height={24}
-                      fill='blue'
-                      fillOpacity={0.3}
-                      x={a.viewBox.x + (a.viewBox.width - 24) / 2}
-                      y={a.viewBox.y + 10}
-                    />
-                  );
-                }}
+                label={(a) => (
+                  <NightLogo
+                    width={24}
+                    height={24}
+                    fill='blue'
+                    fillOpacity={0.3}
+                    x={a.viewBox.x + (a.viewBox.width - 24) / 2}
+                    y={a.viewBox.y + 10}
+                  />
+                )}
               />
             </>
           )}
