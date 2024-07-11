@@ -36,12 +36,16 @@ const GlucoseChart: React.FC = () => {
     value: string;
   };
 
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-
   type ChartData = {
     Timestamp: string;
     ValueInMgPerDl: number;
   };
+
+  const NIGHT_START_HOUR = 23;
+  const NIGHT_END_HOUR = 6;
+  const { data: history } = useHistory();
+  const showExtraChartContent = true;
+  const data = history;
 
   const renderTick = (x: number, y: number, date: string, time: string) => {
     return (
@@ -93,6 +97,7 @@ const GlucoseChart: React.FC = () => {
     payload,
   }: {
     active: boolean | undefined;
+    /* eslint-disable @typescript-eslint/no-explicit-any */
     payload: any;
   }) => {
     if (active && payload && payload.length) {
@@ -138,11 +143,13 @@ const GlucoseChart: React.FC = () => {
       return;
     }
     const todayStart = dayjs().startOf('day');
-    const todayNightStart = todayStart.set('hour', 23);
-    const todayNightEnd = todayStart.add(1, 'day').set('hour', 6);
+    const todayNightStart = todayStart.set('hour', NIGHT_START_HOUR);
+    const todayNightEnd = todayStart.add(1, 'day').set('hour', NIGHT_END_HOUR);
 
-    const yesterdayNightStart = todayStart.subtract(1, 'day').set('hour', 23);
-    const yesterdayNightEnd = todayStart.set('hour', 6);
+    const yesterdayNightStart = todayStart
+      .subtract(1, 'day')
+      .set('hour', NIGHT_START_HOUR);
+    const yesterdayNightEnd = todayStart.set('hour', NIGHT_END_HOUR);
 
     const nightDates = data.filter((date) => {
       const currentDate = dayjs(date.Timestamp);
@@ -166,25 +173,6 @@ const GlucoseChart: React.FC = () => {
     return instance === 'first' ? first : last;
   };
 
-  const { data: history } = useHistory();
-
-  const renderSvgLabel = (x: number, y: number, label: React.ReactElement) => {
-    return (
-      <foreignObject
-        x={x}
-        y={y}
-        width={24}
-        height={24}
-        viewBox='0 0 1024 1024'
-        fill='#666'
-      >
-        {label}
-      </foreignObject>
-    );
-  };
-  const showExtraChartContent = true;
-
-  const data = history;
   return (
     <div className='glucose-chart'>
       <h2>Last 12h of David</h2>
