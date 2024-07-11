@@ -164,8 +164,8 @@ const GlucoseChart = ({ toggleSwitch, checked }: Props) => {
               <CustomTooltip active={active} payload={payload} />
             )}
           />
-          <ReferenceLine y={80} stroke='lightgrey' strokeOpacity={0.5} />
-          <ReferenceLine y={130} stroke='lightgrey' strokeOpacity={0.5} />
+          <ReferenceLine y={70} stroke='lightgrey' strokeOpacity={0.5} />
+          <ReferenceLine y={180} stroke='lightgrey' strokeOpacity={0.5} />
 
           {showExtraChartContent && (
             <>

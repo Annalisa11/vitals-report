@@ -25,7 +25,7 @@ export const CustomizedLabel = ({ p, value }: Props) => {
       fill='white'
       textAnchor='middle' // Ensuring text is centered
     >
-      {value.toString().split('.')[0]}%
+      {value > 2 ? `${value.toString().split('.')[0]}%` : ''}
     </text>
   );
 };
@@ -38,10 +38,10 @@ const GlucoseScoreChart = () => {
     }
     const totalEntries = data.length;
     const inRange = data.filter(
-      (d) => d.ValueInMgPerDl >= 80 && d.ValueInMgPerDl <= 135
+      (d) => d.ValueInMgPerDl >= 70 && d.ValueInMgPerDl <= 180
     ).length;
-    const belowRange = data.filter((d) => d.ValueInMgPerDl < 80).length;
-    const aboveRange = data.filter((d) => d.ValueInMgPerDl > 130).length;
+    const belowRange = data.filter((d) => d.ValueInMgPerDl < 70).length;
+    const aboveRange = data.filter((d) => d.ValueInMgPerDl > 180).length;
 
     return [
       { name: 'In Range', value: (inRange / totalEntries) * 100 },
@@ -86,7 +86,11 @@ const GlucoseScoreChart = () => {
           <YAxis type='category' dataKey='name' hide />
           <Legend iconSize={0} formatter={legendFormatter} spacing={10} />
           <Bar
-            radius={[8, 0, 0, 8]}
+            radius={
+              glucoseRanges[1].value <= 2 && glucoseRanges[2].value <= 2
+                ? 8
+                : [8, 0, 0, 8]
+            }
             dataKey='In Range'
             stackId='a'
             fill={COLORS[0]}
@@ -98,7 +102,7 @@ const GlucoseScoreChart = () => {
             dataKey='Below Range'
             stackId='a'
             fill={COLORS[1]}
-            radius={[1, 1, 1, 1]}
+            radius={glucoseRanges[2].value <= 2 ? [0, 8, 8, 0] : [1, 1, 1, 1]}
             label={(payload) => (
               <CustomizedLabel p={payload} value={glucoseRanges[1].value} />
             )}
