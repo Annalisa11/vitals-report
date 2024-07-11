@@ -21,14 +21,18 @@ import { useHistory } from '../hooks/useHistory.ts';
 import '../styles/GlucoseChart.scss';
 import { VitalsType } from '../App.tsx';
 import NightLogo from '../assets/moon.svg?react';
+import ToggleSwitch from './ToggleSwitch.tsx';
 
 dayjs.extend(customParseFormat);
 dayjs.extend(isToday);
 dayjs.extend(isYesterday);
 dayjs.extend(isBetween);
 dayjs.locale('de');
-
-const GlucoseChart: React.FC = () => {
+interface Props {
+  toggleSwitch: React.Dispatch<React.SetStateAction<boolean>>;
+  checked: boolean;
+}
+const GlucoseChart = ({ toggleSwitch, checked }: Props) => {
   type ChartPayload = {
     coordinate: number;
     index: number;
@@ -44,7 +48,7 @@ const GlucoseChart: React.FC = () => {
   const NIGHT_START_HOUR = 23;
   const NIGHT_END_HOUR = 6;
   const { data: history } = useHistory();
-  const showExtraChartContent = true;
+  const showExtraChartContent = checked;
   const data = history;
 
   const renderTick = (x: number, y: number, date: string, time: string) => {
@@ -176,7 +180,9 @@ const GlucoseChart: React.FC = () => {
   return (
     <div className='glucose-chart'>
       <h2>Last 12h of David</h2>
-      <ResponsiveContainer width='100%' height={300}>
+      <ToggleSwitch checked={checked} toggleSwitch={toggleSwitch} />
+
+      <ResponsiveContainer width='100%' height={300} style={{ marginTop: 70 }}>
         <AreaChart
           data={data}
           margin={{ top: 0, left: 0, right: 0, bottom: 0 }}

@@ -1,0 +1,121 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:600,700);
+@import '../reusables.scss';
+
+$primary: hsl(208, 37%, 20%);
+$muted: lighten(gray, 23%);
+$background: lighten(#fde088, 2%);
+$shadow: darken($background, 11%);
+$white: lighten(mistyrose, 5%);
+
+.kitty-switch {
+  z-index: 100;
+  width: auto;
+  display: block;
+  position: relative;
+  margin: 30px 0 20px 0;
+
+  .prompt {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .well {
+    background: white;
+    height: 20px;
+    width: 60px;
+    position: absolute;
+    right: 50px;
+    top: 7px;
+    border-radius: 10px;
+    // box-shadow: inset 0 2px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid lighten($primary, 21%);
+    cursor: pointer;
+  }
+
+  input[type='checkbox'] {
+    opacity: 0;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    appearance: none;
+    height: 29px;
+    width: 140px;
+    background: transparent;
+    position: absolute;
+    right: 0;
+    top: 3px;
+    cursor: pointer;
+    z-index: 100;
+    color: transparent;
+
+    &:after {
+      content: '';
+      background-color: transparent;
+      height: 40px;
+      width: 80px;
+      position: absolute;
+      left: 30px;
+      top: -5px;
+    }
+
+    ~ .kitty:before {
+      content: '🍩';
+      position: absolute;
+      right: 80px;
+      top: -10px;
+      font-size: 28px;
+      z-index: 1;
+      color: $primary;
+      transition: all 0.25s ease-out;
+    }
+
+    &:checked {
+      right: 0;
+
+      &:after {
+        left: -80px;
+      }
+
+      ~ .kitty:before {
+        content: '🍰';
+        top: -10px;
+        right: 41px;
+      }
+
+      ~ .visible {
+        opacity: 1;
+        max-height: 900px;
+        overflow: visible;
+      }
+    }
+
+    ~ label {
+      &:before {
+        content: 'Less';
+        position: absolute;
+        color: $primary;
+        left: -40px;
+        top: 0;
+        font-size: 16px;
+      }
+
+      &:after {
+        content: 'more';
+        position: absolute;
+        color: $muted;
+        left: 73px;
+        top: 0;
+        font-size: 16px;
+      }
+    }
+
+    &:checked ~ label {
+      &:before {
+        color: $muted;
+      }
+      &:after {
+        color: $primary;
+      }
+    }
+  }
+}

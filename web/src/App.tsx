@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import Vitals from './components/Vitals';
 import Jokes from './components/Jokes';
@@ -7,6 +7,7 @@ import { useVitals } from './hooks/useVitals';
 import AiComment from './components/AiComment';
 import GlucoseScoreChart from './components/GlucoseScoreChart';
 import { useGlucoseScore } from './hooks/useAIComment';
+import Accordion from './components/Accordion';
 
 export type VitalsType = {
   FactoryTimestamp: string;
@@ -37,6 +38,8 @@ const App: React.FC = () => {
     mutateGlucoseScore({ inRange: 20, belowRange: 40, aboveRange: 20 });
   };
 
+  const [isChecked, setIsChecked] = useState(false);
+
   const showButton = false;
   return (
     <div className='app'>
@@ -46,15 +49,22 @@ const App: React.FC = () => {
       </header>
       <main>
         <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />
-        <GlucoseChart />
         <div className='glucose-score'>
-          <GlucoseScoreChart />
-          {showButton && (
-            <>
-              <button onClick={getGlucoseScore}>get score</button>
-              <div>{glucoseScoreComment}</div>
-            </>
-          )}
+          <GlucoseChart checked={isChecked} toggleSwitch={setIsChecked} />
+          <Accordion
+            isOpen={isChecked}
+            children={
+              <>
+                <GlucoseScoreChart />
+                {showButton && (
+                  <>
+                    <button onClick={getGlucoseScore}>get score</button>
+                    <div>{glucoseScoreComment}</div>
+                  </>
+                )}
+              </>
+            }
+          />
           <AiComment vitals={vitals} />
         </div>
         <Jokes />
