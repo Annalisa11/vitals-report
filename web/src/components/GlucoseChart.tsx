@@ -6,7 +6,7 @@ import isToday from 'dayjs/plugin/isToday';
 import isYesterday from 'dayjs/plugin/isYesterday';
 import isBetween from 'dayjs/plugin/isBetween';
 import 'dayjs/locale/de';
-import dummyData from '../assets/chart-data.json';
+// import dummyData from '../assets/chart-data.json';
 import {
   AreaChart,
   Area,
@@ -33,12 +33,12 @@ interface Props {
   checked: boolean;
 }
 const GlucoseChart = ({ toggleSwitch, checked }: Props) => {
-  type ChartPayload = {
-    coordinate: number;
-    index: number;
-    offset: number;
-    value: string;
-  };
+  // type ChartPayload = {
+  //   coordinate: number;
+  //   index: number;
+  //   offset: number;
+  //   value: string;
+  // };
 
   type ChartData = {
     Timestamp: string;
@@ -51,51 +51,6 @@ const GlucoseChart = ({ toggleSwitch, checked }: Props) => {
   const showExtraChartContent = checked;
   const data = history;
 
-  const renderTick = (x: number, y: number, date: string, time: string) => {
-    return (
-      <foreignObject
-        x={x}
-        y={y + 4}
-        width={44}
-        height={44}
-        viewBox='0 0 1024 1024'
-        fill='#666'
-      >
-        <div data-xmlns='http://www.w3.org/1999/xhtml'>
-          <span className='tick__time'>{time}</span>
-          <small className='tick__date'>{date}</small>
-        </div>
-      </foreignObject>
-    );
-  };
-
-  const formatTimestamp = ({
-    visibleTicksCount,
-    index,
-    x,
-    y,
-    payload,
-  }: {
-    visibleTicksCount: number;
-    index: number;
-    x: number;
-    y: number;
-    payload: ChartPayload;
-  }) => {
-    const lastCoordinate = payload.coordinate;
-    const date = dayjs(payload.value);
-    const formattedDate = date.isToday()
-      ? 'today'
-      : date.isYesterday()
-      ? 'yesterday'
-      : date.format('D.M');
-    const formattedTime = date.format('HH:mm');
-
-    const newX = index === visibleTicksCount - 1 ? lastCoordinate - 44 : x - 22;
-
-    return renderTick(newX, y, formattedDate, formattedTime);
-  };
-
   const CustomTooltip = ({
     active,
     payload,
@@ -106,7 +61,6 @@ const GlucoseChart = ({ toggleSwitch, checked }: Props) => {
   }) => {
     if (active && payload && payload.length) {
       const time = dayjs(payload[0].payload.Timestamp);
-      const date = dayjs(payload[0].payload.Timestamp);
 
       return (
         <div className='custom-tooltip'>
