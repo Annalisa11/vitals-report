@@ -10,14 +10,13 @@ import { useGlucoseScore } from './hooks/useAIComment';
 import Accordion from './components/Accordion';
 
 export type VitalsType = {
-  FactoryTimestamp: string;
   Timestamp: string;
-  type: number;
   ValueInMgPerDl: number;
-  TrendArrow: number;
-  TrendMessage: string | null;
-  MeasurementColor: number;
-  GlucoseUnits: number;
+  TrendArrow: {
+    value: number;
+    icon: string;
+    message: string;
+  };
   Value: number;
   isHigh: boolean;
   isLow: boolean;

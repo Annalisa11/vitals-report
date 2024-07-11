@@ -12,20 +12,13 @@ interface Props {
 }
 
 const Vitals = ({ vitals, vitalsLoading }: Props) => {
-  const getTrendEmoji = (trendArrow: number) => {
-    switch (trendArrow) {
-      case 1:
-        return '⬇️ Nose dive! Oopsie daisy';
-      case 2:
-        return '↘️ Slight dip! Still on the move';
-      case 3:
-        return '➡️ Flatline. Yawn...';
-      case 4:
-        return '↗️ Slight bump. Almost trying';
-      case 5:
-        return '⬆️ Sky-high! Calm down, chamxp';
-      default:
-        return '🤷‍♂️ Who knows?';
+  const getAlarmMessage = () => {
+    if (vitals?.isHigh) {
+      return '🚨 TOO HIGH 🚨';
+    } else if (vitals?.isLow) {
+      return '🚑 TOO LOW 🚑';
+    } else {
+      return 'none... relax';
     }
   };
 
@@ -44,16 +37,12 @@ const Vitals = ({ vitals, vitalsLoading }: Props) => {
             {dayjs(vitals.Timestamp).format('L LT')}
           </p>
           <p>
-            <strong>Trend:</strong>
-            {vitals.TrendMessage || 'No significant change'}
-          </p>
-          <p>
-            <strong>Glucose Units:</strong>
-            {vitals.GlucoseUnits}
-          </p>
-          <p>
             <strong>Trend Arrow:</strong>
-            <div>{getTrendEmoji(vitals.TrendArrow)}</div>
+            {`${vitals.TrendArrow.icon} ${vitals.TrendArrow.message}`}
+          </p>
+          <p>
+            <strong>Alarm:</strong>
+            {getAlarmMessage()}
           </p>
         </div>
       </div>
