@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   BarChart,
   Bar,
@@ -9,11 +8,13 @@ import {
 } from 'recharts';
 import { VitalsType } from '../App';
 import { useHistory } from '../hooks/useHistory';
+
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   p: any;
   value: number;
 }
+
 export const CustomizedLabel = ({ p, value }: Props) => {
   return (
     <text
@@ -42,18 +43,13 @@ const GlucoseScoreChart = () => {
     const belowRange = data.filter((d) => d.ValueInMgPerDl < 80).length;
     const aboveRange = data.filter((d) => d.ValueInMgPerDl > 130).length;
 
-    console.log(
-      'DATA VALUES %',
-      (inRange / totalEntries) * 100,
-      (belowRange / totalEntries) * 100,
-      (aboveRange / totalEntries) * 100
-    );
     return [
       { name: 'In Range', value: (inRange / totalEntries) * 100 },
       { name: 'Below Range', value: (belowRange / totalEntries) * 100 },
       { name: 'Above Range', value: (aboveRange / totalEntries) * 100 },
     ];
   };
+
   const glucoseRanges = calculateGlucoseRanges(history);
 
   const legendFormatter = (value: string) => {
@@ -68,11 +64,12 @@ const GlucoseScoreChart = () => {
         return value;
     }
   };
+
   const COLORS = ['#61bf93', 'dodgerblue', 'blue'];
 
   return (
     glucoseRanges && (
-      <ResponsiveContainer width='100%' height={90}>
+      <ResponsiveContainer width='100%' height={80}>
         <BarChart
           layout='vertical'
           data={[
@@ -83,52 +80,37 @@ const GlucoseScoreChart = () => {
               ),
             },
           ]}
-          margin={{ top: 0, right: 0, left: -0, bottom: 0 }}
+          margin={{ top: 0, right: 20, left: 20, bottom: 0 }}
         >
-          <XAxis type='number' visibility={'hidden'} />
-          <YAxis type='category' dataKey='name' visibility={'hidden'} />
+          <XAxis type='number' hide />
+          <YAxis type='category' dataKey='name' hide />
           <Legend iconSize={0} formatter={legendFormatter} spacing={10} />
           <Bar
             radius={[8, 0, 0, 8]}
             dataKey='In Range'
             stackId='a'
             fill={COLORS[0]}
-            label={(payload) => {
-              console.log('first');
-
-              console.log(payload);
-              return (
-                <CustomizedLabel p={payload} value={glucoseRanges[0].value} />
-              );
-            }}
+            label={(payload) => (
+              <CustomizedLabel p={payload} value={glucoseRanges[0].value} />
+            )}
           />
           <Bar
             dataKey='Below Range'
             stackId='a'
             fill={COLORS[1]}
             radius={[1, 1, 1, 1]}
-            label={(payload) => {
-              console.log('second');
-
-              console.log(payload);
-              return (
-                <CustomizedLabel p={payload} value={glucoseRanges[1].value} />
-              );
-            }}
+            label={(payload) => (
+              <CustomizedLabel p={payload} value={glucoseRanges[1].value} />
+            )}
           />
           <Bar
             dataKey='Above Range'
             stackId='a'
             fill={COLORS[2]}
             radius={[0, 8, 8, 0]}
-            label={(payload) => {
-              console.log('third');
-
-              console.log(payload);
-              return (
-                <CustomizedLabel p={payload} value={glucoseRanges[2].value} />
-              );
-            }}
+            label={(payload) => (
+              <CustomizedLabel p={payload} value={glucoseRanges[2].value} />
+            )}
           />
         </BarChart>
       </ResponsiveContainer>
