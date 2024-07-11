@@ -72,7 +72,7 @@ const GlucoseScoreChart = () => {
 
   return (
     glucoseRanges && (
-      <ResponsiveContainer width='100%' height={100}>
+      <ResponsiveContainer width='100%' height={90}>
         <BarChart
           layout='vertical'
           data={[
@@ -83,7 +83,7 @@ const GlucoseScoreChart = () => {
               ),
             },
           ]}
-          margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
+          margin={{ top: 0, right: 0, left: -0, bottom: 0 }}
         >
           <XAxis type='number' visibility={'hidden'} />
           <YAxis type='category' dataKey='name' visibility={'hidden'} />

@@ -66,6 +66,29 @@ app.post('/openai', async (req, res) => {
   }
 });
 
+app.post('/glucose-score', async (req, res) => {
+  if (USE_DUMMY_DATA === true) {
+    res.send(dummyData.glucoseScore);
+  } else {
+    try {
+      const { prompt } = req.body;
+      console.log('Prompt received:', prompt);
+
+      const completion = await openai.chat.completions.create({
+        messages: [{ role: 'system', content: prompt }],
+        model: 'gpt-3.5-turbo-1106',
+        temperature: 1.5,
+      });
+
+      const message = completion.choices[0]?.message?.content || '';
+      res.send({ message });
+    } catch (error) {
+      console.error('Error generating glucose score completion:', error);
+      res.status(500).send('Error fetching ai completion');
+    }
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Api proxy is running on port ${PORT}`);
   console.log(`> Dummy Data in use: ${USE_DUMMY_DATA === true}`);

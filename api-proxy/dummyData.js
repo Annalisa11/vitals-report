@@ -15,4 +15,7 @@ module.exports = {
   openai: {
     message: 'Here is a dummy response from OpenAI.',
   },
+  glucoseScore: {
+    message: 'Mostly steady, occasionally wacky!',
+  },
 };

@@ -6,6 +6,7 @@ import GlucoseChart from './components/GlucoseChart';
 import { useVitals } from './hooks/useVitals';
 import AiComment from './components/AiComment';
 import GlucoseScoreChart from './components/GlucoseScoreChart';
+import { useGlucoseScore } from './hooks/useAIComment';
 
 export type VitalsType = {
   FactoryTimestamp: string;
@@ -21,8 +22,20 @@ export type VitalsType = {
   isLow: boolean;
 };
 
+export type GlucoseScore = {
+  inRange: number;
+  belowRange: number;
+  aboveRange: number;
+};
+
 const App: React.FC = () => {
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
+  const { mutate: mutateGlucoseScore, data: glucoseScoreComment } =
+    useGlucoseScore();
+
+  const getGlucoseScore = () => {
+    mutateGlucoseScore({ inRange: 20, belowRange: 40, aboveRange: 20 });
+  };
 
   return (
     <div className='app'>
@@ -33,7 +46,11 @@ const App: React.FC = () => {
       <main>
         <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />
         <GlucoseChart />
-        <GlucoseScoreChart />
+        <div className='glucose-score'>
+          <GlucoseScoreChart />
+          <button onClick={getGlucoseScore}>get score</button>
+          <div>{glucoseScoreComment}</div>
+        </div>
         <AiComment vitals={vitals} />
         <Jokes />
       </main>

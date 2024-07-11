@@ -9,3 +9,10 @@ main {
   place-content: center;
   gap: 4rem;
 }
+
+.glucose-score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
