@@ -7,15 +7,15 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'; // ES 2015
 dayjs.extend(localizedFormat);
 
 interface Props {
-  vitals: VitalsType | undefined;
+  vitals: VitalsType;
   vitalsLoading: boolean;
 }
 
 const Vitals = ({ vitals, vitalsLoading }: Props) => {
   const getAlarmMessage = () => {
-    if (vitals?.isHigh) {
+    if (vitals.isHigh) {
       return '🚨 TOO HIGH 🚨';
-    } else if (vitals?.isLow) {
+    } else if (vitals.isLow) {
       return '🚑 TOO LOW 🚑';
     } else {
       return 'none... relax';

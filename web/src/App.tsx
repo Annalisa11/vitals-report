@@ -47,7 +47,11 @@ const App: React.FC = () => {
         <h2>Your daily dose of David</h2>
       </header>
       <main>
-        <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />
+        {vitals ? (
+          <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />
+        ) : (
+          <div>data not available right now...</div>
+        )}
         <div className='glucose-score'>
           <GlucoseChart checked={isChecked} toggleSwitch={setIsChecked} />
           <Accordion
