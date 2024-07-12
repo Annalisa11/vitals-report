@@ -73,7 +73,7 @@ const GlucoseScoreChart = () => {
           <Legend iconSize={0} spacing={10} />
           <Bar
             radius={
-              glucoseRanges[1].value <= 6 && glucoseRanges[2].value <= 6
+              glucoseRanges[1].value === 0 && glucoseRanges[2].value === 0
                 ? 8
                 : [8, 0, 0, 8]
             }
@@ -88,7 +88,7 @@ const GlucoseScoreChart = () => {
             dataKey='Below Range'
             stackId='a'
             fill={COLORS[1]}
-            radius={glucoseRanges[2].value <= 6 ? [0, 8, 8, 0] : [1, 1, 1, 1]}
+            radius={glucoseRanges[2].value === 0 ? [0, 8, 8, 0] : [1, 1, 1, 1]}
             label={(payload) => (
               <CustomizedLabel p={payload} value={glucoseRanges[1].value} />
             )}
