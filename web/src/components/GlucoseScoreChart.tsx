@@ -23,7 +23,7 @@ export const CustomizedLabel = ({ p, value }: Props) => {
       dy={6}
       fontSize={16}
       fill='white'
-      textAnchor='middle' // Ensuring text is centered
+      textAnchor='middle'
     >
       {value > 6 ? `${value.toString().split('.')[0]}%` : ''}
     </text>
@@ -51,20 +51,6 @@ const GlucoseScoreChart = () => {
   };
 
   const glucoseRanges = calculateGlucoseRanges(history);
-
-  const legendFormatter = (value: string) => {
-    switch (value) {
-      case 'In Range':
-        return '🥬 In Range';
-      case 'Below Range':
-        return '🐬 Below Range';
-      case 'Above Range':
-        return '✈️ Above Range';
-      default:
-        return value;
-    }
-  };
-
   const COLORS = ['#61bf93', 'dodgerblue', 'blue'];
 
   return (
@@ -84,7 +70,7 @@ const GlucoseScoreChart = () => {
         >
           <XAxis type='number' hide />
           <YAxis type='category' dataKey='name' hide />
-          <Legend iconSize={0} formatter={legendFormatter} spacing={10} />
+          <Legend iconSize={0} spacing={10} />
           <Bar
             radius={
               glucoseRanges[1].value <= 6 && glucoseRanges[2].value <= 6
