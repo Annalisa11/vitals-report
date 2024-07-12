@@ -25,7 +25,7 @@ export const CustomizedLabel = ({ p, value }: Props) => {
       fill='white'
       textAnchor='middle' // Ensuring text is centered
     >
-      {value > 2 ? `${value.toString().split('.')[0]}%` : ''}
+      {value > 6 ? `${value.toString().split('.')[0]}%` : ''}
     </text>
   );
 };
@@ -80,14 +80,14 @@ const GlucoseScoreChart = () => {
               ),
             },
           ]}
-          margin={{ top: 0, right: 20, left: 20, bottom: 0 }}
+          margin={{ top: 0, right: 10, left: 10, bottom: 0 }}
         >
           <XAxis type='number' hide />
           <YAxis type='category' dataKey='name' hide />
           <Legend iconSize={0} formatter={legendFormatter} spacing={10} />
           <Bar
             radius={
-              glucoseRanges[1].value <= 2 && glucoseRanges[2].value <= 2
+              glucoseRanges[1].value <= 6 && glucoseRanges[2].value <= 6
                 ? 8
                 : [8, 0, 0, 8]
             }
@@ -102,7 +102,7 @@ const GlucoseScoreChart = () => {
             dataKey='Below Range'
             stackId='a'
             fill={COLORS[1]}
-            radius={glucoseRanges[2].value <= 2 ? [0, 8, 8, 0] : [1, 1, 1, 1]}
+            radius={glucoseRanges[2].value <= 6 ? [0, 8, 8, 0] : [1, 1, 1, 1]}
             label={(payload) => (
               <CustomizedLabel p={payload} value={glucoseRanges[1].value} />
             )}
