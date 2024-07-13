@@ -6,8 +6,8 @@ import GlucoseChart from './components/GlucoseChart';
 import { useVitals } from './hooks/useVitals';
 import AiComment from './components/AiComment';
 import GlucoseScoreChart from './components/GlucoseScoreChart';
-import { useGlucoseScore } from './hooks/useAIComment';
 import Accordion from './components/Accordion';
+import ScoreEmoji from './components/ScoreEmoji';
 
 export type VitalsType = {
   Timestamp: string;
@@ -30,16 +30,8 @@ export type GlucoseScore = {
 
 const App: React.FC = () => {
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
-  const { mutate: mutateGlucoseScore, data: glucoseScoreComment } =
-    useGlucoseScore();
-
-  const getGlucoseScore = () => {
-    mutateGlucoseScore({ inRange: 20, belowRange: 40, aboveRange: 20 });
-  };
-
   const [isChecked, setIsChecked] = useState(false);
 
-  const showButton = false;
   return (
     <div className='app'>
       <header className='app__header'>
@@ -50,22 +42,17 @@ const App: React.FC = () => {
         {vitals ? (
           <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />
         ) : (
-          <div>data not available right now...</div>
+          <div>data not available right now :(</div>
         )}
         <div className='glucose-score'>
           <GlucoseChart checked={isChecked} toggleSwitch={setIsChecked} />
           <Accordion
             isOpen={isChecked}
             children={
-              <>
+              <div className='chart-details'>
                 <GlucoseScoreChart />
-                {showButton && (
-                  <>
-                    <button onClick={getGlucoseScore}>get score</button>
-                    <div>{glucoseScoreComment}</div>
-                  </>
-                )}
-              </>
+                <ScoreEmoji />
+              </div>
             }
           />
           <AiComment vitals={vitals} />

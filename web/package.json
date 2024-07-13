@@ -13,6 +13,7 @@
     "@tanstack/react-query": "^5.50.1",
     "axios": "^1.7.2",
     "dayjs": "^1.11.11",
+    "js-confetti": "^0.12.0",
     "openai": "^4.52.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
