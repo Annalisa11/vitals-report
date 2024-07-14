@@ -1,17 +1,24 @@
 ﻿using System.Text;
-using System.Text.Json;
+using backend.Configuration;
 using backend.Models;
-using OpenAI;
+using Microsoft.Extensions.Options;
 using OpenAI.Chat;
 
-namespace backend.Utils
+namespace backend.Clients
 {
-    public class OpenAiClient 
+    public class OpenAiClient : IOpenAiClient
     {
         private readonly ChatClient _client;
 
-        public OpenAiClient(string apiKey)
+        public OpenAiClient(IOptions<OpenAiClientSettings> settings)
         {
+            string? apiKey = settings.Value.ApiKey;
+
+            if (apiKey == null)
+            {
+                throw new InvalidOperationException("API key not found.");
+            }
+
             _client = new ChatClient("gpt-4o", apiKey);
         }
 
