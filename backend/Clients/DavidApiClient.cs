@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using backend.Models;
 
-namespace backend.Utils
+namespace backend.Clients
 {
     public class DavidApiClient
     {
