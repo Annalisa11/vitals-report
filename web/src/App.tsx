@@ -28,6 +28,13 @@ export type GlucoseScore = {
   aboveRange: number;
 };
 
+export type GlucoseScoreResult = {
+  ranges: GlucoseScoreType[];
+};
+export type GlucoseScoreType = {
+  name: string;
+  value: number;
+};
 const App: React.FC = () => {
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
   const [isChecked, setIsChecked] = useState(false);

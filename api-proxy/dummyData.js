@@ -16,6 +16,18 @@ module.exports = {
     message: 'Here is a dummy response from OpenAI.',
   },
   glucoseScore: {
-    message: 'Mostly steady, occasionally wacky!',
+    inRange: {
+      name: 'In Range',
+      value: 50,
+    },
+    belowRange: {
+      name: 'Below Range',
+      value: 20,
+    },
+    aboveRange: {
+      name: 'Above Range',
+      value: 30,
+    },
+    emoji: '🍉',
   },
 };

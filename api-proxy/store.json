@@ -1,0 +1,568 @@
+{
+  "history": [
+    {
+      "Value": 59,
+      "Timestamp": "7/14/2024 11:05:47 AM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 59,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 82,
+      "Timestamp": "7/14/2024 11:20:52 AM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 82,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 117,
+      "Timestamp": "7/14/2024 11:36:00 AM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 117,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 137,
+      "Timestamp": "7/14/2024 11:51:06 AM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 137,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 146,
+      "Timestamp": "7/14/2024 12:06:11 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 146,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 164,
+      "Timestamp": "7/14/2024 12:21:18 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 164,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 181,
+      "Timestamp": "7/14/2024 12:36:23 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 181,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 185,
+      "Timestamp": "7/14/2024 12:51:31 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 185,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 183,
+      "Timestamp": "7/14/2024 1:06:35 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 183,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 175,
+      "Timestamp": "7/14/2024 1:21:42 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 175,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 164,
+      "Timestamp": "7/14/2024 1:36:48 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 164,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 149,
+      "Timestamp": "7/14/2024 1:51:55 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 149,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 126,
+      "Timestamp": "7/14/2024 2:07:02 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 126,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 125,
+      "Timestamp": "7/14/2024 2:22:07 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 125,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 171,
+      "Timestamp": "7/14/2024 2:37:13 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 171,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 209,
+      "Timestamp": "7/14/2024 2:52:19 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 209,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 197,
+      "Timestamp": "7/14/2024 3:07:28 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 197,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 149,
+      "Timestamp": "7/14/2024 3:22:32 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 149,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 106,
+      "Timestamp": "7/14/2024 3:37:39 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 106,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 93,
+      "Timestamp": "7/14/2024 3:52:45 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 93,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 106,
+      "Timestamp": "7/14/2024 4:07:52 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 106,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 133,
+      "Timestamp": "7/14/2024 4:22:57 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 133,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 130,
+      "Timestamp": "7/14/2024 4:38:04 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 130,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 108,
+      "Timestamp": "7/14/2024 4:53:11 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 108,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 96,
+      "Timestamp": "7/14/2024 5:08:17 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 96,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 96,
+      "Timestamp": "7/14/2024 5:23:23 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 96,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 95,
+      "Timestamp": "7/14/2024 5:38:29 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 95,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 94,
+      "Timestamp": "7/14/2024 5:53:37 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 94,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 91,
+      "Timestamp": "7/14/2024 6:08:41 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 91,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 83,
+      "Timestamp": "7/14/2024 6:23:48 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 83,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 77,
+      "Timestamp": "7/14/2024 6:38:54 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 77,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 74,
+      "Timestamp": "7/14/2024 6:54:01 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 74,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 70,
+      "Timestamp": "7/14/2024 7:09:08 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 70,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 70,
+      "Timestamp": "7/14/2024 7:24:15 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 70,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 85,
+      "Timestamp": "7/14/2024 7:39:20 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 85,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 120,
+      "Timestamp": "7/14/2024 7:54:26 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 120,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 148,
+      "Timestamp": "7/14/2024 8:09:33 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 148,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 158,
+      "Timestamp": "7/14/2024 8:24:40 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 158,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 161,
+      "Timestamp": "7/14/2024 8:39:46 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 161,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 158,
+      "Timestamp": "7/14/2024 8:54:51 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 158,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 157,
+      "Timestamp": "7/14/2024 9:09:59 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 157,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 155,
+      "Timestamp": "7/14/2024 9:25:05 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 155,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 156,
+      "Timestamp": "7/14/2024 9:40:11 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 156,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 164,
+      "Timestamp": "7/14/2024 9:55:21 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 164,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 191,
+      "Timestamp": "7/14/2024 10:10:26 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 191,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 195,
+      "Timestamp": "7/14/2024 10:25:30 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 195,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 186,
+      "Timestamp": "7/14/2024 10:40:37 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 186,
+      "isHigh": false,
+      "isLow": false
+    }
+  ]
+}

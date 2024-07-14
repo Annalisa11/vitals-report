@@ -6,8 +6,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { VitalsType } from '../App';
-import { useHistory } from '../hooks/useHistory';
+import hooks from '../hooks/useHistory';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -31,26 +30,11 @@ export const CustomizedLabel = ({ p, value }: Props) => {
 };
 
 const GlucoseScoreChart = () => {
-  const { data: history } = useHistory();
-  const calculateGlucoseRanges = (data: VitalsType[] | undefined) => {
-    if (!data) {
-      return;
-    }
-    const totalEntries = data.length;
-    const inRange = data.filter(
-      (d) => d.ValueInMgPerDl >= 70 && d.ValueInMgPerDl <= 180
-    ).length;
-    const belowRange = data.filter((d) => d.ValueInMgPerDl < 70).length;
-    const aboveRange = data.filter((d) => d.ValueInMgPerDl > 180).length;
+  const { useGlucoseScore } = hooks;
 
-    return [
-      { name: 'In Range', value: (inRange / totalEntries) * 100 },
-      { name: 'Below Range', value: (belowRange / totalEntries) * 100 },
-      { name: 'Above Range', value: (aboveRange / totalEntries) * 100 },
-    ];
-  };
+  const { data: data } = useGlucoseScore();
+  const glucoseRanges = data?.ranges;
 
-  const glucoseRanges = calculateGlucoseRanges(history);
   const COLORS = ['#61bf93', 'dodgerblue', 'blue'];
 
   return (

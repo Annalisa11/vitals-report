@@ -3,6 +3,7 @@ const axios = require('axios');
 const OpenAI = require('openai');
 const cors = require('cors');
 require('dotenv').config();
+const store = require('data-store')({ path: process.cwd() + '/store.json' });
 
 const dummyData = require('./dummyData');
 
@@ -36,6 +37,7 @@ app.get('/vitals', async (req, res) => {
 app.get('/history', async (req, res) => {
   try {
     const response = await axios.get(`${process.env.API_URL}/cgm?type=graph`);
+    store.set({ history: response.data });
     res.send(response.data);
   } catch (error) {
     console.error('Error fetching history:', error);
@@ -66,25 +68,18 @@ app.post('/openai', async (req, res) => {
   }
 });
 
-app.post('/glucose-score', async (req, res) => {
+app.get('/glucose-score', async (req, res) => {
   if (USE_DUMMY_DATA === true) {
     res.send(dummyData.glucoseScore);
   } else {
     try {
-      const { prompt } = req.body;
-      console.log('Prompt received:', prompt);
-
-      const completion = await openai.chat.completions.create({
-        messages: [{ role: 'system', content: prompt }],
-        model: 'gpt-3.5-turbo-1106',
-        temperature: 1.5,
-      });
-
-      const message = completion.choices[0]?.message?.content || '';
-      res.send({ message });
+      const history = store.get('history');
+      console.log('history', history);
+      const ranges = getGlucoseRanges(history);
+      res.send({ ranges });
     } catch (error) {
       console.error('Error generating glucose score completion:', error);
-      res.status(500).send('Error fetching ai completion');
+      res.status(500).send('Error fetching glucose score:' + error.message);
     }
   }
 });
@@ -93,3 +88,18 @@ app.listen(PORT, () => {
   console.log(`Api proxy is running on port ${PORT}`);
   console.log(`> Dummy Data in use: ${USE_DUMMY_DATA === true}`);
 });
+
+const getGlucoseRanges = (data) => {
+  const totalEntries = data.length;
+  const inRange = data.filter(
+    (d) => d.ValueInMgPerDl >= 70 && d.ValueInMgPerDl <= 180
+  ).length;
+  const belowRange = data.filter((d) => d.ValueInMgPerDl < 70).length;
+  const aboveRange = data.filter((d) => d.ValueInMgPerDl > 180).length;
+
+  return [
+    { name: 'In Range', value: (inRange / totalEntries) * 100 },
+    { name: 'Below Range', value: (belowRange / totalEntries) * 100 },
+    { name: 'Above Range', value: (aboveRange / totalEntries) * 100 },
+  ];
+};
