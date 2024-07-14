@@ -29,9 +29,11 @@ export type GlucoseScore = {
 };
 
 export type GlucoseScoreResult = {
-  ranges: GlucoseScoreType[];
+  ranges: Range[];
+  emoji: string;
 };
-export type GlucoseScoreType = {
+
+export type Range = {
   name: string;
   value: number;
 };

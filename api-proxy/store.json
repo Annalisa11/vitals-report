@@ -1,18 +1,6 @@
 {
   "history": [
     {
-      "Value": 59,
-      "Timestamp": "7/14/2024 11:05:47 AM",
-      "TrendArrow": {
-        "value": null,
-        "icon": "❓",
-        "message": "Unknown"
-      },
-      "ValueInMgPerDl": 59,
-      "isHigh": false,
-      "isLow": false
-    },
-    {
       "Value": 82,
       "Timestamp": "7/14/2024 11:20:52 AM",
       "TrendArrow": {
@@ -561,6 +549,18 @@
         "message": "Unknown"
       },
       "ValueInMgPerDl": 186,
+      "isHigh": false,
+      "isLow": false
+    },
+    {
+      "Value": 194,
+      "Timestamp": "7/14/2024 10:55:44 PM",
+      "TrendArrow": {
+        "value": null,
+        "icon": "❓",
+        "message": "Unknown"
+      },
+      "ValueInMgPerDl": 194,
       "isHigh": false,
       "isLow": false
     }

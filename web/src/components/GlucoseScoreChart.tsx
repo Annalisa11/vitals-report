@@ -34,6 +34,10 @@ const GlucoseScoreChart = () => {
 
   const { data: data } = useGlucoseScore();
   const glucoseRanges = data?.ranges;
+  if (!glucoseRanges || !data) {
+    console.log('UNDEFINED ');
+    return;
+  }
 
   const COLORS = ['#61bf93', 'dodgerblue', 'blue'];
 

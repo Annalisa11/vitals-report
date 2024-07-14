@@ -75,8 +75,9 @@ app.get('/glucose-score', async (req, res) => {
     try {
       const history = store.get('history');
       console.log('history', history);
-      const ranges = getGlucoseRanges(history);
-      res.send({ ranges });
+      const response = getGlucoseRanges(history);
+      console.log('response glucose-score', response);
+      res.send(response);
     } catch (error) {
       console.error('Error generating glucose score completion:', error);
       res.status(500).send('Error fetching glucose score:' + error.message);
@@ -96,10 +97,28 @@ const getGlucoseRanges = (data) => {
   ).length;
   const belowRange = data.filter((d) => d.ValueInMgPerDl < 70).length;
   const aboveRange = data.filter((d) => d.ValueInMgPerDl > 180).length;
-
-  return [
+  const ranges = [
     { name: 'In Range', value: (inRange / totalEntries) * 100 },
     { name: 'Below Range', value: (belowRange / totalEntries) * 100 },
     { name: 'Above Range', value: (aboveRange / totalEntries) * 100 },
   ];
+
+  return {
+    ranges: ranges,
+    emoji: getEmoji(ranges),
+  };
+};
+
+const getEmoji = (data) => {
+  if (data[0].value > 97) {
+    return '🏆';
+  } else if (data[0].value > 85) {
+    return '🥇';
+  } else if (data[0].value > 70) {
+    return '🥈';
+  } else if (data[0].value > 55) {
+    return '🥉';
+  } else {
+    return '😐';
+  }
 };
