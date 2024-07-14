@@ -1,27 +1,17 @@
-﻿using backend.Configuration;
-using backend.Factories;
+﻿using backend.Clients;
 using backend.Models;
-using backend.Utils;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace backend.Controllers
 {
     [ApiController]
     public class OpenAiController : ControllerBase
     {
-        private readonly OpenAiClient _client;
+        private readonly IOpenAiClient _client;
 
-        public OpenAiController(IOpenAiClientFactory factory, IOptions<OpenAiClientSettings> settings)
+        public OpenAiController(IOpenAiClient client)
         {
-            string? apiKey = settings.Value.ApiKey;
-
-            if (apiKey == null)
-            {
-                throw new InvalidOperationException("API key not found.");
-            }
-
-            _client = factory.Create(apiKey);
+            _client = client;
         }
 
         [Route("v1/openai")]

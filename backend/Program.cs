@@ -1,15 +1,11 @@
+using backend.Clients;
 using backend.Configuration;
-using backend.Factories;
-using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddSingleton<IOpenAiClientFactory, OpenAiClientFactory>();
-
+builder.Services.AddTransient<IOpenAiClient, OpenAiClient>();
 builder.Services.Configure<OpenAiClientSettings>(builder.Configuration.GetSection(OpenAiClientSettings.Section));
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
