@@ -74,12 +74,10 @@ app.get('/glucose-score', async (req, res) => {
   } else {
     try {
       const history = store.get('history');
-      console.log('history', history);
       const response = getGlucoseRanges(history);
-      console.log('response glucose-score', response);
       res.send(response);
     } catch (error) {
-      console.error('Error generating glucose score completion:', error);
+      console.error('Error generating glucose score:', error);
       res.status(500).send('Error fetching glucose score:' + error.message);
     }
   }
