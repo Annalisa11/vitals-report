@@ -6,6 +6,15 @@
   --green-color: #93f9b9;
 }
 
+html[theme='classic'] {
+}
+
+html[theme='dark'] {
+  --dark-color: hsl(208, 100%, 32%);
+  --dark-color-20: hsla(111, 22%, 54%, 0.2);
+  --green-color: #f993e8;
+}
+
 $breakpoints: (
   'medium': 768px,
   'large': 1440px,

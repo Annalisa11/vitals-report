@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './App.scss';
 import Vitals from './components/Vitals';
 import Jokes from './components/Jokes';
@@ -8,6 +8,8 @@ import AiComment from './components/AiComment';
 import GlucoseScoreChart from './components/GlucoseScoreChart';
 import Accordion from './components/Accordion';
 import ScoreEmoji from './components/ScoreEmoji';
+import ThemeProvider, { ThemeContext } from './providers/ThemeContext';
+import ThemeDropdown from './forms/ThemeDropdown';
 
 export type VitalsType = {
   Timestamp: string;
@@ -37,9 +39,19 @@ export type Range = {
   name: string;
   value: number;
 };
+
 const App: React.FC = () => {
+  const { theme } = useContext(ThemeContext);
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('theme', theme);
+    console.log(
+      'html attribute: ',
+      document.documentElement.getAttribute('theme')
+    );
+  }, [theme]);
 
   return (
     <div className='app'>
@@ -47,6 +59,7 @@ const App: React.FC = () => {
         <h1>Best Report EVER</h1>
         <h2>Your daily dose of David</h2>
       </header>
+      <ThemeDropdown />
       <main>
         {vitals ? (
           <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />
