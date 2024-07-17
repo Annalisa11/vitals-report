@@ -38,6 +38,13 @@
   --bar-chart-color-second: dodgerblue;
   --bar-chart-color-third: blue;
   --bar-chart-label-color: white;
+
+  // emojis
+  --emoji-1: 🏆;
+  --emoji-2: 🥇;
+  --emoji-3: 🥈;
+  --emoji-4: 🥉;
+  --emoji-5: 😐;
 }
 
 html[theme='classic'] {
@@ -65,6 +72,13 @@ html[theme='dark'] {
   --chart-color-label: var(--text-color-primary);
   --chart-color-value: #82ca9d;
   --chart-color-details: var(--text-color-primary-40);
+
+  // emojis
+  --emoji-1: 🏆;
+  --emoji-2: 🥇;
+  --emoji-3: 🥈;
+  --emoji-4: 🥉;
+  --emoji-5: 😐;
 }
 
 html[theme='unicorn'] {
@@ -102,6 +116,13 @@ html[theme='unicorn'] {
   --bar-chart-color-second: #00a2ff;
   --bar-chart-color-third: var(--color-secondary);
   --bar-chart-label-color: white;
+
+  // emojis
+  --emoji-1: 🌟;
+  --emoji-2: 👸;
+  --emoji-3: 🧚;
+  --emoji-4: 🎠;
+  --emoji-5: 🏰;
 }
 
 $breakpoints: (

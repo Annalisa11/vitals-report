@@ -109,14 +109,14 @@ const getGlucoseRanges = (data) => {
 
 const getEmoji = (data) => {
   if (data[0].value > 97) {
-    return '🏆';
+    return 0;
   } else if (data[0].value > 85) {
-    return '🥇';
+    return 1;
   } else if (data[0].value > 70) {
-    return '🥈';
+    return 2;
   } else if (data[0].value > 55) {
-    return '🥉';
+    return 3;
   } else {
-    return '😐';
+    return 4;
   }
 };

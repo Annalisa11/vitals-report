@@ -32,7 +32,7 @@ export type GlucoseScore = {
 
 export type GlucoseScoreResult = {
   ranges: Range[];
-  emoji: string;
+  emoji: number;
 };
 
 export type Range = {

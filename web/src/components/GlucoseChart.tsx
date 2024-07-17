@@ -153,7 +153,7 @@ const GlucoseChart = ({ toggleSwitch, checked }: Props) => {
             minTickGap={60}
           />
           <YAxis
-            domain={['dataMin - 30', 'dataMax + 30']}
+            domain={[0, 300]}
             mirror
             tickLine={false}
             axisLine={false}
