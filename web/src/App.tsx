@@ -55,11 +55,11 @@ const App: React.FC = () => {
 
   return (
     <div className='app'>
+      <ThemeDropdown />
       <header className='app__header'>
         <h1>Best Report EVER</h1>
         <h2>Your daily dose of David</h2>
       </header>
-      <ThemeDropdown />
       <main>
         {vitals ? (
           <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />

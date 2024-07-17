@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { Theme, ThemeContext } from '../providers/ThemeContext';
+import '../styles/forms/ThemeDropdown.scss';
 
 const ThemeDropdown = () => {
   const [selectedValue, setSelectedValue] = useState<Theme>('classic');
@@ -12,8 +13,8 @@ const ThemeDropdown = () => {
   };
 
   return (
-    <div>
-      <label htmlFor='cars'>Choose a theme:</label>
+    <div className='theme-dropdown'>
+      <label htmlFor='themes'>Choose a theme:</label>
 
       <select
         value={selectedValue}

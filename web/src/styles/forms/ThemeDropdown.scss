@@ -1,0 +1,13 @@
+@import '../../reusables.scss';
+
+.theme-dropdown {
+  label {
+    margin-right: 1rem;
+  }
+
+  select {
+    padding: 0.5rem;
+    background-color: var(--dropdown-background-color);
+    color: var(--text-color-primary);
+  }
+}

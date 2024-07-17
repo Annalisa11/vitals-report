@@ -24,6 +24,8 @@
   --glucose-score-emoji-background-color: white;
   --glucose-score-emoji-border-color: var(--text-color-primary);
 
+  --dropdown-background-color: var(--background-color);
+
   // chart
   --chart-color-label: black;
   --chart-color-value: green;
@@ -80,6 +82,8 @@ html[theme='unicorn'] {
   --vitals-glucose-text-color: var(--text-color-primary);
   --glucose-score-emoji-background-color: white;
   --glucose-score-emoji-border-color: var(--background-color-secondary);
+
+  --dropdown-background-color: white;
 
   // chart
   --chart-color-label: black;
