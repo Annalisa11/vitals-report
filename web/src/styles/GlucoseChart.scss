@@ -1,24 +1,31 @@
 @import '../reusables.scss';
 
 .glucose-chart {
+  .stop {
+    stop-color: var(--chart-stop-color);
+  }
+
+  .recharts-curve.recharts-area-curve {
+    stroke: var(--chart-stop-color);
+  }
   .custom-tooltip {
-    border: 1px solid rgb(186, 186, 186);
-    background-color: white;
-    color: var(--dark-color);
+    border: 1px solid var(--color-border-secondary);
+    background-color: var(--background-color);
+    color: var(--text-color-primary);
     padding: 1rem;
     border-radius: 12px;
 
     &__label {
-      color: black;
+      color: var(--chart-color-label);
       height: 20px;
     }
 
     &__value {
-      color: green;
+      color: var(--chart-color-value);
 
       & small {
         font-size: x-small;
-        color: grey;
+        color: var(--chart-color-details);
       }
     }
   }
@@ -42,4 +49,28 @@
   .recharts-y-axis .recharts-cartesian-axis-tick:first-child text {
     font-size: 0;
   }
+
+  .recharts-dot {
+    fill: var(--chart-stop-color) !important;
+  }
+}
+
+.recharts-legend-item.legend-item-0 span,
+.recharts-rectangle.first {
+  fill: var(--bar-chart-color-first);
+  color: var(--bar-chart-color-first);
+}
+.recharts-legend-item.legend-item-1 span,
+.recharts-rectangle.second {
+  fill: var(--bar-chart-color-second);
+  color: var(--bar-chart-color-second);
+}
+.recharts-legend-item.legend-item-2 span,
+.recharts-rectangle.third {
+  fill: var(--bar-chart-color-third);
+  color: var(--bar-chart-color-third);
+}
+
+.bar-chart-text {
+  fill: var(--bar-chart-label-color);
 }

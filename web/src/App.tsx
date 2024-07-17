@@ -8,7 +8,7 @@ import AiComment from './components/AiComment';
 import GlucoseScoreChart from './components/GlucoseScoreChart';
 import Accordion from './components/Accordion';
 import ScoreEmoji from './components/ScoreEmoji';
-import ThemeProvider, { ThemeContext } from './providers/ThemeContext';
+import { ThemeContext } from './providers/ThemeContext';
 import ThemeDropdown from './forms/ThemeDropdown';
 
 export type VitalsType = {

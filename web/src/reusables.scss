@@ -1,18 +1,54 @@
 // Variables
 
+$testt: green;
 :root {
-  --dark-color: hsl(208, 37%, 20%);
-  --dark-color-20: hsla(208, 37%, 20%, 0.2);
-  --green-color: #93f9b9;
+  --button-background-secondary: #f1f1f1;
+  --button-background-primary: #93f9b9;
+  --button-background-darken: brightness(85%);
+  --button-border-hover: var(--color-secondary);
+  --text-color-primary: hsl(208, 37%, 20%);
+  --text-color-primary-20: hsla(208, 37%, 20%, 0.2);
+  --text-color-primary-40: hsla(208, 37%, 20%, 0.4);
+  --color-primary: #93f9b9;
+  --color-secondary: #646cff;
+  --color-border-secondary: rgb(186, 186, 186);
+
+  --background-color: white;
+  --toggle-switch-bachground: white;
+  --toggle-switch-primary: var(--text-color-primary);
+  --toggle-switch-lightened: var(--text-color-primary-40);
+  --toggle-switch-content-left: '🍩';
+  --toggle-switch-content-right: '🍰';
+  --toggle-switch-muted: var(--text-color-primary-40);
+
+  --glucose-score-emoji-background-color: white;
+
+  // chart
+  --chart-color-label: black;
+  --chart-color-value: green;
+  --chart-color-details: grey;
+
+  // rename to chart area color
+  --chart-stop-color: #82ca9d;
+
+  --bar-chart-color-first: #61bf93;
+  --bar-chart-color-second: dodgerblue;
+  --bar-chart-color-third: blue;
+  --bar-chart-label-color: white;
 }
 
 html[theme='classic'] {
 }
 
 html[theme='dark'] {
-  --dark-color: hsl(208, 100%, 32%);
-  --dark-color-20: hsla(111, 22%, 54%, 0.2);
-  --green-color: #f993e8;
+  --text-color-primary: rgb(0, 87, 163);
+  --text-color-primary-20: hsla(111, 22%, 54%, 0.2);
+  --color-primary: #f993e8;
+}
+html[theme='unicorn'] {
+  --text-color-primary: hsl(108, 72%, 27%);
+  --text-color-primary-20: hsla(111, 22%, 54%, 0.2);
+  --color-primary: #fd9b2a;
 }
 
 $breakpoints: (

@@ -7,6 +7,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import hooks from '../hooks/useHistory';
+import '../styles/GlucoseChart.scss';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -17,11 +18,11 @@ interface Props {
 export const CustomizedLabel = ({ p, value }: Props) => {
   return (
     <text
+      className='bar-chart-text'
       x={p.x + p.width / 2}
       y={p.y + p.height / 2}
       dy={6}
       fontSize={16}
-      fill='white'
       textAnchor='middle'
     >
       {value > 6 ? `${value.toString().split('.')[0]}%` : ''}
@@ -38,8 +39,6 @@ const GlucoseScoreChart = () => {
     console.log('UNDEFINED ');
     return;
   }
-
-  const COLORS = ['#61bf93', 'dodgerblue', 'blue'];
 
   return (
     glucoseRanges && (
@@ -60,6 +59,7 @@ const GlucoseScoreChart = () => {
           <YAxis type='category' dataKey='name' hide />
           <Legend iconSize={0} spacing={10} />
           <Bar
+            className='first'
             radius={
               glucoseRanges[1].value === 0 && glucoseRanges[2].value === 0
                 ? 8
@@ -67,24 +67,23 @@ const GlucoseScoreChart = () => {
             }
             dataKey='In Range'
             stackId='a'
-            fill={COLORS[0]}
             label={(payload) => (
               <CustomizedLabel p={payload} value={glucoseRanges[0].value} />
             )}
           />
           <Bar
+            className='second'
             dataKey='Below Range'
             stackId='a'
-            fill={COLORS[1]}
             radius={glucoseRanges[2].value === 0 ? [0, 8, 8, 0] : [1, 1, 1, 1]}
             label={(payload) => (
               <CustomizedLabel p={payload} value={glucoseRanges[1].value} />
             )}
           />
           <Bar
+            className='third'
             dataKey='Above Range'
             stackId='a'
-            fill={COLORS[2]}
             radius={[0, 8, 8, 0]}
             label={(payload) => (
               <CustomizedLabel p={payload} value={glucoseRanges[2].value} />

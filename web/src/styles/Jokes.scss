@@ -1,5 +1,7 @@
 @import '../reusables.scss';
 
+$test: var(--color-primary);
+
 .jokes {
   display: flex;
   flex-direction: column;
@@ -7,7 +9,7 @@
 
   .joke {
     border-radius: 24px;
-    border: 1px solid var(--dark-color-20);
+    border: 1px solid var(--text-color-primary-20);
     width: fit-content;
     padding: 1rem 2rem;
     margin-top: 1rem;
@@ -18,22 +20,22 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    background-color: var(--green-color);
+    background-color: var(--button-background-primary);
     padding: 0.5rem 1rem;
     border-radius: 8px;
     margin-top: 1rem;
     text-decoration: none;
-    color: var(--dark-color);
+    color: var(--text-color-primary);
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: darken(#93f9b9, 10%);
+      filter: brightness(90%);
     }
 
     &__logo {
       width: 24px;
       height: 24px;
-      color: var(--dark-color);
+      color: var(--text-color-primary);
     }
 
     &__label {

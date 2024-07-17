@@ -1,9 +1,3 @@
-$primary: darken(lightblue, 23%);
-$muted: lighten(gray, 23%);
-$background: lighten(#fde088, 2%);
-$shadow: darken($background, 11%);
-$white: lighten(mistyrose, 5%);
-
 .visible {
   opacity: 0;
   max-height: 0;
@@ -15,14 +9,5 @@ $white: lighten(mistyrose, 5%);
   &.open {
     opacity: 1;
     max-height: 900px; // Ensure this is large enough to display all content
-  }
-}
-
-.muted {
-  color: $muted;
-
-  a {
-    color: darken(mistyrose, 10%);
-    text-decoration: none;
   }
 }
