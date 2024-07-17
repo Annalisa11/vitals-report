@@ -2,11 +2,11 @@
 
 .glucose-chart {
   .stop {
-    stop-color: var(--chart-stop-color);
+    stop-color: var(--chart-area-color);
   }
 
   .recharts-curve.recharts-area-curve {
-    stroke: var(--chart-stop-color);
+    stroke: var(--chart-area-color);
   }
   .custom-tooltip {
     border: 1px solid var(--color-border-secondary);
@@ -51,7 +51,7 @@
   }
 
   .recharts-dot {
-    fill: var(--chart-stop-color) !important;
+    fill: var(--chart-area-color) !important;
   }
 }
 
