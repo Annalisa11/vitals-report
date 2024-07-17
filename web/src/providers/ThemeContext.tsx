@@ -17,11 +17,13 @@ interface ProviderProps {
 }
 
 const ThemeProvider = ({ children }: ProviderProps) => {
-  const [theme, setTheme] = useState<Theme>('classic');
+  const [theme, setTheme] = useState<Theme>(
+    (localStorage.getItem('theme') as Theme) || 'classic'
+  );
 
   const changeThemeHandler = (theme: Theme) => {
-    console.log('set theme', theme);
     setTheme(theme);
+    localStorage.setItem('theme', theme);
   };
   return (
     <ThemeContext.Provider

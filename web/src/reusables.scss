@@ -60,6 +60,11 @@ html[theme='dark'] {
 
   --glucose-score-emoji-background-color: var(--background-color-secondary);
   --glucose-score-emoji-border-color: var(--text-color-primary-40);
+
+  //chart
+  --chart-color-label: var(--text-color-primary);
+  --chart-color-value: #82ca9d;
+  --chart-color-details: var(--text-color-primary-40);
 }
 
 html[theme='unicorn'] {
