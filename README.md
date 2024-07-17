@@ -5,14 +5,14 @@ Well, same :)
 
 ## Table of Contents
 
-- [Getting Started](#getting-started)
-- [Prerequisites](#prerequisites)
-- [Environment Variables](#environment-variables)
-- [Run the Project](#run-the-project)
-- [Project Structure](#project-structure)
-- [Built With](#built-with)
+- [Getting Started](#-getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Environment Variables](#environment-variables)
+- [Run the Project](#-run-the-project)
+- [Project Structure](#-project-structure)
+- [Built With](#-built-with)
 
-## Getting Started
+## 🏁 Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
@@ -39,7 +39,7 @@ USE_DUMMY_DATA=true                       // set this to false if you want to ma
 VITE_API_URL=http://localhost:5000          // use the real url of where your server is running. If you use the backend you started locally, you can use localhost and the port you chose.
 ```
 
-## Run the Project
+## 🚀 Run the Project
 
 🚨 Install all dependencies with `npm install` in the respective `web` and `api-proxy` folders if you run the api-proxy/frontend for the first time.  
 
@@ -76,7 +76,7 @@ cd web
 npm run dev
 ```
 
-## Project Structure
+## 📂 Project Structure
 
 ```js
 project-root   
@@ -106,7 +106,7 @@ project-root
 └── README.md 
 ```
 
-## Built With
+## 🔨 Built With
 
 **Backend**   
 - Node.js
