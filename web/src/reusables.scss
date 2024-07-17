@@ -1,12 +1,12 @@
 // Variables
 
-$testt: green;
 :root {
   --button-background-secondary: #f1f1f1;
   --button-background-primary: #93f9b9;
   --button-background-darken: brightness(85%);
   --button-border-hover: var(--color-secondary);
   --text-color-primary: hsl(208, 37%, 20%);
+  --text-color-primary-inverted: var(--text-color-primary);
   --text-color-primary-20: hsla(208, 37%, 20%, 0.2);
   --text-color-primary-40: hsla(208, 37%, 20%, 0.4);
   --color-primary: #93f9b9;
@@ -14,7 +14,7 @@ $testt: green;
   --color-border-secondary: rgb(186, 186, 186);
 
   --background-color: white;
-  --toggle-switch-bachground: white;
+  --toggle-switch-background: white;
   --toggle-switch-primary: var(--text-color-primary);
   --toggle-switch-lightened: var(--text-color-primary-40);
   --toggle-switch-content-left: '🍩';
@@ -22,14 +22,15 @@ $testt: green;
   --toggle-switch-muted: var(--text-color-primary-40);
 
   --glucose-score-emoji-background-color: white;
+  --glucose-score-emoji-border-color: var(--text-color-primary);
 
   // chart
   --chart-color-label: black;
   --chart-color-value: green;
   --chart-color-details: grey;
 
-  // rename to chart area color
   --chart-area-color: #82ca9d;
+  --tooltip-background-color: var(--background-color);
 
   --bar-chart-color-first: #61bf93;
   --bar-chart-color-second: dodgerblue;
@@ -41,14 +42,57 @@ html[theme='classic'] {
 }
 
 html[theme='dark'] {
-  --text-color-primary: rgb(0, 87, 163);
-  --text-color-primary-20: hsla(111, 22%, 54%, 0.2);
-  --color-primary: #f993e8;
+  --text-color-primary: hsla(0, 0%, 100%, 0.87);
+  --text-color-primary-inverted: var(--background-color);
+  --text-color-primary-20: hsla(0, 0%, 100%, 0.2);
+  --text-color-primary-40: hsla(0, 0%, 100%, 0.4);
+  --background-color: #242424;
+  --background-color-secondary: #363636;
+  --vitals-glucose-text-color: var(--text-color-primary-inverted);
+  --share-button-text-color: var(--text-color-primary-inverted);
+
+  --ai-comment-background-color: var(--background-color-secondary);
+
+  // toggle
+  --toggle-switch-background: var(--background-color);
+
+  --glucose-score-emoji-background-color: var(--background-color-secondary);
+  --glucose-score-emoji-border-color: var(--text-color-primary-40);
 }
+
 html[theme='unicorn'] {
-  --text-color-primary: hsl(108, 72%, 27%);
-  --text-color-primary-20: hsla(111, 22%, 54%, 0.2);
-  --color-primary: #fd9b2a;
+  --button-background-secondary: white;
+  --button-background-primary: #b2f0fb;
+  --button-border-hover: var(--color-primary);
+  --text-color-primary: #0b3c49;
+  --text-color-primary-inverted: white;
+  --color-primary: #67c7ff;
+  --color-secondary: #646cff;
+
+  --background-color: #ffd7f9;
+  --background-color-secondary: #af4d98;
+  --toggle-switch-background: var(--background-color);
+  --toggle-switch-content-left: '🌈';
+  --toggle-switch-content-right: '🦄';
+
+  --ai-comment-text-color: var(--text-color-primary);
+  --ai-comment-background-color: var(--text-color-primary-inverted);
+  --vitals-glucose-text-color: var(--text-color-primary);
+  --glucose-score-emoji-background-color: white;
+  --glucose-score-emoji-border-color: var(--background-color-secondary);
+
+  // chart
+  --chart-color-label: black;
+  --chart-color-value: #af4d98;
+  --chart-color-details: grey;
+
+  --chart-area-color: #af4d98;
+  --tooltip-background-color: white;
+
+  --bar-chart-color-first: #af4d98;
+  --bar-chart-color-second: #00a2ff;
+  --bar-chart-color-third: var(--color-secondary);
+  --bar-chart-label-color: white;
 }
 
 $breakpoints: (

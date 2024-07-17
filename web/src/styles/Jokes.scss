@@ -35,11 +35,12 @@ $test: var(--color-primary);
     &__logo {
       width: 24px;
       height: 24px;
-      color: var(--text-color-primary);
+      color: var(--share-button-text-color);
     }
 
     &__label {
       font-size: 1rem;
+      color: var(--share-button-text-color);
     }
   }
 }
