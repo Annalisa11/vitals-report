@@ -3,6 +3,8 @@
 Always wanted to keep track on your friend's diabetes vitals?  
 Well, same :)
 
+![Logo](application-screenshot.png)
+
 ## Table of Contents
 
 - [Getting Started](#-getting-started)
