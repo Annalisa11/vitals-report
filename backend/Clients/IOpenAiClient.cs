@@ -7,3 +7,4 @@ namespace backend.Clients
         Task<OpenAiResponseDto> SendRequestAsync(string prompt);
     }
 }
+

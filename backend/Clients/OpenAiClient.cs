@@ -1,4 +1,6 @@
 ﻿using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using backend.Configuration;
 using backend.Models;
 using Microsoft.Extensions.Options;
@@ -26,30 +28,9 @@ namespace backend.Clients
         {
             ChatCompletion completion = await _client.CompleteChatAsync(prompt);
             var message = completion.ToString();
-            var headline = GetHeadlineFromMessage(message);
+            var response = JsonSerializer.Deserialize<OpenAiResponseDto>(message);
 
-            return new OpenAiResponseDto
-            {
-                Message = message,
-                Headline = headline
-            };
-        }
-
-        private static string GetHeadlineFromMessage(string message)
-        {
-            string[] split = message.Split(" ", StringSplitOptions.TrimEntries);
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < split.Length; i++)
-            {
-                builder.Append(split[i]).Append(' ');
-
-                if (i >= 2)
-                {
-                    break;
-                }
-            }
-
-            return builder.ToString();
+            return response!;
         }
     }
 }
