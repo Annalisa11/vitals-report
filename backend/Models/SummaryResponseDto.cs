@@ -12,5 +12,8 @@ namespace backend.Models
 
         [JsonPropertyName("commentHeadline")]
         public required string CommentHeadline { get; set; }
+
+        [JsonPropertyName("history")]
+        public required VitalsDto[] History { get; set; }
     }
 }

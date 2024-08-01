@@ -14,5 +14,15 @@ namespace backend.Clients
 
             return JsonSerializer.Deserialize<VitalsFromDavidDto>(responseBody)!;
         }
+
+        public static async Task<VitalsFromDavidDto[]> GetHistoryAsync()
+        {
+            var httpClient = new HttpClient();
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get, "https://legendary-api.davidpenn.de/cgm?type=graph");
+            var responseMessage = await httpClient.SendAsync(httpRequestMessage);
+            var responseBody = await responseMessage.Content.ReadAsStringAsync();
+
+            return JsonSerializer.Deserialize<VitalsFromDavidDto[]>(responseBody)!;
+        }
     }
 }
