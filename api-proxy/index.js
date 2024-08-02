@@ -2,6 +2,11 @@ const express = require('express');
 const axios = require('axios');
 const OpenAI = require('openai');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const nodemailer = require('nodemailer');
+
 require('dotenv').config();
 const store = require('data-store')({ path: process.cwd() + '/store.json' });
 
@@ -15,9 +20,81 @@ const USE_DUMMY_DATA = process.env.USE_DUMMY_DATA === 'true' ?? true;
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
+});
+
+// Mock database
+const users = [];
+
+// Configure nodemailer
+const transporter = nodemailer.createTransport({
+  service: 'hotmail',
+  auth: {
+    user: 'annalisa.comin@hotmail.com',
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
+
+// Admin creates an account
+app.post('/create-account', (req, res) => {
+  const { email, rights } = req.body;
+  const token = jwt.sign({ email, rights }, 'secret-key', { expiresIn: '1h' });
+
+  const mailOptions = {
+    from: 'annalisa.comin3@gmail.com',
+    to: email,
+    subject: 'Complete your registration',
+    text: `Click the link to complete your registration: http://localhost:3000/register?token=${token}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).send(error.toString());
+    }
+    res.send('Email sent: ' + info.response);
+  });
+});
+
+// User registers
+app.post('/register', (req, res) => {
+  const { token, username, password } = req.body;
+  try {
+    const decoded = jwt.verify(token, 'secret-key');
+    const hashedPassword = bcrypt.hashSync(password, 8);
+
+    users.push({
+      email: decoded.email,
+      username,
+      password: hashedPassword,
+      rights: decoded.rights,
+    });
+    res.send('Registration successful');
+  } catch (err) {
+    res.status(500).send('Invalid token');
+  }
+});
+
+// User login
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+  const user = users.find((u) => u.username === username);
+
+  if (!user) {
+    return res.status(404).send('User not found');
+  }
+
+  const passwordIsValid = bcrypt.compareSync(password, user.password);
+  if (!passwordIsValid) {
+    return res.status(401).send('Invalid password');
+  }
+
+  const token = jwt.sign({ id: user.id, rights: user.rights }, 'secret-key', {
+    expiresIn: '1h',
+  });
+  res.send({ auth: true, token });
 });
 
 app.get('/vitals', async (req, res) => {
