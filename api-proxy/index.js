@@ -6,6 +6,8 @@ require('dotenv').config();
 const store = require('data-store')({ path: process.cwd() + '/store.json' });
 
 const dummyData = require('./dummyData');
+// { history: History[][] }
+const fakeData = require('./fakeData.json');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -70,7 +72,8 @@ app.post('/openai', async (req, res) => {
 
 app.get('/glucose-score', async (req, res) => {
   if (USE_DUMMY_DATA === true) {
-    res.send(dummyData.glucoseScore);
+    const response = getGlucoseRanges(fakeData.history[0]);
+    res.send(response);
   } else {
     try {
       const history = store.get('history');
