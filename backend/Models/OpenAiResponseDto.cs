@@ -4,10 +4,10 @@ namespace backend.Models
 {
     public class OpenAiResponseDto
     {
-        [JsonPropertyName("message")]
-        public string? Message { get; set; }
-
         [JsonPropertyName("headline")]
-        public string? Headline { get; set; }
+        public required string Headline { get; set; }
+
+        [JsonPropertyName("comment")]
+        public required string Comment { get; set; }
     }
 }

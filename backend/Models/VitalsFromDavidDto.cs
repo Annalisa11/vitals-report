@@ -10,8 +10,8 @@ namespace backend.Models
         [JsonPropertyName("ValueInMgPerDl")]
         public int ValueInMgPerDl { get; set; }
 
-        [JsonPropertyName("TrendArrow")]
-        public int TrendArrow { get; set; }
+        //[JsonPropertyName("TrendArrow")]
+        //public int TrendArrow { get; set; }
 
         [JsonPropertyName("TrendMessage")]
         public string TrendMessage { get; set; }
