@@ -26,9 +26,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Mock database
-const users = [];
-
 // Configure nodemailer
 const transporter = nodemailer.createTransport({
   service: 'hotmail',
@@ -44,15 +41,15 @@ app.post('/create-account', (req, res) => {
   const token = jwt.sign({ email, rights }, 'secret-key', { expiresIn: '1h' });
 
   const mailOptions = {
-    from: 'annalisa.comin3@gmail.com',
+    from: 'annalisa.comin@hotmail.com',
     to: email,
     subject: 'Complete your registration',
-    text: `Click the link to complete your registration: http://localhost:3000/register?token=${token}`,
+    text: `Click the link to complete your registration: http://localhost:5173/register?token=${token}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return res.status(500).send(error.toString());
+      return res.status(500).send(error.toString(), info);
     }
     res.send('Email sent: ' + info.response);
   });
@@ -65,22 +62,27 @@ app.post('/register', (req, res) => {
     const decoded = jwt.verify(token, 'secret-key');
     const hashedPassword = bcrypt.hashSync(password, 8);
 
-    users.push({
+    const stringifiedUser = JSON.stringify({
       email: decoded.email,
       username,
       password: hashedPassword,
       rights: decoded.rights,
     });
+
+    store.union('users', stringifiedUser);
     res.send('Registration successful');
   } catch (err) {
-    res.status(500).send('Invalid token');
+    console.log('ERROR', err);
+    res.status(500).send('Invalid token or token expired');
   }
 });
 
 // User login
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-  const user = users.find((u) => u.username === username);
+  const users = store.get('users');
+  const usersData = users.map((user) => JSON.parse(user));
+  const user = usersData.filter((user) => user.username === username).pop();
 
   if (!user) {
     return res.status(404).send('User not found');
