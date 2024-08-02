@@ -17,10 +17,18 @@ const ThemeDropdown = () => {
       <label htmlFor='themes'>Choose a theme:</label>
 
       <select
+        // style={{
+        //   border: '1px solid red',
+        //   backgroundColor: 'pink',
+        //   borderRadius: 30,
+        // }}
+        className='hallo'
         value={selectedValue}
         onChange={(e) => handleChangeValue(e.target.value as Theme)}
       >
-        <option value='classic'>classic</option>
+        <option style={{ border: '1px solid blue' }} value='classic'>
+          classic
+        </option>
         <option value='dark'>dark</option>
         <option value='unicorn'>unicorn</option>
       </select>
