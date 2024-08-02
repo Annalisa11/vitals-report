@@ -3,8 +3,8 @@ import { Theme, ThemeContext } from '../providers/ThemeContext';
 import '../styles/forms/ThemeDropdown.scss';
 
 const ThemeDropdown = () => {
-  const [selectedValue, setSelectedValue] = useState<Theme>('classic');
-  const { changeTheme } = useContext(ThemeContext);
+  const { changeTheme, theme } = useContext(ThemeContext);
+  const [selectedValue, setSelectedValue] = useState<Theme>(theme ?? 'classic');
 
   const handleChangeValue = (newValue: Theme) => {
     console.log('handle value change of dropdown', newValue);
