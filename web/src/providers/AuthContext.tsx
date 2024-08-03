@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 interface AuthContextProps {
   token: string;
   user: User | undefined;
-  login: (username: string, password: string) => void;
+  login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   isLoggedIn: boolean;
 }
@@ -14,7 +14,7 @@ interface AuthContextProps {
 export const AuthContext = createContext<AuthContextProps>({
   token: '',
   user: undefined,
-  login: () => {},
+  login: async () => {},
   logout: () => {},
   isLoggedIn: false,
 });
@@ -32,24 +32,29 @@ const AuthProvider = ({ children }: ProviderProps) => {
   const [token, setToken] = useState<string>(
     localStorage.getItem('token') ?? ''
   );
-  const [user, setUser] = useState<User>();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [user, setUser] = useState<User | undefined>(
+    JSON.parse(localStorage.getItem('user') ?? 'null') ?? undefined
+  );
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
+    JSON.parse(localStorage.getItem('user') ?? 'null') ? true : false
+  );
 
   useEffect(() => {
     setIsLoggedIn(user ? true : false);
+    console.log('useEffect[user]: ', user);
   }, [user]);
 
   const login = async (username: string, password: string) => {
     axios
       .post(`${BASE_URL}/login`, { username, password })
       .then((response) => {
-        console.log(response);
         const { token, user: userResponse } = response.data;
         setToken(token);
         setUser(userResponse);
 
         localStorage.setItem('token', token);
-        navigate('/home');
+        localStorage.setItem('user', JSON.stringify(userResponse));
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
@@ -60,6 +65,7 @@ const AuthProvider = ({ children }: ProviderProps) => {
     setToken('');
     setUser(undefined);
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   };
 
   return (

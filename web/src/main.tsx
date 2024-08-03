@@ -9,8 +9,8 @@ import ErrorPage from './pages/ErrorPage.tsx';
 import LoginPage from './pages/LoginPage.tsx';
 import CreateAccountPage from './pages/CreateAccountPage.tsx';
 import RegisterPage from './pages/RegisterPage.tsx';
-import AuthProvider from './providers/AuthContext.tsx';
 import MainLayout from './MainLayout.tsx';
+import PrivateRoute from './components/PrivateRoute.tsx';
 
 // https://medium.com/@galohernandez/vite-react-react-router-dom-the-latest-way-312ee887197e
 
@@ -22,11 +22,13 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <LoginPage />,
-      },
-      {
-        path: 'home',
-        element: <App />,
+        element: <PrivateRoute redirectTo='/login' />,
+        children: [
+          {
+            path: '/',
+            element: <App />,
+          },
+        ],
       },
       {
         path: 'create-account',
