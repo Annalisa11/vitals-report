@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddTransient<IOpenAiClient, OpenAiClient>();
+builder.Services.AddTransient<JokeApiClient>();
 builder.Services.Configure<OpenAiClientSettings>(builder.Configuration.GetSection(OpenAiClientSettings.Section));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

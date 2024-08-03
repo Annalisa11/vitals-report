@@ -1,4 +1,5 @@
 ﻿using backend.Clients;
+using backend.Mappings;
 using backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +14,13 @@ namespace backend.Controllers
         public async Task<IActionResult> GetSummary()
         {
             var vitalsToConvert = await DavidApiClient.GetDavidVitalsAsync();
+            var vitalsDto = Mapper.MapToVitalsDto(vitalsToConvert);
+
             var history = await DavidApiClient.GetHistoryAsync();
+            var historyDto = history.Select(x => Mapper.MapToVitalsDto(x)).ToArray();
+
+            var jokeFromJokeApi = await JokeApiClient.GetJokeAsync();
+            var jokeDto = Mapper.MapToJokeDto(jokeFromJokeApi);
 
             string prompt =
                 "Generate a message in raw JSON with no formatting and two properties 'headline' and 'comment'. " +
@@ -25,25 +32,14 @@ namespace backend.Controllers
             var openAiResponse = await client.SendRequestAsync(prompt);
             var summary = new SummaryResponseDto()
             {
-                Vitals = this.buildVitalsDto(vitalsToConvert),
-                Comment = openAiResponse.Comment,
+                Vitals = vitalsDto,
                 CommentHeadline = openAiResponse.Headline,
-                History = history.Select(x => buildVitalsDto(x)).ToArray(),
+                Comment = openAiResponse.Comment,
+                History = historyDto,
+                Joke = jokeDto
             };
-            return this.Ok(summary);
-        }
 
-        private VitalsDto buildVitalsDto(VitalsFromDavidDto vitals)
-        {
-            return new VitalsDto
-            {
-                GlucoseUnits = vitals.GlucoseUnits,
-                MeasurementColor = vitals.MeasurementColor,
-                Timestamp = vitals.Timestamp,
-                TrendMessage = vitals.TrendMessage,
-                Value = vitals.Value,
-                ValueInMgPerDl = vitals.ValueInMgPerDl
-            };
+            return Ok(summary);
         }
     }
 }
