@@ -7,7 +7,6 @@ const ThemeDropdown = () => {
   const [selectedValue, setSelectedValue] = useState<Theme>(theme ?? 'classic');
 
   const handleChangeValue = (newValue: Theme) => {
-    console.log('handle value change of dropdown', newValue);
     setSelectedValue(newValue);
     changeTheme(newValue);
   };

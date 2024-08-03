@@ -96,7 +96,7 @@ app.post('/login', (req, res) => {
   const token = jwt.sign({ id: user.id, rights: user.rights }, 'secret-key', {
     expiresIn: '1h',
   });
-  res.send({ auth: true, token });
+  res.send({ token, user: { username: user.username } });
 });
 
 app.get('/vitals', async (req, res) => {

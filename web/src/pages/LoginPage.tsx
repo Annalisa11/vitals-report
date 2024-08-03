@@ -1,26 +1,15 @@
 import { FormEvent, useState } from 'react';
-import axios from 'axios';
-import { BASE_URL } from '../config';
-import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../providers/AuthContext';
 
 const LoginPage = () => {
-  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { login, isLoggedIn, user, token } = useAuth();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    axios
-      .post(`${BASE_URL}/login`, { username, password })
-      .then((response) => {
-        console.log(response);
-        alert('Login successful');
-        navigate('/home');
-      })
-      .catch((error) => {
-        console.log(error);
-        alert('Login failed');
-      });
+    login(username, password);
+    console.log('LOGIN INFO after login:', isLoggedIn, user, token);
   };
 
   return (

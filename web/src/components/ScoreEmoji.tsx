@@ -15,7 +15,6 @@ const ScoreEmoji = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       const style = getComputedStyle(document.documentElement);
-      console.log('-- set emojis for theme: ', theme);
       const temp = [
         style.getPropertyValue('--emoji-1').trim(),
         style.getPropertyValue('--emoji-2').trim(),
@@ -40,7 +39,6 @@ const ScoreEmoji = () => {
     });
   };
 
-  console.log('---RENDER with emojis: ', theme, emojis);
   return (
     <div className='score-emoji' onClick={fireConfetti}>
       <div className='score-emoji__emoji'>{emojis[score]}</div>

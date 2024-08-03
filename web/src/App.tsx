@@ -47,10 +47,6 @@ const App: React.FC = () => {
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', theme);
-    console.log(
-      'html attribute: ',
-      document.documentElement.getAttribute('theme')
-    );
   }, [theme]);
 
   return (
