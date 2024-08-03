@@ -24,6 +24,8 @@ const Vitals = ({ vitals, vitalsLoading }: Props) => {
 
   return vitals && !vitalsLoading ? (
     <div className='vitals'>
+      <h2>Your daily dose of David</h2>
+
       <div className='vitals__container'>
         <div className='vitals__glucose'>
           <p className='vitals__glucose-text'>

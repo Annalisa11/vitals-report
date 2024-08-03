@@ -10,6 +10,7 @@ import Accordion from './components/Accordion';
 import ScoreEmoji from './components/ScoreEmoji';
 import { ThemeContext } from './providers/ThemeContext';
 import ThemeDropdown from './forms/ThemeDropdown';
+import { useAuth } from './providers/AuthContext';
 
 export type VitalsType = {
   Timestamp: string;
@@ -44,6 +45,7 @@ const App: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
   const [isChecked, setIsChecked] = useState(false);
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', theme);
@@ -51,11 +53,15 @@ const App: React.FC = () => {
 
   return (
     <div className='app'>
-      <ThemeDropdown />
       <header className='app__header'>
-        <h1>Best Report EVER</h1>
-        <h2>Your daily dose of David</h2>
+        <ThemeDropdown />
+        <div className='app__header user'>
+          <strong>Hi, {user?.username}</strong>
+          <button onClick={logout}>Log Out</button>
+        </div>
       </header>
+      <h1>Best Report EVER</h1>
+
       <main>
         {vitals ? (
           <Vitals vitals={vitals} vitalsLoading={vitalsLoading} />

@@ -1,6 +1,19 @@
 .app {
   padding-bottom: 4rem;
   background-color: var(--background-color);
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4rem;
+
+    .user {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
 }
 
 main {
