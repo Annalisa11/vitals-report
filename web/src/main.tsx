@@ -22,13 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <PrivateRoute redirectTo='/login' />,
-        children: [
-          {
-            path: '/',
-            element: <App />,
-          },
-        ],
+        element: <App />,
       },
       {
         path: 'create-account',
