@@ -25,7 +25,7 @@ interface ProviderProps {
   children?: React.ReactNode;
 }
 
-type User = {
+export type User = {
   username: string;
   rights: string[];
 };

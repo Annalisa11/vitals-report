@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import GlucoseBox from './components/GlucoseBox';
 import axios from 'axios';
 import { BASE_URL } from './config';
+import AdminModal from './components/admin/AdminModal';
 
 export type VitalsType = {
   Timestamp: string;
@@ -101,6 +102,7 @@ const App: React.FC = () => {
         )}
       </header>
       <h1>Best Report EVER</h1>
+      <AdminModal />
 
       {isLoggedIn ? (
         <main>
