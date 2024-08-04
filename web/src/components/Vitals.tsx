@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/de';
 import localizedFormat from 'dayjs/plugin/localizedFormat'; // ES 2015
 import { useAuth } from '../providers/AuthContext';
+import GlucoseBox from './GlucoseBox';
 
 dayjs.extend(localizedFormat);
 
@@ -30,12 +31,7 @@ const Vitals = ({ vitals, vitalsLoading }: Props) => {
       <h2>Your daily dose of David</h2>
 
       <div className='vitals__container'>
-        <div className='vitals__glucose'>
-          <p className='vitals__glucose-text'>
-            {vitals.ValueInMgPerDl}
-            <span className='vitals__glucose-unit'> mg/dL</span>
-          </p>
-        </div>
+        <GlucoseBox ValueInMgPerDl={vitals.ValueInMgPerDl} />
         {checkPermission('vitals-details') && (
           <div className='vitals__stats'>
             <p>

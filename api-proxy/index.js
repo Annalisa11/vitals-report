@@ -117,6 +117,21 @@ app.get('/vitals', async (req, res) => {
   }
 });
 
+app.post('/guess', async (req, res) => {
+  try {
+    console.log('req', req);
+    const { value } = req.body;
+    const history = store.get('history');
+    const realValue = history[history.length - 1].Value;
+    const message = getGuessFeedback(value, realValue);
+
+    res.send(message);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error while guessing');
+  }
+});
+
 app.get('/history', async (req, res) => {
   try {
     const response = await axios.get(`${process.env.API_URL}/cgm?type=graph`);
@@ -204,3 +219,28 @@ const getEmoji = (data) => {
     return 4;
   }
 };
+
+function getGuessFeedback(guessedValue, realValue) {
+  const difference = Math.abs(guessedValue - realValue);
+  let feedback = '';
+
+  if (difference === 0) {
+    feedback = '🏆 Exact Match!'; // Exact match
+  } else if (difference <= 2) {
+    feedback = '🔥🔥🔥🔥'; // Very close
+  } else if (difference <= 5) {
+    feedback = '🔥🔥🔥'; // Close
+  } else if (difference <= 10) {
+    feedback = '🔥🔥'; // Not too far
+  } else if (difference <= 20) {
+    feedback = '🔥'; // Not too far
+  } else if (difference <= 30) {
+    feedback = '❄️'; // Not too far
+  } else if (difference <= 60) {
+    feedback = '❄️❄️'; // Not too far
+  } else {
+    feedback = '❄️❄️❄️❄️'; // Far
+  }
+
+  return feedback;
+}
