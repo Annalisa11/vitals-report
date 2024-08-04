@@ -119,7 +119,6 @@ app.get('/vitals', async (req, res) => {
 
 app.post('/guess', async (req, res) => {
   try {
-    console.log('req', req);
     const { value } = req.body;
     const history = store.get('history');
     const realValue = history[history.length - 1].Value;
@@ -129,6 +128,41 @@ app.post('/guess', async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send('Error while guessing');
+  }
+});
+
+//TODO: check for permission?
+app.post('/admin', async (req, res) => {
+  try {
+    console.log('ADMIN', req);
+    const users = store.get('users');
+    const usersData = users.map((user) => JSON.parse(user));
+
+    res.send(usersData);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error while requesting admin information');
+  }
+});
+
+app.delete('/admin/:username', async (req, res) => {
+  try {
+    const username = req.params.username;
+    const users = store.get('users');
+    const usersData = users.map((user) => JSON.parse(user));
+
+    const filteredUsers = usersData.filter(
+      (user) => user.username !== username
+    );
+    store.set(
+      'users',
+      filteredUsers.map((user) => JSON.stringify(user))
+    );
+
+    res.send(204);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error while deleting user ');
   }
 });
 
