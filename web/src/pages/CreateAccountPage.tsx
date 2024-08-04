@@ -1,11 +1,22 @@
 import axios from 'axios';
 import { BASE_URL } from '../config';
 import { FormEvent, useState } from 'react';
+import RightsCheckbox, { Right } from '../forms/RightsCheckbox';
 
 const CreateAccountPage = () => {
   const [email, setEmail] = useState('');
-  //   const [rights, setRights] = useState('');
-  const rights = 'something';
+  const [rights, setRights] = useState<string[]>([]);
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+    setRights((prevRights) => {
+      if (checked) {
+        return [...prevRights, value];
+      } else {
+        return prevRights.filter((right) => right !== value);
+      }
+    });
+  };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -19,6 +30,22 @@ const CreateAccountPage = () => {
         alert('Failed to create account');
       });
   };
+
+  const rightsData: { name: string; right: Right }[] = [
+    {
+      name: 'Chart',
+      right: 'chart',
+    },
+    {
+      name: 'Vitals Details',
+      right: 'vitals-details',
+    },
+    {
+      name: 'Create Account',
+      right: 'create-account',
+    },
+  ];
+
   return (
     <div>
       <h1>Create Account</h1>
@@ -32,8 +59,16 @@ const CreateAccountPage = () => {
             required
           />
         </div>
-
-        <button type='submit'>send invitation</button>
+        <h2>to what information should the user have access?</h2>
+        {rightsData.map(({ right, name }) => (
+          <RightsCheckbox
+            name={name}
+            right={right}
+            rights={rights}
+            onChange={handleCheckboxChange}
+          />
+        ))}
+        <button type='submit'>Send Invitation</button>
       </form>
     </div>
   );

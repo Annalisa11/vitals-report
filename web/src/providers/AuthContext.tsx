@@ -8,6 +8,7 @@ interface AuthContextProps {
   user: User | undefined;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
+  checkPermission: (right: string) => boolean;
   isLoggedIn: boolean;
 }
 
@@ -16,6 +17,7 @@ export const AuthContext = createContext<AuthContextProps>({
   user: undefined,
   login: async () => {},
   logout: () => {},
+  checkPermission: () => false,
   isLoggedIn: false,
 });
 
@@ -25,6 +27,7 @@ interface ProviderProps {
 
 type User = {
   username: string;
+  rights: string[];
 };
 
 const AuthProvider = ({ children }: ProviderProps) => {
@@ -61,6 +64,14 @@ const AuthProvider = ({ children }: ProviderProps) => {
       });
   };
 
+  const checkPermission = (right: string) => {
+    console.log('CHECK PER', user);
+    if (!user || !user.rights) {
+      return false;
+    }
+    return user.rights.some((r) => r === right);
+  };
+
   const logout = () => {
     setToken('');
     setUser(undefined);
@@ -75,6 +86,7 @@ const AuthProvider = ({ children }: ProviderProps) => {
         user,
         login,
         logout,
+        checkPermission,
         isLoggedIn,
       }}
     >

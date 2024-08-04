@@ -1,14 +1,20 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../providers/AuthContext';
+import { Right } from '../forms/RightsCheckbox';
 
 interface Props {
   redirectTo: string;
+  rightsCheck?: Right;
 }
 
-const PrivateRoute = ({ redirectTo }: Props) => {
-  const { isLoggedIn } = useAuth();
+const PrivateRoute = ({ redirectTo, rightsCheck }: Props) => {
+  const { isLoggedIn, checkPermission } = useAuth();
 
-  return isLoggedIn ? <Outlet /> : <Navigate to={redirectTo} />;
+  const check: boolean = rightsCheck
+    ? checkPermission(rightsCheck)
+    : isLoggedIn;
+
+  return check ? <Outlet /> : <Navigate to={redirectTo} />;
 };
 
 export default PrivateRoute;

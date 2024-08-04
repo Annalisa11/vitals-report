@@ -32,7 +32,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'create-account',
-        element: <CreateAccountPage />,
+        element: <PrivateRoute redirectTo='/' rightsCheck='create-account' />,
+        children: [
+          {
+            path: '/create-account',
+            element: <CreateAccountPage />,
+          },
+        ],
       },
       {
         path: 'register',

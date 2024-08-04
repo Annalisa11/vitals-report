@@ -45,7 +45,7 @@ const App: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
   const [isChecked, setIsChecked] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout, checkPermission } = useAuth();
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', theme);
@@ -68,19 +68,22 @@ const App: React.FC = () => {
         ) : (
           <div>data not available right now :(</div>
         )}
-        <div className='glucose-score'>
-          <GlucoseChart checked={isChecked} toggleSwitch={setIsChecked} />
-          <Accordion
-            isOpen={isChecked}
-            children={
-              <div className='chart-details'>
-                <GlucoseScoreChart />
-                <ScoreEmoji />
-              </div>
-            }
-          />
-          <AiComment vitals={vitals} />
-        </div>
+        {checkPermission('chart') && (
+          <div className='glucose-score'>
+            <GlucoseChart checked={isChecked} toggleSwitch={setIsChecked} />
+            <Accordion
+              isOpen={isChecked}
+              children={
+                <div className='chart-details'>
+                  <GlucoseScoreChart />
+                  <ScoreEmoji />
+                </div>
+              }
+            />{' '}
+            <AiComment vitals={vitals} />
+          </div>
+        )}
+
         <Jokes />
       </main>
     </div>

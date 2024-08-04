@@ -36,6 +36,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Admin creates an account
+// rights = string[]
 app.post('/create-account', (req, res) => {
   const { email, rights } = req.body;
   const token = jwt.sign({ email, rights }, 'secret-key', { expiresIn: '1h' });
@@ -96,7 +97,8 @@ app.post('/login', (req, res) => {
   const token = jwt.sign({ id: user.id, rights: user.rights }, 'secret-key', {
     expiresIn: '1h',
   });
-  res.send({ token, user: { username: user.username } });
+  console.log('user', user);
+  res.send({ token, user: { ...user } });
 });
 
 app.get('/vitals', async (req, res) => {

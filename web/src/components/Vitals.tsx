@@ -3,6 +3,7 @@ import { VitalsType } from '../App';
 import dayjs from 'dayjs';
 import 'dayjs/locale/de';
 import localizedFormat from 'dayjs/plugin/localizedFormat'; // ES 2015
+import { useAuth } from '../providers/AuthContext';
 
 dayjs.extend(localizedFormat);
 
@@ -12,6 +13,8 @@ interface Props {
 }
 
 const Vitals = ({ vitals, vitalsLoading }: Props) => {
+  const { checkPermission } = useAuth();
+
   const getAlarmMessage = () => {
     if (vitals.isHigh) {
       return '🚨 TOO HIGH 🚨';
@@ -33,20 +36,22 @@ const Vitals = ({ vitals, vitalsLoading }: Props) => {
             <span className='vitals__glucose-unit'> mg/dL</span>
           </p>
         </div>
-        <div className='vitals__stats'>
-          <p>
-            <strong>Timestamp:</strong>
-            {dayjs(vitals.Timestamp).format('L LT')}
-          </p>
-          <p>
-            <strong>Trend Arrow:</strong>
-            {`${vitals.TrendArrow.icon} ${vitals.TrendArrow.message}`}
-          </p>
-          <p>
-            <strong>Alarm:</strong>
-            {getAlarmMessage()}
-          </p>
-        </div>
+        {checkPermission('vitals-details') && (
+          <div className='vitals__stats'>
+            <p>
+              <strong>Timestamp:</strong>
+              {dayjs(vitals.Timestamp).format('L LT')}
+            </p>
+            <p>
+              <strong>Trend Arrow:</strong>
+              {`${vitals.TrendArrow.icon} ${vitals.TrendArrow.message}`}
+            </p>
+            <p>
+              <strong>Alarm:</strong>
+              {getAlarmMessage()}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   ) : (
