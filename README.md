@@ -57,7 +57,14 @@ The other one is written in C# and is a more professional approach to implementi
 #### 2. Api-proxy (Node.js)
 
 The api proxy is a small server that proxies the api requests just enough to satisfy Frontend needs.   
-First navigate into the backend folder, the `api-proxy` folder, and create an empty `.json`file called `store.json` on the same level es the `index.js` file.   
+
+First navigate into the backend folder, the `api-proxy` folder, and create an empty `.json` file called `store.json` on the same level es the `index.js` file.     
+The `store.json` file will be our simple "database" and is absolutely necessary for the backend.  
+> project-root   
+> ├── api-proxy  
+> │   ├── index.js   
+> │   ├── store.json   
+> ...
 
 Then you can run the server.  
 ```
@@ -98,6 +105,7 @@ project-root
 │   ├── src
 │   │   ├── assets   // put any img, svg etc here
 │   │   ├── components   // put any component files here (feel free to nest it further)
+│   │   ├── pages   // put any page files here 
 │   │   ├── hooks    // put any custom hooks here
 │   │   ├── providers    // put any contexts or providers here
 │   │   ├── styles    // put any styles of components here
