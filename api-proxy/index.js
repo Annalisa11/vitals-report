@@ -150,9 +150,13 @@ app.put('/admin/rights/:username', async (req, res) => {
     const newRights = req.body.rights;
     const users = store.get('users');
 
-    const filteredUsers = users.filter((user) => user.username === username);
-    store.set('users', [...filteredUsers]);
-    res.send(usersData);
+    const index = users.findIndex((user) => user.username === username);
+    const user = users[index];
+    const userWithNewRights = { ...user, rights: newRights };
+    users[index] = userWithNewRights;
+    store.set('users', [...users]);
+
+    res.send(204);
   } catch (error) {
     console.log(error);
     res.status(500).send('Error while requesting admin information');

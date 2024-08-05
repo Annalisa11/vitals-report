@@ -1,4 +1,3 @@
-import React from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import axios from 'axios';
 import { BASE_URL } from '../../config';

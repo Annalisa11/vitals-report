@@ -34,9 +34,10 @@ const UserRightsAccordionContent = ({
   const handleSaveRights = async (e: FormEvent) => {
     e.preventDefault();
     axios
-      .put(`${BASE_URL}/admin/rights/${username}`, { checkedRights })
+      .put(`${BASE_URL}/admin/rights/${username}`, { rights: checkedRights })
       .then(() => {
         getAdminInformation();
+        setIsEditMode(false);
       })
       .catch((error) => {
         console.log(error);
