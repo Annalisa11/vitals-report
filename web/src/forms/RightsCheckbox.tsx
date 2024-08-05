@@ -5,11 +5,18 @@ interface Props {
   right: Right;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   rights: string[];
+  disabled?: boolean;
 }
 
 export type Right = 'chart' | 'vitals-details' | 'create-account';
 
-const RightsCheckbox = ({ name, right, rights, onChange }: Props) => {
+const RightsCheckbox = ({
+  name,
+  right,
+  rights,
+  onChange,
+  disabled = false,
+}: Props) => {
   return (
     <div className='checkbox'>
       <input
@@ -18,6 +25,7 @@ const RightsCheckbox = ({ name, right, rights, onChange }: Props) => {
         value={right}
         checked={rights.includes(right)}
         onChange={onChange}
+        disabled={disabled}
       />
       <label htmlFor={`${right}`}>{name}</label>
     </div>

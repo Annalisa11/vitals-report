@@ -5,10 +5,24 @@ import axios from 'axios';
 import { useAuth, User } from '../../providers/AuthContext';
 import { BASE_URL } from '../../config';
 import { useEffect, useState } from 'react';
+import * as Accordion from '@radix-ui/react-accordion';
+import RightsCheckbox, { Right } from '../../forms/RightsCheckbox';
 
 const AdminModal = () => {
   const { user } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+
+  const handleSaveRights = async (rights: Right[], username: string) => {
+    axios
+      .put(`${BASE_URL}/admin/rights/${username}`, { rights })
+      .then(() => {
+        getAdminInformation();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const getAdminInformation = async () => {
     try {
@@ -33,7 +47,22 @@ const AdminModal = () => {
 
   useEffect(() => {
     getAdminInformation();
+    console.info(checkedRights);
   }, []);
+
+  const [checkedRights, setCheckedRights] = useState<string[]>([]);
+  const allRights: Right[] = ['vitals-details', 'chart', 'create-account'];
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+    setCheckedRights((prevRights) => {
+      if (checked) {
+        return [...prevRights, value];
+      } else {
+        return prevRights.filter((r) => r !== value);
+      }
+    });
+  };
 
   return (
     <Dialog.Root>
@@ -48,12 +77,54 @@ const AdminModal = () => {
             {users &&
               users.map(({ username, rights }, i) => {
                 return (
-                  <div key={i}>
-                    {`${username}, [${
-                      rights ? rights.map((right) => right) : ''
-                    }]`}
-                    <button onClick={() => deleteUser(username)}>delete</button>
-                  </div>
+                  <Accordion.Root
+                    className='accordion-root'
+                    type='single'
+                    collapsible
+                  >
+                    <Accordion.Item className='accordion-item' value={username}>
+                      <Accordion.Header className='accordion-header'>
+                        <Accordion.Trigger className='accordion-trigger'>
+                          <div key={i}>
+                            {`${username}`}
+                            <button onClick={() => deleteUser(username)}>
+                              delete
+                            </button>
+                          </div>
+                        </Accordion.Trigger>
+                      </Accordion.Header>
+                      <Accordion.Content className='accordion-content'>
+                        <div>
+                          <form>
+                            {allRights.map((right, i) => (
+                              <RightsCheckbox
+                                name={right}
+                                right={right}
+                                key={i}
+                                onChange={handleCheckboxChange}
+                                rights={checkedRights}
+                                disabled={!isEditMode}
+                              />
+                            ))}
+                            <button
+                              type='button'
+                              className='button green'
+                              onClick={() => setIsEditMode((prev) => !prev)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              type='submit'
+                              className='button green'
+                              disabled={!isEditMode}
+                            >
+                              Save
+                            </button>
+                          </form>
+                        </div>
+                      </Accordion.Content>
+                    </Accordion.Item>
+                  </Accordion.Root>
                 );
               })}
           </div>
