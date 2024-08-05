@@ -34,7 +34,12 @@ Create a `.env` file in the root of both the backend (api-proxy) and frontend (w
 PORT=5000                                 // if you change the port, remember to change it in the .env file of the frontend, too
 API_URL=https://api.example.com           // use a real url of the api where you get the vitals data from (if you don't know, use the dummy data)
 OPENAI_API_KEY=your_openai_api_key        // use a real openAI private api key if you have one (if not use the dummy data)
-USE_DUMMY_DATA=true                       // set this to false if you want to make the actual api calls. Leave it to true if you want to have the dummy data returned
+USE_DUMMY_DATA=true                       // set this to false if you want to make the actual api calls. Leave it to true if you want to have the dummy data returned                
+EMAIL_SERVICE=gmail                       // your email service (gmail, outlook, yahoo etc)
+EMAIL_PASSWORD=your_email_password        // your email password
+EMAIL_USER=your@email.de                  // the email you want to send confirmation emails from to the user
+JWT_SECRET=jwt_secret_key                 // some random string. (https://dev.to/tkirwa/generate-a-random-jwt-secret-key-39j4)
+
 ```
 #### Frontend
 ```js
@@ -90,9 +95,13 @@ npm run dev
 ```js
 project-root   
 ├── api-proxy  // backend api-proxy (Node.js)
-│   ├── index.js    // server file
+│   ├── index.js    // server entry file
 │   ├── store.json  // don't forget to create this file, it is not in the gitHub repo because of privacy issues
-│   ├── .env        // write your environment varibales here
+│   ├── .env        // write your environment varibales here     
+│   ├── controllers   // all controllers: logic of the api calls   
+│   ├── routes   // all routes of the api that can be used by the frontend   
+│   ├── utils   // all utils functions
+│   ├── config.json    // put here any global constants
 │   ├── package.json    
 │   └── ...
 ├── backend   // backend api (C#)
