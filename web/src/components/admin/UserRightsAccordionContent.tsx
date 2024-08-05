@@ -61,6 +61,7 @@ const UserRightsAccordionContent = ({
             type='button'
             className='button green'
             onClick={() => setIsEditMode((prev) => !prev)}
+            disabled={isEditMode}
           >
             Edit
           </button>

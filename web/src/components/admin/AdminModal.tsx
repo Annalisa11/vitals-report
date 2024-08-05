@@ -8,8 +8,11 @@ import { useEffect, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import UserRightsAccordionContent from './UserRightsAccordionContent';
 import UserRightsAccordionTrigger from './UserRightsAccordionTrigger copy';
+import { useNavigate } from 'react-router-dom';
+import AdminLogo from '../../assets/admin-person.svg?react';
 
 const AdminModal = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
 
@@ -35,8 +38,17 @@ const AdminModal = () => {
       <Dialog.Portal>
         <Dialog.Overlay className='DialogOverlay' />
         <Dialog.Content className='DialogContent'>
-          <Dialog.Title className='DialogTitle'>Admin Panel</Dialog.Title>
+          <Dialog.Title className='DialogTitle'>
+            <div className='DialogTitle__headline'>
+              <AdminLogo className='logo' />
+              <h2>Admin Panel</h2>
+            </div>
+          </Dialog.Title>
           <div>
+            <h2>Manage Users and Rights</h2>
+            <button type='button' onClick={() => navigate('/create-account')}>
+              Create new Account
+            </button>
             <Accordion.Root
               className='accordion-root'
               type='single'

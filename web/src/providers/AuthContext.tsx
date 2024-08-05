@@ -28,6 +28,7 @@ interface ProviderProps {
 
 export type User = {
   username: string;
+  // TODO: email: string;
   rights: Right[];
 };
 
