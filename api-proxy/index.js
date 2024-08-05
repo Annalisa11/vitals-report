@@ -63,14 +63,14 @@ app.post('/register', (req, res) => {
     const decoded = jwt.verify(token, 'secret-key');
     const hashedPassword = bcrypt.hashSync(password, 8);
 
-    const stringifiedUser = JSON.stringify({
+    const user = {
       email: decoded.email,
       username,
       password: hashedPassword,
       rights: decoded.rights,
-    });
+    };
 
-    store.union('users', stringifiedUser);
+    store.union('users', user);
     res.send('Registration successful');
   } catch (err) {
     console.log('ERROR', err);
@@ -82,8 +82,7 @@ app.post('/register', (req, res) => {
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
   const users = store.get('users');
-  const usersData = users.map((user) => JSON.parse(user));
-  const user = usersData.filter((user) => user.username === username).pop();
+  const user = users.filter((user) => user.username === username).pop();
 
   if (!user) {
     return res.status(404).send('User not found');
@@ -134,10 +133,25 @@ app.post('/guess', async (req, res) => {
 //TODO: check for permission?
 app.post('/admin', async (req, res) => {
   try {
-    console.log('ADMIN', req);
     const users = store.get('users');
-    const usersData = users.map((user) => JSON.parse(user));
 
+    res.send(users);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Error while requesting admin information');
+  }
+});
+
+//user: {email: string, username: string, password: string, rights: string[]}
+
+app.put('/admin/rights/:username', async (req, res) => {
+  try {
+    const username = req.params.username;
+    const newRights = req.body.rights;
+    const users = store.get('users');
+
+    const filteredUsers = users.filter((user) => user.username === username);
+    store.set('users', [...filteredUsers]);
     res.send(usersData);
   } catch (error) {
     console.log(error);
@@ -149,15 +163,9 @@ app.delete('/admin/:username', async (req, res) => {
   try {
     const username = req.params.username;
     const users = store.get('users');
-    const usersData = users.map((user) => JSON.parse(user));
 
-    const filteredUsers = usersData.filter(
-      (user) => user.username !== username
-    );
-    store.set(
-      'users',
-      filteredUsers.map((user) => JSON.stringify(user))
-    );
+    const filteredUsers = users.filter((user) => user.username !== username);
+    store.set('users', [...filteredUsers]);
 
     res.send(204);
   } catch (error) {
