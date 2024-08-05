@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { EMAIL_USER, JWT_SECRET } = require('../config');
 const store = require('data-store')({ path: `${process.cwd()}/store.json` });
+// the email html template doesn't work very well... will look at it some other time
 const { emailString } = require('../assets/email/registration-email.js');
 
 const createAccount = (req, res) => {
@@ -14,7 +15,7 @@ const createAccount = (req, res) => {
     from: EMAIL_USER,
     to: email,
     subject: 'Complete your registration',
-    html: emailString(token),
+    html: `Click the link to complete your registration: http://localhost:5173/register?token=${token}`,
   };
 
   sendEmail(mailOptions, res);

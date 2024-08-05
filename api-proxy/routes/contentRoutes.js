@@ -9,7 +9,7 @@ const {
 
 const router = express.Router();
 
-router.get('/', getVitals);
+router.get('/vitals', getVitals);
 router.get('/history', getHistory);
 router.get('/glucose-score', getGlucoseScore);
 router.post('/openai', openAi);

@@ -15,7 +15,8 @@ const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 const getVitals = async (req, res) => {
   // TODO: write middleware for dummy data?
-  if (USE_DUMMY_DATA) {
+  console.log('use dummy data', USE_DUMMY_DATA, USE_DUMMY_DATA === true);
+  if (USE_DUMMY_DATA === true) {
     return res.send(dummyData.vitals);
   }
   try {
@@ -37,6 +38,7 @@ const getHistory = async (req, res) => {
 };
 
 const getGlucoseScore = (req, res) => {
+  console.log('get glucose score');
   if (USE_DUMMY_DATA === true) {
     const response = getGlucoseRanges(fakeData.history[0]);
     return res.send(response);
@@ -51,7 +53,7 @@ const getGlucoseScore = (req, res) => {
 };
 
 const openAi = async (req, res) => {
-  if (USE_DUMMY_DATA) {
+  if (USE_DUMMY_DATA === true) {
     return res.send(dummyData.openai);
   }
   try {
