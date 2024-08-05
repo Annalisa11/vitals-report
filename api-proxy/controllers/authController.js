@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { EMAIL_USER, JWT_SECRET } = require('../config');
 const store = require('data-store')({ path: `${process.cwd()}/store.json` });
+const { emailString } = require('../assets/email/registration-email.js');
 
 const createAccount = (req, res) => {
   const { email, rights } = req.body;
@@ -13,7 +14,7 @@ const createAccount = (req, res) => {
     from: EMAIL_USER,
     to: email,
     subject: 'Complete your registration',
-    text: `Click the link to complete your registration: http://localhost:5173/register?token=${token}`,
+    html: emailString(token),
   };
 
   sendEmail(mailOptions, res);
@@ -22,7 +23,7 @@ const createAccount = (req, res) => {
 const register = (req, res) => {
   const { token, username, password } = req.body;
   try {
-    const decoded = jwt.verify(JWT_SECRET);
+    const decoded = jwt.verify(token, JWT_SECRET);
     const hashedPassword = bcrypt.hashSync(password, 8);
 
     const user = {

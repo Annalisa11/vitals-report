@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = require('../config');
 
 const signToken = (payload, expiresIn = '1h') => {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: expiresIn });
 };
 
 const sendError = (res, error, message = 'An error occurred', status = 500) => {
