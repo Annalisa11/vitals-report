@@ -6,23 +6,12 @@ import { useAuth, User } from '../../providers/AuthContext';
 import { BASE_URL } from '../../config';
 import { useEffect, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
-import RightsCheckbox, { Right } from '../../forms/RightsCheckbox';
+import UserRightsAccordionContent from './UserRightsAccordionContent';
+import UserRightsAccordionTrigger from './UserRightsAccordionTrigger copy';
 
 const AdminModal = () => {
   const { user } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
-
-  const handleSaveRights = async (rights: Right[], username: string) => {
-    axios
-      .put(`${BASE_URL}/admin/rights/${username}`, { rights })
-      .then(() => {
-        getAdminInformation();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
   const getAdminInformation = async () => {
     try {
@@ -34,35 +23,9 @@ const AdminModal = () => {
     }
   };
 
-  const deleteUser = async (username: string) => {
-    axios
-      .delete(`${BASE_URL}/admin/${username}`)
-      .then(() => {
-        getAdminInformation();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   useEffect(() => {
     getAdminInformation();
-    console.info(checkedRights);
   }, []);
-
-  const [checkedRights, setCheckedRights] = useState<string[]>([]);
-  const allRights: Right[] = ['vitals-details', 'chart', 'create-account'];
-
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
-    setCheckedRights((prevRights) => {
-      if (checked) {
-        return [...prevRights, value];
-      } else {
-        return prevRights.filter((r) => r !== value);
-      }
-    });
-  };
 
   return (
     <Dialog.Root>
@@ -74,59 +37,31 @@ const AdminModal = () => {
         <Dialog.Content className='DialogContent'>
           <Dialog.Title className='DialogTitle'>Admin Panel</Dialog.Title>
           <div>
-            {users &&
-              users.map(({ username, rights }, i) => {
-                return (
-                  <Accordion.Root
-                    className='accordion-root'
-                    type='single'
-                    collapsible
-                  >
-                    <Accordion.Item className='accordion-item' value={username}>
-                      <Accordion.Header className='accordion-header'>
-                        <Accordion.Trigger className='accordion-trigger'>
-                          <div key={i}>
-                            {`${username}`}
-                            <button onClick={() => deleteUser(username)}>
-                              delete
-                            </button>
-                          </div>
-                        </Accordion.Trigger>
-                      </Accordion.Header>
-                      <Accordion.Content className='accordion-content'>
-                        <div>
-                          <form>
-                            {allRights.map((right, i) => (
-                              <RightsCheckbox
-                                name={right}
-                                right={right}
-                                key={i}
-                                onChange={handleCheckboxChange}
-                                rights={checkedRights}
-                                disabled={!isEditMode}
-                              />
-                            ))}
-                            <button
-                              type='button'
-                              className='button green'
-                              onClick={() => setIsEditMode((prev) => !prev)}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              type='submit'
-                              className='button green'
-                              disabled={!isEditMode}
-                            >
-                              Save
-                            </button>
-                          </form>
-                        </div>
-                      </Accordion.Content>
+            <Accordion.Root
+              className='accordion-root'
+              type='single'
+              collapsible
+            >
+              {users &&
+                users.map((user, i) => {
+                  return (
+                    <Accordion.Item
+                      key={i}
+                      className='accordion-item'
+                      value={user.username}
+                    >
+                      <UserRightsAccordionTrigger
+                        user={user}
+                        getAdminInformation={getAdminInformation}
+                      />
+                      <UserRightsAccordionContent
+                        user={user}
+                        getAdminInformation={getAdminInformation}
+                      />
                     </Accordion.Item>
-                  </Accordion.Root>
-                );
-              })}
+                  );
+                })}
+            </Accordion.Root>
           </div>
           <div
             style={{
