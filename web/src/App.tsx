@@ -150,6 +150,7 @@ const App: React.FC = () => {
             </Button>
             <div>score: {score}</div>
           </form>
+          <Jokes />
         </main>
       )}
     </div>
