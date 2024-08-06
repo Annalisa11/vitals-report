@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../config';
 import { User } from '../../providers/AuthContext';
 import Button from '../basic/Button';
+import './UserAccordion.scss';
 
 interface Props {
   user: User;
@@ -29,10 +30,10 @@ const UserRightsAccordionTrigger = ({
   return (
     <Accordion.Header className='accordion-header' {...props}>
       <Accordion.Trigger className='accordion-trigger'>
-        <div>
-          {`${username}`}
-          <Button onClick={() => deleteUser()}>delete</Button>
-        </div>
+        {username}
+        <Button variant='delete' onClick={() => deleteUser()}>
+          delete
+        </Button>
       </Accordion.Trigger>
     </Accordion.Header>
   );

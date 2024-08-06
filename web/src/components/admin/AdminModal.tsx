@@ -85,7 +85,7 @@ const AdminModal = () => {
           ></div>
           <Dialog.Close asChild>
             <Button className='IconButton' aria-label='Close'>
-              <Cross2Icon />
+              <Cross2Icon height={20} width={20} />
             </Button>
           </Dialog.Close>
         </Dialog.Content>

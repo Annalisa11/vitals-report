@@ -58,28 +58,28 @@ const UserRightsAccordionContent = ({
               disabled={!isEditMode}
             />
           ))}
-          <Button
-            type='button'
-            className='button green'
-            onClick={() => setIsEditMode((prev) => !prev)}
-            disabled={isEditMode}
-          >
-            Edit
-          </Button>
+          <div className='crud-buttons'>
+            <Button
+              type='button'
+              onClick={() => setIsEditMode((prev) => !prev)}
+              disabled={isEditMode}
+            >
+              Edit
+            </Button>
 
-          <Button
-            type='button'
-            className='button green'
-            onClick={() => {
-              setIsEditMode(false);
-              setCheckedRights(rights);
-            }}
-          >
-            Cancel
-          </Button>
-          <Button type='submit' className='button green' disabled={!isEditMode}>
-            Save
-          </Button>
+            <Button
+              type='button'
+              onClick={() => {
+                setIsEditMode(false);
+                setCheckedRights(rights);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button type='submit' variant='green' disabled={!isEditMode}>
+              Save
+            </Button>
+          </div>
         </form>
       </div>
     </Accordion.Content>
