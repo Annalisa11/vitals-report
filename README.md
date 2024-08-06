@@ -7,14 +7,16 @@ Well, same :)
 
 ## Table of Contents
 
-- [Getting Started](#-getting-started)
+- [Getting Started](#-setup)
   - [Prerequisites](#prerequisites)
   - [Environment Variables](#environment-variables)
+  - [Data Storage](#data-storage)
 - [Run the Project](#-run-the-project)
 - [Project Structure](#-project-structure)
+- [Tests](#-tests)
 - [Built With](#-built-with)
 
-## 🏁 Getting Started
+## 🏁 Setup
 
 These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
@@ -39,12 +41,23 @@ EMAIL_SERVICE=gmail                       // your email service (gmail, outlook,
 EMAIL_PASSWORD=your_email_password        // your email password
 EMAIL_USER=your@email.de                  // the email you want to send confirmation emails from to the user
 JWT_SECRET=jwt_secret_key                 // some random string. (https://dev.to/tkirwa/generate-a-random-jwt-secret-key-39j4)
-
-```
+```    
 #### Frontend
 ```js
 VITE_API_URL=http://localhost:5000          // use the real url of where your server is running. If you use the backend you started locally, you can use localhost and the port you chose.
 ```
+
+### Data Storage 
+
+The Nodejs backend persists data simply by storing it into a json file.  
+This file is not pushed to github, so we have to create it the first time we set up the backend.  
+To do so navigate into the backend folder, the `api-proxy` folder, and create an empty `.json` file called `store.json` on the same level es the `index.js` file.     
+The `store.json` file will be our simple "database" and is absolutely necessary for the backend.  
+> project-root   
+> ├── api-proxy  
+> │   ├── index.js   
+> │   ├── store.json   
+> ...
 
 ## 🚀 Run the Project
 
@@ -52,7 +65,7 @@ VITE_API_URL=http://localhost:5000          // use the real url of where your se
 
 ### Backend
 
-There are two "backends". One written in Node.js/Javascript which is maintained by the Frontend Dev for testing and trying out.   
+There are two "backends". One written in Node.js/Javascript which is maintained by the Frontend Dev for testing and trying out backend development.   
 The other one is written in C# and is a more professional approach to implementing the compatible Api.  
 
 #### 1. Api (C#)
@@ -62,16 +75,7 @@ The other one is written in C# and is a more professional approach to implementi
 #### 2. Api-proxy (Node.js)
 
 The api proxy is a small server that proxies the api requests just enough to satisfy Frontend needs.   
-
-First navigate into the backend folder, the `api-proxy` folder, and create an empty `.json` file called `store.json` on the same level es the `index.js` file.     
-The `store.json` file will be our simple "database" and is absolutely necessary for the backend.  
-> project-root   
-> ├── api-proxy  
-> │   ├── index.js   
-> │   ├── store.json   
-> ...
-
-Then you can run the server.  
+Navigate into the `api-proxy` folder and run this command.  
 ```
 cd api-proxy
 node index.js
@@ -123,6 +127,18 @@ project-root
 │   ├── package.json    
 │   └── ...    
 └── README.md 
+```
+
+## 🧪 Tests
+
+### Backend
+
+The Node.js backend has some very basic tests, implemented just for fun and for learning.  
+Feel free to check it out on the **node-tests** branch.  
+
+To run the tests simply run
+```
+npm run test
 ```
 
 ## 🔨 Built With
