@@ -34,7 +34,7 @@ const AdminModal = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button className=''>Open Admin panel</Button>
+        <Button variant='secondary'>Open Admin panel</Button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='DialogOverlay' />
