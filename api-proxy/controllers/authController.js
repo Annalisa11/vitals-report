@@ -47,6 +47,9 @@ const login = (req, res) => {
   const user = users.find((user) => user.username === username);
 
   //TODO: think about error codes and messages
+  if (!username || !password) {
+    return res.status(400).send('Malformed request');
+  }
   if (!user) {
     return res.status(404).send('User not found');
   }
