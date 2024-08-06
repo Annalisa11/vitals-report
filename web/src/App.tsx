@@ -58,7 +58,7 @@ const App: React.FC = () => {
   const [score, setScore] = useState<string>('');
   const [guesses, setGuesses] = useState<number>(() => {
     const storedGuesses = sessionStorage.getItem('guesses');
-    return storedGuesses ? Number(storedGuesses) : 0;
+    return storedGuesses ? Number(storedGuesses) : 5;
   });
 
   useEffect(() => {
@@ -80,10 +80,6 @@ const App: React.FC = () => {
         console.log(error);
       });
   };
-
-  useEffect(() => {
-    sessionStorage.setItem('guesses', '5');
-  }, []);
 
   useEffect(() => {
     sessionStorage.setItem('guesses', JSON.stringify(guesses));
