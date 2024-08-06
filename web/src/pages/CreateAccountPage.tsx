@@ -2,6 +2,7 @@ import axios from 'axios';
 import { BASE_URL } from '../config';
 import { FormEvent, useState } from 'react';
 import RightsCheckbox, { Right } from '../forms/RightsCheckbox';
+import Button from '../components/basic/Button';
 
 const CreateAccountPage = () => {
   const [email, setEmail] = useState('');
@@ -68,7 +69,7 @@ const CreateAccountPage = () => {
             onChange={handleCheckboxChange}
           />
         ))}
-        <button type='submit'>Send Invitation</button>
+        <Button type='submit'>Send Invitation</Button>
       </form>
     </div>
   );

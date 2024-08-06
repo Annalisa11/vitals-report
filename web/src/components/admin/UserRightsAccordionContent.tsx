@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../config';
 import RightsCheckbox, { Right } from '../../forms/RightsCheckbox';
 import { User } from '../../providers/AuthContext';
+import Button from '../basic/Button';
 
 interface Props {
   user: User;
@@ -57,16 +58,16 @@ const UserRightsAccordionContent = ({
               disabled={!isEditMode}
             />
           ))}
-          <button
+          <Button
             type='button'
             className='button green'
             onClick={() => setIsEditMode((prev) => !prev)}
             disabled={isEditMode}
           >
             Edit
-          </button>
+          </Button>
 
-          <button
+          <Button
             type='button'
             className='button green'
             onClick={() => {
@@ -75,10 +76,10 @@ const UserRightsAccordionContent = ({
             }}
           >
             Cancel
-          </button>
-          <button type='submit' className='button green' disabled={!isEditMode}>
+          </Button>
+          <Button type='submit' className='button green' disabled={!isEditMode}>
             Save
-          </button>
+          </Button>
         </form>
       </div>
     </Accordion.Content>

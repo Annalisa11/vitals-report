@@ -16,6 +16,7 @@ import GlucoseBox from './components/GlucoseBox';
 import axios from 'axios';
 import { BASE_URL } from './config';
 import AdminModal from './components/admin/AdminModal';
+import Button from './components/basic/Button';
 
 export type VitalsType = {
   Timestamp: string;
@@ -95,10 +96,10 @@ const App: React.FC = () => {
         {isLoggedIn ? (
           <div className='app__header user'>
             <strong>Hi, {user?.username}</strong>
-            <button onClick={logout}>Log Out</button>
+            <Button onClick={logout}>Log Out</Button>
           </div>
         ) : (
-          <button onClick={() => navigate('/login')}>Log In</button>
+          <Button onClick={() => navigate('/login')}>Log In</Button>
         )}
       </header>
       <h1>Best Report EVER</h1>
@@ -148,9 +149,9 @@ const App: React.FC = () => {
             </div>
             {guesses <= 0 && <div>NO MORE GUESSES :(</div>}
 
-            <button type='submit' disabled={guesses <= 0}>
+            <Button type='submit' disabled={guesses <= 0}>
               Guess
-            </button>
+            </Button>
             <div>score: {score}</div>
           </form>
         </main>

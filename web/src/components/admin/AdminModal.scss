@@ -14,6 +14,8 @@
 
   --green-4: #dcfce7;
   --green-5: #bbf7d0;
+  --green-7: #22c55e;
+  --green-11: #065f46;
 }
 /* reset */
 
@@ -46,6 +48,7 @@
   margin: 0;
   font-weight: bold;
   font-size: x-large;
+  color: var(--text-color-primary);
 
   &__headline {
     display: flex;
@@ -71,17 +74,6 @@
   height: 35px;
 }
 
-.Button.green {
-  background-color: var(--green-4);
-  color: var(--green-11);
-}
-.Button.green:hover {
-  background-color: var(--green-5);
-}
-.Button.green:focus {
-  box-shadow: 0 0 0 2px var(--green-7);
-}
-
 .IconButton {
   padding: 0;
   font-family: inherit;
@@ -97,10 +89,10 @@
   right: 10px;
 }
 .IconButton:hover {
-  background-color: var(--violet-4);
+  background-color: var(--color-secondary-xlight);
 }
 .IconButton:focus {
-  box-shadow: 0 0 0 2px var(--violet-7);
+  box-shadow: 0 0 0 2px var(--color-secondary);
 }
 
 @keyframes overlayShow {
@@ -137,19 +129,21 @@
   --violet-11: #8a5cff;
 }
 
-/* reset */
-button,
-h3 {
+h3,
+button {
   all: unset;
 }
 
 .accordion-root {
-  background-color: var(--mauve-6);
+  background-color: var(--background-color);
 }
 
 .accordion-item {
   overflow: hidden;
-  margin-top: 1px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid red;
+  }
 
   &:first-child {
     margin-top: 0;

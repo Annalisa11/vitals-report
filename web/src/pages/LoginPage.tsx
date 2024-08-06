@@ -2,6 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useAuth } from '../providers/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import '../styles/pages/Login.scss';
+import Button from '../components/basic/Button';
 
 const LoginPage = () => {
   const [username, setUsername] = useState('');
@@ -45,17 +46,17 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button type='submit'>Login</button>
+        <Button type='submit'>Login</Button>
         <div>
           <p>
             You don't have an account yet? <br />
             Ask an Admin to make one...
           </p>
-          <button>
+          <Button>
             <a href={`https://wa.me/?text=${encodeURIComponent(message)}`}>
               Ask for an account
             </a>
-          </button>
+          </Button>
         </div>
       </form>
     </div>

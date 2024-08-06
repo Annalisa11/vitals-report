@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import '../styles/Jokes.scss';
 import Logo from '../assets/whatsapp.svg?react';
+import Button from './basic/Button';
 
 interface Joke {
   setup: string;
@@ -34,7 +35,7 @@ const Jokes = () => {
         Life's tough for David. He's battling diabetes and could use a good
         laugh. Be a friend and brighten his day — hit him with a joke!
       </p>
-      <button onClick={getJoke}>Get me a Joke</button>
+      <Button onClick={getJoke}>Get me a Joke</Button>
       {joke.setup && (
         <>
           <div className='joke'>

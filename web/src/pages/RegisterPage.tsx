@@ -3,6 +3,7 @@ import { FormEvent, useState } from 'react';
 import { BASE_URL } from '../config';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Button from '../components/basic/Button';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const RegisterPage = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type='submit'>Register</button>
+      <Button type='submit'>Register</Button>
     </form>
   );
 };

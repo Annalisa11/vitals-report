@@ -2,6 +2,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import axios from 'axios';
 import { BASE_URL } from '../../config';
 import { User } from '../../providers/AuthContext';
+import Button from '../basic/Button';
 
 interface Props {
   user: User;
@@ -30,7 +31,7 @@ const UserRightsAccordionTrigger = ({
       <Accordion.Trigger className='accordion-trigger'>
         <div>
           {`${username}`}
-          <button onClick={() => deleteUser()}>delete</button>
+          <Button onClick={() => deleteUser()}>delete</Button>
         </div>
       </Accordion.Trigger>
     </Accordion.Header>

@@ -10,6 +10,7 @@ import UserRightsAccordionContent from './UserRightsAccordionContent';
 import UserRightsAccordionTrigger from './UserRightsAccordionTrigger copy';
 import { useNavigate } from 'react-router-dom';
 import AdminLogo from '../../assets/admin-person.svg?react';
+import Button from '../basic/Button';
 
 const AdminModal = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const AdminModal = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className=''>Open Admin panel</button>
+        <Button className=''>Open Admin panel</Button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='DialogOverlay' />
@@ -46,9 +47,9 @@ const AdminModal = () => {
           </Dialog.Title>
           <div>
             <h2>Manage Users and Rights</h2>
-            <button type='button' onClick={() => navigate('/create-account')}>
+            <Button type='button' onClick={() => navigate('/create-account')}>
               Create new Account
-            </button>
+            </Button>
             <Accordion.Root
               className='accordion-root'
               type='single'
@@ -83,9 +84,9 @@ const AdminModal = () => {
             }}
           ></div>
           <Dialog.Close asChild>
-            <button className='IconButton' aria-label='Close'>
+            <Button className='IconButton' aria-label='Close'>
               <Cross2Icon />
-            </button>
+            </Button>
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
