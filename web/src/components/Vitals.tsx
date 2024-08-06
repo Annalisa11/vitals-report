@@ -3,8 +3,8 @@ import { VitalsType } from '../App';
 import dayjs from 'dayjs';
 import 'dayjs/locale/de';
 import localizedFormat from 'dayjs/plugin/localizedFormat'; // ES 2015
-import { useAuth } from '../providers/AuthContext';
 import GlucoseBox from './GlucoseBox';
+import useAuth from '../hooks/useAuth';
 
 dayjs.extend(localizedFormat);
 
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Vitals = ({ vitals, vitalsLoading }: Props) => {
-  const { checkPermission } = useAuth();
+  const { checkHasRight } = useAuth();
 
   const getAlarmMessage = () => {
     if (vitals.isHigh) {
@@ -32,7 +32,7 @@ const Vitals = ({ vitals, vitalsLoading }: Props) => {
 
       <div className='vitals__container'>
         <GlucoseBox ValueInMgPerDl={vitals.ValueInMgPerDl} />
-        {checkPermission('vitals-details') && (
+        {checkHasRight('vitals-details') && (
           <div className='vitals__stats'>
             <p>
               <strong>Timestamp:</strong>

@@ -10,13 +10,13 @@ import Accordion from './components/Accordion';
 import ScoreEmoji from './components/ScoreEmoji';
 import { ThemeContext } from './providers/ThemeContext';
 import ThemeDropdown from './forms/ThemeDropdown';
-import { useAuth } from './providers/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import GlucoseBox from './components/GlucoseBox';
 import axios from 'axios';
 import { BASE_URL } from './config';
 import AdminModal from './components/admin/AdminModal';
 import Button from './components/basic/Button';
+import useAuth from './hooks/useAuth';
 
 export type VitalsType = {
   Timestamp: string;
@@ -52,7 +52,7 @@ const App: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
   const [isChecked, setIsChecked] = useState(false);
-  const { user, logout, checkPermission, isLoggedIn } = useAuth();
+  const { user, logout, isLoggedIn, checkHasRight } = useAuth();
 
   const [glucoseValue, setGlucoseValue] = useState<number | undefined>();
   const [score, setScore] = useState<string>('');
@@ -93,7 +93,7 @@ const App: React.FC = () => {
           <div className='app__header user'>
             <strong>Hi, {user?.username}</strong>
             <Button onClick={logout}>Log Out</Button>
-            {user?.rights.includes('create-account') && <AdminModal />}
+            {checkHasRight('create-account') && <AdminModal />}
           </div>
         ) : (
           <Button onClick={() => navigate('/login')}>Log In</Button>
@@ -108,7 +108,7 @@ const App: React.FC = () => {
           ) : (
             <div>data not available right now :(</div>
           )}
-          {checkPermission('chart') && (
+          {checkHasRight('chart') && (
             <div className='glucose-score'>
               <GlucoseChart checked={isChecked} toggleSwitch={setIsChecked} />
               <Accordion

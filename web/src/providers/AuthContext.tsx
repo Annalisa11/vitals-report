@@ -1,15 +1,14 @@
 import axios from 'axios';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { BASE_URL } from '../config';
 import { useNavigate } from 'react-router-dom';
 import { Right } from '../forms/RightsCheckbox';
 
-interface AuthContextProps {
+export interface AuthContextProps {
   token: string;
   user: User | undefined;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
-  checkPermission: (right: string) => boolean;
   isLoggedIn: boolean;
 }
 
@@ -18,7 +17,6 @@ export const AuthContext = createContext<AuthContextProps>({
   user: undefined,
   login: async () => {},
   logout: () => {},
-  checkPermission: () => false,
   isLoggedIn: false,
 });
 
@@ -66,14 +64,6 @@ const AuthProvider = ({ children }: ProviderProps) => {
       });
   };
 
-  const checkPermission = (right: string) => {
-    console.log('CHECK PER', user);
-    if (!user || !user.rights) {
-      return false;
-    }
-    return user.rights.some((r) => r === right);
-  };
-
   const logout = () => {
     setToken('');
     setUser(undefined);
@@ -88,7 +78,6 @@ const AuthProvider = ({ children }: ProviderProps) => {
         user,
         login,
         logout,
-        checkPermission,
         isLoggedIn,
       }}
     >
@@ -98,7 +87,3 @@ const AuthProvider = ({ children }: ProviderProps) => {
 };
 
 export default AuthProvider;
-
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
