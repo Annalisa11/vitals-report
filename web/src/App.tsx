@@ -10,12 +10,13 @@ import Accordion from './components/Accordion';
 import ScoreEmoji from './components/ScoreEmoji';
 import { ThemeContext } from './providers/ThemeContext';
 import ThemeDropdown from './forms/ThemeDropdown';
-import { useAuth } from './providers/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import GlucoseBox from './components/GlucoseBox';
 import axios from 'axios';
 import { BASE_URL } from './config';
 import AdminModal from './components/admin/AdminModal';
+import Button from './components/basic/Button';
+import useAuth from './hooks/useAuth';
 
 export type VitalsType = {
   Timestamp: string;
@@ -51,13 +52,13 @@ const App: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
   const [isChecked, setIsChecked] = useState(false);
-  const { user, logout, checkPermission, isLoggedIn } = useAuth();
+  const { user, logout, isLoggedIn, checkHasRight } = useAuth();
 
   const [glucoseValue, setGlucoseValue] = useState<number | undefined>();
   const [score, setScore] = useState<string>('');
   const [guesses, setGuesses] = useState<number>(() => {
     const storedGuesses = sessionStorage.getItem('guesses');
-    return storedGuesses ? Number(storedGuesses) : 0;
+    return storedGuesses ? Number(storedGuesses) : 5;
   });
 
   useEffect(() => {
@@ -81,10 +82,6 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    sessionStorage.setItem('guesses', '5');
-  }, []);
-
-  useEffect(() => {
     sessionStorage.setItem('guesses', JSON.stringify(guesses));
   }, [guesses]);
 
@@ -95,14 +92,14 @@ const App: React.FC = () => {
         {isLoggedIn ? (
           <div className='app__header user'>
             <strong>Hi, {user?.username}</strong>
-            <button onClick={logout}>Log Out</button>
+            <Button onClick={logout}>Log Out</Button>
+            {checkHasRight('create-account') && <AdminModal />}
           </div>
         ) : (
-          <button onClick={() => navigate('/login')}>Log In</button>
+          <Button onClick={() => navigate('/login')}>Log In</Button>
         )}
       </header>
       <h1>Best Report EVER</h1>
-      <AdminModal />
 
       {isLoggedIn ? (
         <main>
@@ -111,7 +108,7 @@ const App: React.FC = () => {
           ) : (
             <div>data not available right now :(</div>
           )}
-          {checkPermission('chart') && (
+          {checkHasRight('chart') && (
             <div className='glucose-score'>
               <GlucoseChart checked={isChecked} toggleSwitch={setIsChecked} />
               <Accordion
@@ -148,11 +145,12 @@ const App: React.FC = () => {
             </div>
             {guesses <= 0 && <div>NO MORE GUESSES :(</div>}
 
-            <button type='submit' disabled={guesses <= 0}>
+            <Button type='submit' disabled={guesses <= 0}>
               Guess
-            </button>
+            </Button>
             <div>score: {score}</div>
           </form>
+          <Jokes />
         </main>
       )}
     </div>

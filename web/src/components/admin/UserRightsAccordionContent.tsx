@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../config';
 import RightsCheckbox, { Right } from '../../forms/RightsCheckbox';
 import { User } from '../../providers/AuthContext';
+import Button from '../basic/Button';
 
 interface Props {
   user: User;
@@ -57,28 +58,28 @@ const UserRightsAccordionContent = ({
               disabled={!isEditMode}
             />
           ))}
-          <button
-            type='button'
-            className='button green'
-            onClick={() => setIsEditMode((prev) => !prev)}
-            disabled={isEditMode}
-          >
-            Edit
-          </button>
+          <div className='crud-buttons'>
+            <Button
+              type='button'
+              onClick={() => setIsEditMode((prev) => !prev)}
+              disabled={isEditMode}
+            >
+              Edit
+            </Button>
 
-          <button
-            type='button'
-            className='button green'
-            onClick={() => {
-              setIsEditMode(false);
-              setCheckedRights(rights);
-            }}
-          >
-            Cancel
-          </button>
-          <button type='submit' className='button green' disabled={!isEditMode}>
-            Save
-          </button>
+            <Button
+              type='button'
+              onClick={() => {
+                setIsEditMode(false);
+                setCheckedRights(rights);
+              }}
+            >
+              Cancel
+            </Button>
+            <Button type='submit' variant='green' disabled={!isEditMode}>
+              Save
+            </Button>
+          </div>
         </form>
       </div>
     </Accordion.Content>

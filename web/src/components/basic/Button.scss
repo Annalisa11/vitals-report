@@ -1,0 +1,79 @@
+@import '../../reusables.scss';
+
+@mixin button-variant($bg-color, $text-color, $border-color: null) {
+  background-color: $bg-color;
+  color: $text-color;
+
+  @if $border-color != null {
+    &:hover {
+      border-color: $border-color;
+    }
+  }
+}
+
+.button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+
+  &:hover {
+    border-color: var(--button-border-hover);
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .icon {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    &:hover {
+      border-color: var(--button-border-hover);
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: 4px auto -webkit-focus-ring-color;
+    }
+  }
+}
+
+// Variant-specific styles
+.button.primary {
+  @include button-variant(
+    var(--button-background-primary),
+    var(--text-color-primary)
+  );
+}
+
+.button.secondary {
+  @include button-variant(
+    var(--button-background-secondary),
+    var(--text-color-primary)
+  );
+}
+
+.button.green {
+  @include button-variant(var(--green-xlight), var(--green), var(--green));
+}
+
+.button.delete {
+  @include button-variant(
+    var(--delete-color-light),
+    var(--delete-color),
+    var(--delete-color)
+  );
+}

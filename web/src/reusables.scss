@@ -12,7 +12,11 @@
   --color-primary: #93f9b9;
   --color-secondary: hsl(237, 100%, 70%);
   --color-secondary-light: hsl(237, 100%, 85%);
+  --color-secondary-xlight: hsl(240, 80%, 96%);
   --color-border-secondary: rgb(186, 186, 186);
+
+  --delete-color: #e54d2e;
+  --delete-color-light: #feebe7;
 
   --background-color: white;
   --background-color-secondary: white;
@@ -52,8 +56,20 @@
   // admin modal
   --dark-see-through: rgba(0, 0, 0, 0.6);
 
-  --green-7: #22c55e;
-  --green-11: #065f46;
+  --green-xlight: #dcfce7;
+  --green-light: #bbf7d0;
+  --green: #065f46;
+
+  // .Button.green {
+  //   background-color: var(--green-4);
+  //   color: var(--green-11);
+  // }
+  // .Button.green:hover {
+  //   background-color: var(--green-5);
+  // }
+  // .Button.green:focus {
+  //   box-shadow: 0 0 0 2px var(--green-7);
+  // }
 }
 
 html[theme='classic'] {

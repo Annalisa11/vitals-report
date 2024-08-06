@@ -2,7 +2,6 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import './AdminModal.scss';
 import axios from 'axios';
-import { useAuth, User } from '../../providers/AuthContext';
 import { BASE_URL } from '../../config';
 import { useEffect, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
@@ -10,6 +9,9 @@ import UserRightsAccordionContent from './UserRightsAccordionContent';
 import UserRightsAccordionTrigger from './UserRightsAccordionTrigger copy';
 import { useNavigate } from 'react-router-dom';
 import AdminLogo from '../../assets/admin-person.svg?react';
+import Button from '../basic/Button';
+import useAuth from '../../hooks/useAuth';
+import { User } from '../../providers/AuthContext';
 
 const AdminModal = () => {
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ const AdminModal = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className=''>Open Admin panel</button>
+        <Button variant='secondary' icon={<AdminLogo />}></Button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='DialogOverlay' />
@@ -44,11 +46,13 @@ const AdminModal = () => {
               <h2>Admin Panel</h2>
             </div>
           </Dialog.Title>
+          <Dialog.Description className='dialog-description' />
+
           <div>
             <h2>Manage Users and Rights</h2>
-            <button type='button' onClick={() => navigate('/create-account')}>
+            <Button type='button' onClick={() => navigate('/create-account')}>
               Create new Account
-            </button>
+            </Button>
             <Accordion.Root
               className='accordion-root'
               type='single'
@@ -83,9 +87,9 @@ const AdminModal = () => {
             }}
           ></div>
           <Dialog.Close asChild>
-            <button className='IconButton' aria-label='Close'>
-              <Cross2Icon />
-            </button>
+            <Button className='IconButton' aria-label='Close'>
+              <Cross2Icon height={20} width={20} />
+            </Button>
           </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
