@@ -7,9 +7,8 @@ const {
 const dummyData = require('../dummyData');
 // { history: History[][] }
 const fakeData = require('../fakeData.json');
-const store = require('data-store')({ path: `${process.cwd()}/store.json` });
 const OpenAI = require('openai');
-const { OPENAI_API_KEY, API_URL, USE_DUMMY_DATA } = require('../config');
+const { OPENAI_API_KEY, API_URL, USE_DUMMY_DATA, store } = require('../config');
 
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 

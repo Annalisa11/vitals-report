@@ -1,4 +1,4 @@
-const store = require('data-store')({ path: `${process.cwd()}/store.json` });
+const { store } = require('../config.js');
 const { sendError } = require('../utils/misc.js');
 
 //TODO: check for permission?

@@ -5,8 +5,6 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const contentRoutes = require('./routes/contentRoutes');
 
-const store = require('data-store')({ path: process.cwd() + '/store.json' });
-
 const app = express();
 
 app.use(cors());

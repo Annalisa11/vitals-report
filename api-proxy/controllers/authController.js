@@ -2,8 +2,8 @@ const { signToken, sendError } = require('../utils/misc.js');
 const { sendEmail } = require('../utils/email.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { EMAIL_USER, JWT_SECRET } = require('../config');
-const store = require('data-store')({ path: `${process.cwd()}/store.json` });
+const { EMAIL_USER, JWT_SECRET, store } = require('../config');
+
 // the email html template doesn't work very well... will look at it some other time
 const { emailString } = require('../assets/email/registration-email.js');
 
