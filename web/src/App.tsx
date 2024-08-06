@@ -97,13 +97,13 @@ const App: React.FC = () => {
           <div className='app__header user'>
             <strong>Hi, {user?.username}</strong>
             <Button onClick={logout}>Log Out</Button>
+            {user?.rights.includes('create-account') && <AdminModal />}
           </div>
         ) : (
           <Button onClick={() => navigate('/login')}>Log In</Button>
         )}
       </header>
       <h1>Best Report EVER</h1>
-      <AdminModal />
 
       {isLoggedIn ? (
         <main>
