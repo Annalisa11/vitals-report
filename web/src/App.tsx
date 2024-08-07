@@ -1,22 +1,22 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
 import './App.scss';
+import axios from 'axios';
+
 import Vitals from './components/Vitals';
 import Jokes from './components/Jokes';
 import GlucoseChart from './components/GlucoseChart';
-import { useVitals } from './hooks/useVitals';
 import AiComment from './components/AiComment';
 import GlucoseScoreChart from './components/GlucoseScoreChart';
 import Accordion from './components/Accordion';
 import ScoreEmoji from './components/ScoreEmoji';
-import { ThemeContext } from './providers/ThemeContext';
-import ThemeDropdown from './forms/ThemeDropdown';
-import { useNavigate } from 'react-router-dom';
 import GlucoseBox from './components/GlucoseBox';
-import axios from 'axios';
-import { BASE_URL } from './config';
-import AdminModal from './components/admin/AdminModal';
 import Button from './components/basic/Button';
+
+import { useVitals } from './hooks/useVitals';
 import useAuth from './hooks/useAuth';
+import { ThemeContext } from './providers/ThemeContext';
+import { BASE_URL } from './config';
+import Header from './components/Header';
 
 export type VitalsType = {
   Timestamp: string;
@@ -48,12 +48,11 @@ export type Range = {
 };
 
 const App: React.FC = () => {
-  const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
-  const [isChecked, setIsChecked] = useState(false);
-  const { user, logout, isLoggedIn, checkHasRight } = useAuth();
+  const { isLoggedIn, checkHasRight } = useAuth();
 
+  const [isChecked, setIsChecked] = useState(false);
   const [glucoseValue, setGlucoseValue] = useState<number | undefined>();
   const [score, setScore] = useState<string>('');
   const [guesses, setGuesses] = useState<number>(() => {
@@ -68,17 +67,17 @@ const App: React.FC = () => {
   const handleGlucoseSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log('submit', glucoseValue);
-    axios
-      .post(`${BASE_URL}/guess`, { value: glucoseValue })
-      .then((response) => {
-        const message = response.data;
-        console.log('RES', response, message);
-        setScore(message);
-        setGuesses((prev) => prev - 1);
-      })
-      .catch((error) => {
-        console.log(error);
+    try {
+      const response = await axios.post(`${BASE_URL}/guess`, {
+        value: glucoseValue,
       });
+      const message = response.data;
+      console.log('RES', response, message);
+      setScore(message);
+      setGuesses((prev) => prev - 1);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -87,18 +86,7 @@ const App: React.FC = () => {
 
   return (
     <div className='app'>
-      <header className='app__header'>
-        <ThemeDropdown />
-        {isLoggedIn ? (
-          <div className='app__header user'>
-            <strong>Hi, {user?.username}</strong>
-            <Button onClick={logout}>Log Out</Button>
-            {checkHasRight('create-account') && <AdminModal />}
-          </div>
-        ) : (
-          <Button onClick={() => navigate('/login')}>Log In</Button>
-        )}
-      </header>
+      <Header />
       <h1>Best Report EVER</h1>
 
       {isLoggedIn ? (
@@ -111,19 +99,15 @@ const App: React.FC = () => {
           {checkHasRight('chart') && (
             <div className='glucose-score'>
               <GlucoseChart checked={isChecked} toggleSwitch={setIsChecked} />
-              <Accordion
-                isOpen={isChecked}
-                children={
-                  <div className='chart-details'>
-                    <GlucoseScoreChart />
-                    <ScoreEmoji />
-                  </div>
-                }
-              />
+              <Accordion isOpen={isChecked}>
+                <div className='chart-details'>
+                  <GlucoseScoreChart />
+                  <ScoreEmoji />
+                </div>
+              </Accordion>
               <AiComment vitals={vitals} />
             </div>
           )}
-
           <Jokes />
         </main>
       ) : (
@@ -144,7 +128,6 @@ const App: React.FC = () => {
               />
             </div>
             {guesses <= 0 && <div>NO MORE GUESSES :(</div>}
-
             <Button type='submit' disabled={guesses <= 0}>
               Guess
             </Button>
