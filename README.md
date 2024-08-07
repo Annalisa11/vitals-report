@@ -145,6 +145,8 @@ npm run test
 **Backend**   
 - Node.js
 - Express
+- Jest
+- Supertest
 
 **Frontend**
 - React
@@ -153,3 +155,4 @@ npm run test
 - Typescript
 - Tanstack Query
 - Recharts
+- Radix 
