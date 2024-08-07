@@ -55,14 +55,21 @@
   font-size: x-large;
   color: var(--text-color-primary);
 
+  h1,
+  h2 {
+    margin: 0;
+  }
+
   &__headline {
     display: flex;
     align-items: center;
+    gap: 0.2rem;
 
     .logo {
-      width: 2.5rem;
-      height: 2.5rem;
-      fill: var(--color-text-primary);
+      width: 2rem;
+      height: 2rem;
+      fill: var(--color-secondary);
+      margin-bottom: -0.3rem;
     }
   }
 }
@@ -175,7 +182,7 @@ button {
 .accordion-trigger {
   font-family: inherit;
   background-color: transparent;
-  padding: 0 20px;
+  padding: 10px 20px;
   height: 45px;
   flex: 1;
   display: flex;

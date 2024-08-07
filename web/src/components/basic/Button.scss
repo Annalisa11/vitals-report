@@ -3,6 +3,7 @@
 @mixin button-variant($bg-color, $text-color, $border-color: null) {
   background-color: $bg-color;
   color: $text-color;
+  fill: $text-color;
 
   @if $border-color != null {
     &:hover {
@@ -72,7 +73,8 @@
   @include button-variant(var(--green-xlight), var(--green), var(--green));
 }
 
-.button.delete {
+.button.delete,
+.button.delete svg {
   @include button-variant(
     var(--delete-color-light),
     var(--delete-color),
