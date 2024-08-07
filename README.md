@@ -49,9 +49,9 @@ VITE_API_URL=http://localhost:5000          // use the real url of where your se
 
 ### Data Storage 
 
-The Nodejs backend persists data simply by storing it into a json file.  
+The Node.js backend persists data simply by storing it into a json file.  
 This file is not pushed to github, so we have to create it the first time we set up the backend.  
-To do so navigate into the backend folder, the `api-proxy` folder, and create an empty `.json` file called `store.json` on the same level es the `index.js` file.     
+To do so navigate into the `api-proxy` folder and create an empty `.json` file called `store.json` on the same level es the `index.js` file.     
 The `store.json` file will be our simple "database" and is absolutely necessary for the backend.  
 > project-root   
 > ├── api-proxy  
@@ -74,8 +74,7 @@ The other one is written in C# and is a more professional approach to implementi
 
 #### 2. Api-proxy (Node.js)
 
-The api proxy is a small server that proxies the api requests just enough to satisfy Frontend needs.   
-Navigate into the `api-proxy` folder and run this command.  
+Navigate into the `api-proxy` folder and start the server.  
 ```
 cd api-proxy
 node index.js
