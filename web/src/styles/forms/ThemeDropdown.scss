@@ -1,13 +1,43 @@
 @import '../../reusables.scss';
 
 .theme-dropdown {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  font-family: Arial, sans-serif;
+
   label {
-    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
   }
 
-  select {
-    padding: 0.5rem;
-    background-color: var(--dropdown-background-color);
-    color: var(--text-color-primary);
+  .custom-select-wrapper {
+    width: 90px;
+  }
+
+  .custom-select {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border-secondary);
+    border-radius: 8px;
+    background-color: var(--background-color);
+    cursor: pointer;
+    transition: border-color 0.25s, box-shadow 0.25s;
+
+    &:hover {
+      border-color: var(--button-border-hover);
+    }
+
+    &:focus {
+      border-color: var(--button-border-hover);
+      box-shadow: 0 0 0 2px var(--button-border-hover);
+      outline: none;
+    }
+
+    option {
+      padding: 0.5rem;
+      background-color: var(--dropdown-background-color);
+      color: var(--text-color-primary);
+    }
   }
 }

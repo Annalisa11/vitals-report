@@ -13,24 +13,18 @@ const ThemeDropdown = () => {
 
   return (
     <div className='theme-dropdown'>
-      <label htmlFor='themes'>Choose a theme:</label>
-
-      <select
-        // style={{
-        //   border: '1px solid red',
-        //   backgroundColor: 'pink',
-        //   borderRadius: 30,
-        // }}
-        className='hallo'
-        value={selectedValue}
-        onChange={(e) => handleChangeValue(e.target.value as Theme)}
-      >
-        <option style={{ border: '1px solid blue' }} value='classic'>
-          classic
-        </option>
-        <option value='dark'>dark</option>
-        <option value='unicorn'>unicorn</option>
-      </select>
+      <div className='custom-select-wrapper'>
+        <select
+          id='themes'
+          className='custom-select'
+          value={selectedValue}
+          onChange={(e) => handleChangeValue(e.target.value as Theme)}
+        >
+          <option value='classic'>classic</option>
+          <option value='dark'>dark</option>
+          <option value='unicorn'>unicorn</option>
+        </select>
+      </div>
     </div>
   );
 };
