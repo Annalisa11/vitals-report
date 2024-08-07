@@ -35,7 +35,11 @@ const AdminModal = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button variant='secondary' icon={<AdminLogo />}></Button>
+        <Button
+          variant='secondary'
+          options={{ compact: true }}
+          icon={<AdminLogo />}
+        ></Button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='DialogOverlay' />

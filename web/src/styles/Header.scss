@@ -1,11 +1,18 @@
 @import '../reusables.scss';
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4rem;
-  background-color: var(--background-color);
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    &__buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  }
 
   .user {
     display: flex;

@@ -2,7 +2,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import ThemeDropdown from '../forms/ThemeDropdown';
 import AdminModal from './admin/AdminModal';
 import Button from './basic/Button';
 import '../styles/Header.scss';
@@ -13,12 +12,13 @@ const Header: React.FC = () => {
 
   return (
     <header className='header'>
-      <ThemeDropdown />
       {isLoggedIn ? (
-        <div className='header user'>
+        <div className='header__container'>
           <strong>Hi, {user?.username}</strong>
-          <Button onClick={logout}>Log Out</Button>
-          {checkHasRight('create-account') && <AdminModal />}
+          <div className='header__container__buttons'>
+            <Button onClick={logout}>Log Out</Button>
+            {checkHasRight('create-account') && <AdminModal />}
+          </div>
         </div>
       ) : (
         <Button onClick={() => navigate('/login')}>Log In</Button>

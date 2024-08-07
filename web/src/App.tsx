@@ -17,6 +17,7 @@ import useAuth from './hooks/useAuth';
 import { ThemeContext } from './providers/ThemeContext';
 import { BASE_URL } from './config';
 import Header from './components/Header';
+import ThemeDropdown from './forms/ThemeDropdown';
 
 export type VitalsType = {
   Timestamp: string;
@@ -87,7 +88,10 @@ const App: React.FC = () => {
   return (
     <div className='app'>
       <Header />
-      <h1>Best Report EVER</h1>
+      <div className='app__headline'>
+        <ThemeDropdown />
+        <h1>Best Report EVER</h1>
+      </div>
 
       {isLoggedIn ? (
         <main>
