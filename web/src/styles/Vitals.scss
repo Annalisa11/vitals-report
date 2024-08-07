@@ -36,9 +36,13 @@
   align-items: center;
   background: var(--color-primary);
   border-radius: 2rem;
-  width: fit-content;
-  padding: 2rem 5rem;
+  width: 280px;
+  padding: 2rem 0;
   color: var(--vitals-glucose-text-color);
+
+  @include breakpoint('medium') {
+    width: 350px;
+  }
 
   &-text {
     font-size: 5rem;

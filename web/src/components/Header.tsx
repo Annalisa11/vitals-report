@@ -12,10 +12,10 @@ const Header: React.FC = () => {
   const { user, logout, isLoggedIn, checkHasRight } = useAuth();
 
   return (
-    <header className='app__header'>
+    <header className='header'>
       <ThemeDropdown />
       {isLoggedIn ? (
-        <div className='app__header user'>
+        <div className='header user'>
           <strong>Hi, {user?.username}</strong>
           <Button onClick={logout}>Log Out</Button>
           {checkHasRight('create-account') && <AdminModal />}

@@ -112,27 +112,35 @@ const App: React.FC = () => {
         </main>
       ) : (
         <main>
-          <h2>Guess the Glucose!</h2>
-          <GlucoseBox ValueInMgPerDl={glucoseValue} />
-          <form onSubmit={handleGlucoseSubmit}>
-            <div>
-              <label>Glucose Value</label>
-              <div>Guesses remaining: {guesses}</div>
-              <input
-                type='number'
-                value={glucoseValue}
-                onChange={(e) => {
-                  console.log('target value', e.target);
-                  setGlucoseValue(JSON.parse(e.target.value.trim()));
-                }}
-              />
-            </div>
-            {guesses <= 0 && <div>NO MORE GUESSES :(</div>}
-            <Button type='submit' disabled={guesses <= 0}>
-              Guess
-            </Button>
-            <div>score: {score}</div>
-          </form>
+          <div>
+            <h2>Guess the Glucose!</h2>
+            <GlucoseBox ValueInMgPerDl={glucoseValue} />
+            <form onSubmit={handleGlucoseSubmit} className='guess-form'>
+              <div>
+                <div className='guess-form__guess-count'>
+                  {guesses <= 0
+                    ? 'NO MORE GUESSES :('
+                    : `Guesses remaining: ${guesses}`}
+                </div>
+                <div className='guess-form__input-row'>
+                  <input
+                    className='guess-form__input'
+                    type='number'
+                    value={glucoseValue}
+                    onChange={(e) => {
+                      console.log('target value', e.target);
+                      setGlucoseValue(JSON.parse(e.target.value.trim()));
+                    }}
+                  />
+                  <Button type='submit' disabled={guesses <= 0}>
+                    Guess
+                  </Button>
+                </div>
+              </div>
+              <div>{score}</div>
+            </form>
+          </div>
+
           <Jokes />
         </main>
       )}
