@@ -1,10 +1,15 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import './Button.scss';
 
+type Options = {
+  compact?: boolean;
+};
+
 type Props = {
   variant?: 'primary' | 'secondary' | 'green' | 'delete';
   icon?: React.ReactNode;
   iconPosition?: 'left' | 'right';
+  options?: Options;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
@@ -12,10 +17,14 @@ const Button = ({
   children,
   icon,
   iconPosition = 'left',
+  options = {},
   ...props
 }: Props) => {
+  const { compact } = options;
+  const buttonClass = `button ${variant} ${compact ? 'compact' : ''}`;
+
   return (
-    <button className={`button ${variant}`} {...props}>
+    <button className={buttonClass} {...props}>
       <div className='button__content'>
         {icon && iconPosition === 'left' && (
           <span className='icon left'>{icon}</span>
