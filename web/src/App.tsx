@@ -1,5 +1,4 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
-import './App.scss';
 import axios from 'axios';
 
 import Vitals from './components/Vitals';
@@ -18,6 +17,7 @@ import { ThemeContext } from './providers/ThemeContext';
 import { BASE_URL } from './config';
 import Header from './components/Header';
 import ThemeDropdown from './forms/ThemeDropdown';
+import './App.scss';
 
 export type VitalsType = {
   Timestamp: string;

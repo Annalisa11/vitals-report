@@ -12,7 +12,13 @@ const ToggleSwitch = ({ toggleSwitch, checked }: Props) => {
   };
   return (
     <form>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'flex-end',
+        }}
+      >
         <label
           className='label left'
           htmlFor='airplane-mode'
