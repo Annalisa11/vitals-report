@@ -21,7 +21,9 @@ const Header: React.FC = () => {
           </div>
         </div>
       ) : (
-        <Button onClick={() => navigate('/login')}>Log In</Button>
+        <div className='header__container--logged-out'>
+          <Button onClick={() => navigate('/login')}>Log In</Button>
+        </div>
       )}
     </header>
   );

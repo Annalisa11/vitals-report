@@ -7,6 +7,13 @@
     align-items: center;
     margin-bottom: 2rem;
 
+    &--logged-out {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
     &__buttons {
       display: flex;
       justify-content: flex-end;
