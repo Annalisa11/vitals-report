@@ -1,11 +1,10 @@
 import '../styles/forms/RightsCheckbox.scss';
 
-interface Props {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   right: Right;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  rights: string[];
-  disabled?: boolean;
+  rights: Right[];
+  onCheckboxChange: (value: string, checked: boolean) => void;
 }
 
 export type Right = 'chart' | 'vitals-details' | 'create-account';
@@ -13,10 +12,16 @@ export type Right = 'chart' | 'vitals-details' | 'create-account';
 const RightsCheckbox = ({
   name,
   right,
+  onCheckboxChange,
   rights,
-  onChange,
   disabled = false,
+  ...rest
 }: Props) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, checked } = e.target;
+    onCheckboxChange(value, checked);
+  };
+
   return (
     <div className='checkbox'>
       <input
@@ -24,8 +29,9 @@ const RightsCheckbox = ({
         type='checkbox'
         value={right}
         checked={rights.includes(right)}
-        onChange={onChange}
+        onChange={handleChange}
         disabled={disabled}
+        {...rest}
       />
       <label htmlFor={`${right}`}>{name}</label>
     </div>
