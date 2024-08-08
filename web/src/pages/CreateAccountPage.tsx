@@ -24,7 +24,7 @@ const CreateAccountPage = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     axios
-      .post(`${BASE_URL}/create-account`, { email, rights, user })
+      .post(`${BASE_URL}/create-account`, { email, rights, adminUser: user })
       .then((response) => {
         alert(response.data);
       })
