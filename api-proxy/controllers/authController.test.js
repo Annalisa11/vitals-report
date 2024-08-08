@@ -58,3 +58,22 @@ describe('POST /login', () => {
     });
   });
 });
+
+describe('POST /create-account', () => {
+  describe('given false rights', () => {
+    it('should return 403 FORBIDDEN by middleware', async () => {
+      await request(app)
+        .post('/create-account')
+        .send({
+          email: 'example@gmail.com',
+          rights: ['chart'],
+          adminUser: {
+            email: 'admin@example.com',
+            username: 'test',
+            rights: ['chart'],
+          },
+        })
+        .expect(403);
+    });
+  });
+});
