@@ -7,6 +7,7 @@ import { User } from '../../providers/AuthContext';
 import Button from '../basic/Button';
 import CloseIcon from '../../assets/close.svg?react';
 import EditIcon from '../../assets/edit.svg?react';
+import SaveIcon from '../../assets/check.svg?react';
 import './AdminModal.scss';
 
 interface Props {
@@ -79,8 +80,13 @@ const UserRightsAccordionContent = ({
                 <EditIcon className='icon enter' />
               )}
             </Button>
-            <Button type='submit' variant='green' disabled={!isEditMode}>
-              Save
+            <Button
+              type='submit'
+              variant='green'
+              options={{ compact: true }}
+              disabled={!isEditMode}
+            >
+              <SaveIcon />
             </Button>
           </div>
         </form>

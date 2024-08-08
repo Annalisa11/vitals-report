@@ -55,21 +55,24 @@
 }
 
 // Variant-specific styles
-.button.primary {
+.button.primary,
+.button.primary svg {
   @include button-variant(
     var(--button-background-primary),
     var(--text-color-primary)
   );
 }
 
-.button.secondary {
+.button.secondary,
+.button.secondary svg {
   @include button-variant(
     var(--button-background-secondary),
     var(--text-color-primary)
   );
 }
 
-.button.green {
+.button.green,
+.button.green svg {
   @include button-variant(var(--green-xlight), var(--green), var(--green));
 }
 
