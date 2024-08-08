@@ -2,17 +2,40 @@
   padding-bottom: 4rem;
   background-color: var(--background-color);
 
-  header {
+  &__headline {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 4rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
 
-    .user {
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      justify-content: flex-end;
+    h1 {
+      margin-top: 0;
     }
+  }
+
+  .guess-form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    input {
+      width: 100px;
+      font-size: larger;
+      text-align: center;
+    }
+
+    &__input-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+    }
+  }
+
+  .glucose-score {
+    width: 100%;
   }
 }
 
@@ -21,6 +44,7 @@ main {
   display: flex;
   flex-direction: column;
   place-content: center;
+  align-items: center;
   gap: 4rem;
 }
 
@@ -36,9 +60,8 @@ input:not([type='checkbox']):not([type='radio']):not([type='file']):not(
     [type='submit']
   ):not([type='button']) {
   border: 2px solid var(--color-border-secondary);
-  width: 15em;
   height: 2.5em;
-  padding-left: 0.8em;
+  padding: 0.8em;
   outline: none;
   overflow: hidden;
   background-color: var(--background-color);
@@ -51,6 +74,18 @@ input:not([type='checkbox']):not([type='radio']):not([type='file']):not(
     box-shadow: 0px 0px 0px 5px rgba(74, 157, 236, 0.2);
     background-color: var(--color-background);
   }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 
 label {

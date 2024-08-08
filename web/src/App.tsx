@@ -1,22 +1,23 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
-import './App.scss';
+import axios from 'axios';
+
 import Vitals from './components/Vitals';
 import Jokes from './components/Jokes';
 import GlucoseChart from './components/GlucoseChart';
-import { useVitals } from './hooks/useVitals';
 import AiComment from './components/AiComment';
 import GlucoseScoreChart from './components/GlucoseScoreChart';
 import Accordion from './components/Accordion';
 import ScoreEmoji from './components/ScoreEmoji';
-import { ThemeContext } from './providers/ThemeContext';
-import ThemeDropdown from './forms/ThemeDropdown';
-import { useAuth } from './providers/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import GlucoseBox from './components/GlucoseBox';
-import axios from 'axios';
-import { BASE_URL } from './config';
-import AdminModal from './components/admin/AdminModal';
 import Button from './components/basic/Button';
+
+import { useVitals } from './hooks/useVitals';
+import useAuth from './hooks/useAuth';
+import { ThemeContext } from './providers/ThemeContext';
+import { BASE_URL } from './config';
+import Header from './components/Header';
+import ThemeDropdown from './forms/ThemeDropdown';
+import './App.scss';
 
 export type VitalsType = {
   Timestamp: string;
@@ -48,12 +49,11 @@ export type Range = {
 };
 
 const App: React.FC = () => {
-  const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
-  const [isChecked, setIsChecked] = useState(false);
-  const { user, logout, checkPermission, isLoggedIn } = useAuth();
+  const { isLoggedIn, checkHasRight } = useAuth();
 
+  const [isChecked, setIsChecked] = useState(false);
   const [glucoseValue, setGlucoseValue] = useState<number | undefined>();
   const [score, setScore] = useState<string>('');
   const [guesses, setGuesses] = useState<number>(() => {
@@ -68,17 +68,17 @@ const App: React.FC = () => {
   const handleGlucoseSubmit = async (e: FormEvent) => {
     e.preventDefault();
     console.log('submit', glucoseValue);
-    axios
-      .post(`${BASE_URL}/guess`, { value: glucoseValue })
-      .then((response) => {
-        const message = response.data;
-        console.log('RES', response, message);
-        setScore(message);
-        setGuesses((prev) => prev - 1);
-      })
-      .catch((error) => {
-        console.log(error);
+    try {
+      const response = await axios.post(`${BASE_URL}/guess`, {
+        value: glucoseValue,
       });
+      const message = response.data;
+      console.log('RES', response, message);
+      setScore(message);
+      setGuesses((prev) => prev - 1);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -87,19 +87,11 @@ const App: React.FC = () => {
 
   return (
     <div className='app'>
-      <header className='app__header'>
+      <Header />
+      <div className='app__headline'>
         <ThemeDropdown />
-        {isLoggedIn ? (
-          <div className='app__header user'>
-            <strong>Hi, {user?.username}</strong>
-            <Button onClick={logout}>Log Out</Button>
-            {user?.rights.includes('create-account') && <AdminModal />}
-          </div>
-        ) : (
-          <Button onClick={() => navigate('/login')}>Log In</Button>
-        )}
-      </header>
-      <h1>Best Report EVER</h1>
+        <h1>Best Report EVER</h1>
+      </div>
 
       {isLoggedIn ? (
         <main>
@@ -108,48 +100,52 @@ const App: React.FC = () => {
           ) : (
             <div>data not available right now :(</div>
           )}
-          {checkPermission('chart') && (
+          {checkHasRight('chart') && (
             <div className='glucose-score'>
               <GlucoseChart checked={isChecked} toggleSwitch={setIsChecked} />
-              <Accordion
-                isOpen={isChecked}
-                children={
-                  <div className='chart-details'>
-                    <GlucoseScoreChart />
-                    <ScoreEmoji />
-                  </div>
-                }
-              />
+              <Accordion isOpen={isChecked}>
+                <div className='chart-details'>
+                  <GlucoseScoreChart />
+                  <ScoreEmoji />
+                </div>
+              </Accordion>
               <AiComment vitals={vitals} />
             </div>
           )}
-
           <Jokes />
         </main>
       ) : (
         <main>
-          <h2>Guess the Glucose!</h2>
-          <GlucoseBox ValueInMgPerDl={glucoseValue} />
-          <form onSubmit={handleGlucoseSubmit}>
-            <div>
-              <label>Glucose Value</label>
-              <div>Guesses remaining: {guesses}</div>
-              <input
-                type='number'
-                value={glucoseValue}
-                onChange={(e) => {
-                  console.log('target value', e.target);
-                  setGlucoseValue(JSON.parse(e.target.value.trim()));
-                }}
-              />
-            </div>
-            {guesses <= 0 && <div>NO MORE GUESSES :(</div>}
+          <div>
+            <h2>Guess the Glucose!</h2>
+            <GlucoseBox ValueInMgPerDl={glucoseValue} />
+            <form onSubmit={handleGlucoseSubmit} className='guess-form'>
+              <div>
+                <div className='guess-form__guess-count'>
+                  {guesses <= 0
+                    ? 'NO MORE GUESSES :('
+                    : `Guesses remaining: ${guesses}`}
+                </div>
+                <div className='guess-form__input-row'>
+                  <input
+                    className='guess-form__input'
+                    type='number'
+                    value={glucoseValue}
+                    onChange={(e) => {
+                      console.log('target value', e.target);
+                      setGlucoseValue(JSON.parse(e.target.value.trim()));
+                    }}
+                  />
+                  <Button type='submit' disabled={guesses <= 0}>
+                    Guess
+                  </Button>
+                </div>
+              </div>
+              <div>{score}</div>
+            </form>
+          </div>
 
-            <Button type='submit' disabled={guesses <= 0}>
-              Guess
-            </Button>
-            <div>score: {score}</div>
-          </form>
+          <Jokes />
         </main>
       )}
     </div>

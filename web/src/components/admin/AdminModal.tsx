@@ -2,7 +2,6 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import './AdminModal.scss';
 import axios from 'axios';
-import { useAuth, User } from '../../providers/AuthContext';
 import { BASE_URL } from '../../config';
 import { useEffect, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
@@ -11,6 +10,8 @@ import UserRightsAccordionTrigger from './UserRightsAccordionTrigger copy';
 import { useNavigate } from 'react-router-dom';
 import AdminLogo from '../../assets/admin-person.svg?react';
 import Button from '../basic/Button';
+import useAuth from '../../hooks/useAuth';
+import { User } from '../../providers/AuthContext';
 
 const AdminModal = () => {
   const navigate = useNavigate();
@@ -34,7 +35,11 @@ const AdminModal = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <Button variant='secondary' icon={<AdminLogo />}></Button>
+        <Button
+          variant='secondary'
+          options={{ compact: true }}
+          icon={<AdminLogo />}
+        ></Button>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='DialogOverlay' />
@@ -45,6 +50,8 @@ const AdminModal = () => {
               <h2>Admin Panel</h2>
             </div>
           </Dialog.Title>
+          <Dialog.Description className='dialog-description' />
+
           <div>
             <h2>Manage Users and Rights</h2>
             <Button type='button' onClick={() => navigate('/create-account')}>

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../config';
 import { User } from '../../providers/AuthContext';
 import Button from '../basic/Button';
+import TrashIcon from '../../assets/trash.svg?react';
 import './UserAccordion.scss';
 
 interface Props {
@@ -32,7 +33,7 @@ const UserRightsAccordionTrigger = ({
       <Accordion.Trigger className='accordion-trigger'>
         {username}
         <Button variant='delete' onClick={() => deleteUser()}>
-          delete
+          <TrashIcon />
         </Button>
       </Accordion.Trigger>
     </Accordion.Header>

@@ -5,6 +5,9 @@ import { BASE_URL } from '../../config';
 import RightsCheckbox, { Right } from '../../forms/RightsCheckbox';
 import { User } from '../../providers/AuthContext';
 import Button from '../basic/Button';
+import CloseIcon from '../../assets/close.svg?react';
+import EditIcon from '../../assets/edit.svg?react';
+import './AdminModal.scss';
 
 interface Props {
   user: User;
@@ -60,21 +63,21 @@ const UserRightsAccordionContent = ({
           ))}
           <div className='crud-buttons'>
             <Button
-              type='button'
-              onClick={() => setIsEditMode((prev) => !prev)}
-              disabled={isEditMode}
-            >
-              Edit
-            </Button>
-
-            <Button
+              id='special-button'
               type='button'
               onClick={() => {
-                setIsEditMode(false);
-                setCheckedRights(rights);
+                if (isEditMode) {
+                  setCheckedRights(rights);
+                }
+                setIsEditMode((prev) => !prev);
               }}
+              options={{ compact: true }}
             >
-              Cancel
+              {isEditMode ? (
+                <CloseIcon className='icon enter' />
+              ) : (
+                <EditIcon className='icon enter' />
+              )}
             </Button>
             <Button type='submit' variant='green' disabled={!isEditMode}>
               Save

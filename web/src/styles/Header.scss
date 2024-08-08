@@ -1,0 +1,35 @@
+@import '../reusables.scss';
+
+.header {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    &--logged-out {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+      justify-content: center;
+    }
+
+    &__buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  }
+
+  .user {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .theme-dropdown {
+    display: flex;
+    align-items: center;
+  }
+}

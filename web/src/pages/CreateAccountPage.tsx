@@ -3,10 +3,12 @@ import { BASE_URL } from '../config';
 import { FormEvent, useState } from 'react';
 import RightsCheckbox, { Right } from '../forms/RightsCheckbox';
 import Button from '../components/basic/Button';
+import useAuth from '../hooks/useAuth';
 
 const CreateAccountPage = () => {
   const [email, setEmail] = useState('');
   const [rights, setRights] = useState<string[]>([]);
+  const { user } = useAuth();
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = e.target;
@@ -22,7 +24,7 @@ const CreateAccountPage = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     axios
-      .post(`${BASE_URL}/create-account`, { email, rights })
+      .post(`${BASE_URL}/create-account`, { email, rights, user })
       .then((response) => {
         alert(response.data);
       })
