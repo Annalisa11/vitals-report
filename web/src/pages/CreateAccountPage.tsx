@@ -4,17 +4,19 @@ import { FormEvent, useState } from 'react';
 import RightsCheckbox, { Right } from '../forms/RightsCheckbox';
 import Button from '../components/basic/Button';
 import useAuth from '../hooks/useAuth';
+import '../styles/pages/CreateAccount.scss';
 
 const CreateAccountPage = () => {
+  const defaultRights: Right[] = ['chart', 'vitals-details'];
+
   const [email, setEmail] = useState('');
-  const [rights, setRights] = useState<string[]>([]);
+  const [rights, setRights] = useState<Right[]>(defaultRights);
   const { user } = useAuth();
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
+  const handleCheckboxChange = (value: string, checked: boolean) => {
     setRights((prevRights) => {
       if (checked) {
-        return [...prevRights, value];
+        return [...prevRights, value as Right];
       } else {
         return prevRights.filter((right) => right !== value);
       }
@@ -34,7 +36,7 @@ const CreateAccountPage = () => {
       });
   };
 
-  const rightsData: { name: string; right: Right }[] = [
+  const rightsDataVisual: { name: string; right: Right }[] = [
     {
       name: 'Chart',
       right: 'chart',
@@ -43,6 +45,8 @@ const CreateAccountPage = () => {
       name: 'Vitals Details',
       right: 'vitals-details',
     },
+  ];
+  const rightsDataAdministrative: { name: string; right: Right }[] = [
     {
       name: 'Create Account',
       right: 'create-account',
@@ -50,7 +54,7 @@ const CreateAccountPage = () => {
   ];
 
   return (
-    <div>
+    <div className='create-account'>
       <h1>Create Account</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -62,15 +66,34 @@ const CreateAccountPage = () => {
             required
           />
         </div>
-        <h2>to what information should the user have access?</h2>
-        {rightsData.map(({ right, name }) => (
-          <RightsCheckbox
-            name={name}
-            right={right}
-            rights={rights}
-            onChange={handleCheckboxChange}
-          />
-        ))}
+        <section className='create-account__rights'>
+          <h2>What rights should the user have?</h2>
+          <div className='create-account__rights-container'>
+            <fieldset>
+              <h3>What should the user see?</h3>
+              {rightsDataVisual.map(({ right, name }) => (
+                <RightsCheckbox
+                  name={name}
+                  right={right}
+                  rights={rights}
+                  onCheckboxChange={handleCheckboxChange}
+                />
+              ))}
+            </fieldset>
+            <fieldset>
+              <h3>What should the user be able to do?</h3>
+              {rightsDataAdministrative.map(({ right, name }) => (
+                <RightsCheckbox
+                  name={name}
+                  right={right}
+                  rights={rights}
+                  onCheckboxChange={handleCheckboxChange}
+                />
+              ))}
+            </fieldset>
+          </div>
+        </section>
+
         <Button type='submit'>Send Invitation</Button>
       </form>
     </div>

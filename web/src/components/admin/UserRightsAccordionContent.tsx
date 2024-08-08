@@ -22,14 +22,13 @@ const UserRightsAccordionContent = ({
 }: Props) => {
   const { username, rights } = user;
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [checkedRights, setCheckedRights] = useState<string[]>(rights);
+  const [checkedRights, setCheckedRights] = useState<Right[]>(rights);
   const allRights: Right[] = ['vitals-details', 'chart', 'create-account'];
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, checked } = e.target;
+  const handleCheckboxChange = (value: string, checked: boolean) => {
     setCheckedRights((prevRights) => {
       if (checked) {
-        return [...prevRights, value];
+        return [...prevRights, value as Right];
       } else {
         return prevRights.filter((r) => r !== value);
       }
@@ -56,9 +55,9 @@ const UserRightsAccordionContent = ({
             <RightsCheckbox
               name={right}
               right={right}
-              key={i}
-              onChange={handleCheckboxChange}
               rights={checkedRights}
+              key={i}
+              onCheckboxChange={handleCheckboxChange}
               disabled={!isEditMode}
             />
           ))}

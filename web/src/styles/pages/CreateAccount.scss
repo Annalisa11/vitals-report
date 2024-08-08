@@ -1,0 +1,23 @@
+@import '../../reusables.scss';
+
+.create-account {
+  &__rights {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    font-weight: bold;
+  }
+
+  fieldset {
+    border: none;
+  }
+
+  &__rights-container {
+    text-align: left;
+    width: fit-content;
+  }
+}
