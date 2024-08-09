@@ -14,13 +14,17 @@ const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 const getVitals = async (req, res) => {
   // TODO: write middleware for dummy data?
+  const guesses = store.get('guesses') ?? 5;
+  console.log('STORE', guesses);
+
   console.log('use dummy data', USE_DUMMY_DATA, USE_DUMMY_DATA === true);
   if (USE_DUMMY_DATA === true) {
-    return res.send(dummyData.vitals);
+    console.log('response: ', { ...dummyData.vitals, guesses });
+    return res.send({ ...dummyData.vitals, guesses });
   }
   try {
     const response = await axios.get(`${API_URL}/cgm?type=current`);
-    res.send(response.data);
+    res.send({ ...response.data, guesses });
   } catch (error) {
     sendError(res, error, 'Error fetching vitals');
   }
@@ -84,10 +88,17 @@ const guess = async (req, res) => {
   }
 };
 
+const setGuessesNumber = (req, res) => {
+  console.log('set guesses', req.body);
+  store.set('guesses', req.body.guesses);
+  res.send(200);
+};
+
 module.exports = {
   getVitals,
   getHistory,
   getGlucoseScore,
   openAi,
   guess,
+  setGuessesNumber,
 };

@@ -5,7 +5,8 @@ const { sendError } = require('../utils/misc.js');
 const getAdminInfo = (req, res) => {
   try {
     const users = store.get('users');
-    res.send(users);
+    const guesses = store.get('guesses') ?? 5;
+    res.send({ ...users, guesses });
   } catch (error) {
     sendError(res, error, 'Error requesting admin information');
   }

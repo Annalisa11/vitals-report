@@ -30,6 +30,7 @@ export type VitalsType = {
   Value: number;
   isHigh: boolean;
   isLow: boolean;
+  guesses?: number;
 };
 
 export type GlucoseScore = {
@@ -52,18 +53,26 @@ const App: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
   const { isLoggedIn, checkHasRight } = useAuth();
+  console.log('DATA', vitals);
 
   const [isChecked, setIsChecked] = useState(false);
   const [glucoseValue, setGlucoseValue] = useState<number | undefined>();
   const [score, setScore] = useState<string>('');
-  const [guesses, setGuesses] = useState<number>(() => {
-    const storedGuesses = sessionStorage.getItem('guesses');
-    return storedGuesses ? Number(storedGuesses) : 5;
-  });
+  const [guesses, setGuesses] = useState<number>(0);
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    const storedGuesses = sessionStorage.getItem('guesses');
+    const guesses = storedGuesses
+      ? Number(storedGuesses)
+      : vitals?.guesses
+      ? vitals.guesses
+      : 5;
+    setGuesses(guesses);
+  }, [vitals]);
 
   const handleGlucoseSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -80,10 +89,6 @@ const App: React.FC = () => {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    sessionStorage.setItem('guesses', JSON.stringify(guesses));
-  }, [guesses]);
 
   return (
     <div className='app'>

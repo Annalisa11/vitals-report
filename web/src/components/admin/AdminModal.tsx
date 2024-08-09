@@ -3,7 +3,7 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import './AdminModal.scss';
 import axios from 'axios';
 import { BASE_URL } from '../../config';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import UserRightsAccordionContent from './UserRightsAccordionContent';
 import UserRightsAccordionTrigger from './UserRightsAccordionTrigger copy';
@@ -17,12 +17,16 @@ const AdminModal = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [users, setUsers] = useState<User[]>([]);
+  const [guesses, setGuesses] = useState<number>();
+  const [inputValue, setInputValue] = useState<number | undefined>(0);
+  const [isGuessEdit, setIsGuessEdit] = useState<boolean>(false);
 
   const getAdminInformation = async () => {
     try {
       const response = await axios.post(`${BASE_URL}/admin`, { user });
       console.log(response);
-      setUsers(response.data as User[]);
+      setUsers(response.data.users as User[]);
+      setGuesses(response.data.guesses);
     } catch (error) {
       console.error(error);
     }
@@ -32,6 +36,28 @@ const AdminModal = () => {
     getAdminInformation();
   }, []);
 
+  useEffect(() => {
+    setInputValue(guesses); // Sync input value whenever guesses change
+  }, [guesses]);
+  const handleValueChange = (newValue: string) => {
+    const newGuess = Number(newValue);
+    setInputValue(newGuess);
+    setIsGuessEdit(newGuess !== guesses); // Show warning if the new value is different
+  };
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    try {
+      console.log('handle submit - post to guesses');
+      await axios.post(`${BASE_URL}/admin/update-guesses`, {
+        guesses: inputValue,
+      });
+      setGuesses(inputValue); // Update guesses to reflect the new saved value
+      setIsGuessEdit(false); // Clear the warning after saving
+    } catch (error) {
+      console.error('Error updating guesses:', error);
+    }
+  };
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
@@ -53,6 +79,20 @@ const AdminModal = () => {
           <Dialog.Description className='dialog-description' />
 
           <div>
+            <h2>Manage Privacy Settings</h2>
+            <form onSubmit={handleSubmit}>
+              {isGuessEdit && 'not saved'}
+              <input
+                style={{ width: 100 }}
+                type='number'
+                value={inputValue}
+                onChange={(e) => handleValueChange(e.target.value)}
+                min={1}
+              />
+              <Button type='submit' variant='green'>
+                Save
+              </Button>
+            </form>
             <h2>Manage Users and Rights</h2>
             <Button type='button' onClick={() => navigate('/create-account')}>
               Create new Account
