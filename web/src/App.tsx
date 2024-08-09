@@ -65,28 +65,40 @@ const App: React.FC = () => {
   }, [theme]);
 
   useEffect(() => {
-    const storedGuesses = sessionStorage.getItem('guesses');
-    const guesses = storedGuesses
-      ? Number(storedGuesses)
-      : vitals?.guesses
-      ? vitals.guesses
-      : 5;
-    setGuesses(guesses);
+    const initializeGuesses = () => {
+      const storedGuesses = sessionStorage.getItem('guesses');
+      if (storedGuesses) {
+        setGuesses(Number(storedGuesses));
+      } else if (vitals && vitals.guesses !== undefined) {
+        setGuesses(vitals.guesses);
+      }
+    };
+    initializeGuesses();
   }, [vitals]);
+
+  useEffect(() => {
+    if (guesses) {
+      sessionStorage.setItem('guesses', String(guesses));
+    }
+  }, [guesses]);
 
   const handleGlucoseSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log('submit', glucoseValue);
+    if (guesses <= 0) return;
+
     try {
       const response = await axios.post(`${BASE_URL}/guess`, {
         value: glucoseValue,
       });
       const message = response.data;
-      console.log('RES', response, message);
       setScore(message);
-      setGuesses((prev) => prev - 1);
+      setGuesses((prev) => {
+        const newGuesses = prev - 1;
+        sessionStorage.setItem('guesses', String(newGuesses));
+        return newGuesses;
+      });
     } catch (error) {
-      console.error(error);
+      console.error('Error submitting guess:', error);
     }
   };
 
@@ -121,7 +133,7 @@ const App: React.FC = () => {
         </main>
       ) : (
         <main>
-          <div>
+          <div className='glucose-guessing-container'>
             <h2>Guess the Glucose!</h2>
             <GlucoseBox ValueInMgPerDl={glucoseValue} />
             <form onSubmit={handleGlucoseSubmit} className='guess-form'>
@@ -137,8 +149,11 @@ const App: React.FC = () => {
                     type='number'
                     value={glucoseValue}
                     onChange={(e) => {
-                      console.log('target value', e.target);
-                      setGlucoseValue(JSON.parse(e.target.value.trim()));
+                      setGlucoseValue(
+                        Number(e.target.value) === 0
+                          ? undefined
+                          : Number(e.target.value)
+                      );
                     }}
                   />
                   <Button type='submit' disabled={guesses <= 0}>

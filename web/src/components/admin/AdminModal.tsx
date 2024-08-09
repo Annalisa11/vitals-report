@@ -41,7 +41,7 @@ const AdminModal = () => {
   }, [guesses]);
   const handleValueChange = (newValue: string) => {
     const newGuess = Number(newValue);
-    setInputValue(newGuess);
+    setInputValue(newGuess === 0 ? undefined : newGuess);
     setIsGuessEdit(newGuess !== guesses); // Show warning if the new value is different
   };
 
@@ -78,17 +78,21 @@ const AdminModal = () => {
           </Dialog.Title>
           <Dialog.Description className='dialog-description' />
 
-          <div>
+          <div className='privacy-settings'>
             <h2>Manage Privacy Settings</h2>
+            <small>Number of guesses logged out users have</small>
             <form onSubmit={handleSubmit}>
-              {isGuessEdit && 'not saved'}
-              <input
-                style={{ width: 100 }}
-                type='number'
-                value={inputValue}
-                onChange={(e) => handleValueChange(e.target.value)}
-                min={1}
-              />
+              <div>
+                <small>{isGuessEdit && 'not saved'}</small>
+                <input
+                  style={{ width: 50 }}
+                  type='number'
+                  value={inputValue}
+                  onChange={(e) => handleValueChange(e.target.value)}
+                  min={1}
+                />
+              </div>
+
               <Button type='submit' variant='green'>
                 Save
               </Button>

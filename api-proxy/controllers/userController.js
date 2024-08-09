@@ -6,7 +6,7 @@ const getAdminInfo = (req, res) => {
   try {
     const users = store.get('users');
     const guesses = store.get('guesses') ?? 5;
-    res.send({ ...users, guesses });
+    res.send({ users: users, guesses });
   } catch (error) {
     sendError(res, error, 'Error requesting admin information');
   }
