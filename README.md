@@ -65,15 +65,6 @@ The `store.json` file will be our simple "database" and is absolutely necessary 
 
 ### Backend
 
-There are two "backends". One written in Node.js/Javascript which is maintained by the Frontend Dev for testing and trying out backend development.   
-The other one is written in C# and is a more professional approach to implementing the compatible Api.  
-
-#### 1. Api (C#)
-
-... 
-
-#### 2. Api-proxy (Node.js)
-
 Navigate into the `api-proxy` folder and start the server.  
 ```
 cd api-proxy
@@ -107,12 +98,6 @@ project-root
 │   ├── config.json    // put here any global constants
 │   ├── package.json    
 │   └── ...
-├── backend   // backend api (C#)
-│   ├── clients
-│   ├── configuration
-│   ├── controllers
-│   ├── models    
-│   └── ...    
 ├── web   // frontend    
 │   ├── src
 │   │   ├── assets   // put any img, svg etc here
