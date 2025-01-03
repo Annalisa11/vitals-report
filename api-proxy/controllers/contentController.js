@@ -31,6 +31,9 @@ const getVitals = async (req, res) => {
 };
 
 const getHistory = async (req, res) => {
+  if (USE_DUMMY_DATA === true) {
+    return res.send(fakeData.history[0]);
+  }
   try {
     const response = await axios.get(`${API_URL}/cgm?type=graph`);
     store.set('history', response.data);
