@@ -1,13 +1,18 @@
 const express = require('express');
 const cors = require('cors');
-const { PORT, USE_DUMMY_DATA } = require('./config');
+const { PORT, USE_DUMMY_DATA, FRONTEND_URL } = require('./config');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const contentRoutes = require('./routes/contentRoutes');
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: FRONTEND_URL,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.use(authRoutes);

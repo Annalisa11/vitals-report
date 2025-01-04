@@ -12,6 +12,7 @@ module.exports = {
   EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
   OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   API_URL: process.env.API_URL,
+  FRONTEND_URL: process.env.FRONTEND_URL,
 
   // other
   store,
