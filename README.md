@@ -35,12 +35,16 @@ Create a `.env` file in the root of both the backend (api-proxy) and frontend (w
 ```js
 PORT=5000                                 // if you change the port, remember to change it in the .env file of the frontend, too
 API_URL=https://api.example.com           // use a real url of the api where you get the vitals data from (if you don't know, use the dummy data)
+FRONTEND_URL=http://localhost:5173        // use the real url of where your frontend is running (for local developing leave localhost)
 OPENAI_API_KEY=your_openai_api_key        // use a real openAI private api key if you have one (if not use the dummy data)
 USE_DUMMY_DATA=true                       // set this to false if you want to make the actual api calls. Leave it to true if you want to have the dummy data returned                
 EMAIL_SERVICE=gmail                       // your email service (gmail, outlook, yahoo etc)
 EMAIL_PASSWORD=your_email_password        // your email password
-EMAIL_USER=your@email.de                  // the email you want to send confirmation emails from to the user
+EMAIL_USER=your@gmail.de                  // the email you want to send confirmation emails from to the user
 JWT_SECRET=jwt_secret_key                 // some random string. (https://dev.to/tkirwa/generate-a-random-jwt-secret-key-39j4)
+INITIAL_USER_USERNAME=Hyunbin             // the username of your initial user (it will be an admin with full rights)
+INITIAL_USER_EMAIL=hyunbin@cute.com       // the email of the initial user
+INITIAL_USER_PASSWORD=password123         // the password of the initial user
 ```    
 #### Frontend
 ```js
@@ -50,14 +54,32 @@ VITE_API_URL=http://localhost:5000          // use the real url of where your se
 ### Data Storage 
 
 The Node.js backend persists data simply by storing it into a json file.  
-This file is not pushed to github, so we have to create it the first time we set up the backend.  
-To do so navigate into the `api-proxy` folder and create an empty `.json` file called `store.json` on the same level es the `index.js` file.     
-The `store.json` file will be our simple "database" and is absolutely necessary for the backend.  
+This file is not pushed to github, instead it will be created automatically if it doesn't exist already.  
+It will also create a user with the information you stored in the environmental variables `INITIAL_USER_USERNAME`, `INITIAL_USER_EMAIL`, `INITIAL_USER_PASSWORD` and all the rights there are. The user will thus be an admin with full rights, so choose carefully.
+
 > project-root   
 > ├── api-proxy  
 > │   ├── index.js   
 > │   ├── store.json   
 > ...
+
+An example of the content of the `store.json` file after it is created:  
+```json
+{
+  "users": [
+    {
+      "username": "Hyunbin",
+      "email": "hyunbin@cute.com",
+      "password": "$2a$08$GqS47t9eJ2519d0VOU4SH.jHUS7jXW4USF8GM61kz3sKhHN9tRmM.",
+      "rights": [
+        "chart",
+        "vitals-details",
+        "create-account"
+      ]
+    }
+  ]
+}
+```
 
 ## 🚀 Run the Project
 
