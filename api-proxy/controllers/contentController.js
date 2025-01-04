@@ -13,14 +13,10 @@ const { OPENAI_API_KEY, API_URL, USE_DUMMY_DATA, store } = require('../config');
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 const getVitals = async (req, res) => {
-  console.log('vitals header', req.headers);
-  console.log('vitals Origin:', req.headers.origin);
-
   // TODO: write middleware for dummy data?
   const guesses = store.get('guesses') ?? 5;
   console.log('STORE', guesses);
 
-  console.log('use dummy data', USE_DUMMY_DATA, USE_DUMMY_DATA === true);
   if (USE_DUMMY_DATA === true) {
     console.log('response: ', { ...dummyData.vitals, guesses });
     return res.send({ ...dummyData.vitals, guesses });

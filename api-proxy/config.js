@@ -1,6 +1,35 @@
 require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const bcrypt = require('bcryptjs');
 
 const store = require('data-store')({ path: `${process.cwd()}/store.json` });
+
+const createStoreFile = () => {
+  const storePath = path.resolve(process.cwd(), 'store.json');
+
+  if (!fs.existsSync(storePath)) {
+    fs.writeFileSync(storePath, JSON.stringify({}), 'utf-8');
+    console.log('store.json file created');
+  }
+
+  const data = store.get();
+  if (Object.keys(data).length === 0) {
+    const initialUser = {
+      username: process.env.INITIAL_USER_USERNAME,
+      email: process.env.INITIAL_USER_EMAIL,
+      password: bcrypt.hashSync(process.env.INITIAL_USER_PASSWORD, 8),
+      rights: ['chart', 'vitals-details', 'create-account'],
+    };
+
+    store.union('users', initialUser);
+    console.log('Initial user data saved to store.json');
+  } else {
+    console.log('store.json already contains data');
+  }
+};
+
+createStoreFile();
 
 module.exports = {
   // env
