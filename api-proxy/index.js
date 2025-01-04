@@ -14,7 +14,7 @@ app.use(authRoutes);
 app.use(userRoutes);
 app.use(contentRoutes);
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Api proxy is running on port ${PORT}`);
   console.log(`> Dummy Data in use: ${USE_DUMMY_DATA === true}`);
 });
