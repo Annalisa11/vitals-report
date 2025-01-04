@@ -78,6 +78,13 @@ const openAi = async (req, res) => {
 };
 
 const guess = async (req, res) => {
+  if (USE_DUMMY_DATA === true) {
+    const { value } = req.body;
+    const realValue = dummyData.vitals.Value;
+    const message = getGuessFeedback(value, realValue);
+
+    return res.send(message);
+  }
   try {
     const { value } = req.body;
     const history = store.get('history');
