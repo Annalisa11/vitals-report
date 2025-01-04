@@ -10,6 +10,7 @@ const app = express();
 const corsOptions = {
   origin: FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
