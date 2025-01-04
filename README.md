@@ -7,6 +7,7 @@ Well, same :)
 
 ## Table of Contents
 
+- [Known Problems](#-known-problems)
 - [Getting Started](#-setup)
   - [Prerequisites](#prerequisites)
   - [Environment Variables](#environment-variables)
@@ -15,6 +16,16 @@ Well, same :)
 - [Project Structure](#-project-structure)
 - [Tests](#-tests)
 - [Built With](#-built-with)
+
+
+## 🚧 Known Problems
+
+Some problems or issues that the project has currently and are on the to-do list.  
+- ⚠️ Sending email doesn't seem to work anymore. I'm planning on switching to OAuth2...  
+- The UI in the admin panel is still not optimized for mobile and has some usability issues  
+- The _dark_ and _unicorn_ themes are not updated  
+- The backend dummy data needs some refactoring  
+- The name of the report owner should be customizable  
 
 ## 🏁 Setup
 
