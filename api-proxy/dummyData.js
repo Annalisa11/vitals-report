@@ -13,7 +13,8 @@ module.exports = {
     isLow: false,
   },
   openai: {
-    message: 'Here is a dummy response from OpenAI.',
+    message:
+      "Well, David, looks like your glucose levels are keeping it cool—no crazy highs or lows. It's like your body is just playing it safe, not trying to make any sudden moves. Maybe it's saving up for a bigger spike later? 🧐",
   },
   glucoseScore: {
     inRange: {
