@@ -11,6 +11,7 @@ Well, same :)
 - [Getting Started](#-setup)
   - [Prerequisites](#prerequisites)
   - [Environment Variables](#environment-variables)
+  - [Email Config](#email-config)
   - [Data Storage](#data-storage)
 - [Run the Project](#-run-the-project)
 - [Project Structure](#-project-structure)
@@ -21,7 +22,7 @@ Well, same :)
 ## 🚧 Known Problems
 
 Some problems or issues that the project has currently and are on the to-do list.  
-- ⚠️ Sending email doesn't seem to work anymore. I'm planning on switching to OAuth2...  
+- ⚠️ Sending email doesn't seem to work anymore for outlook or any other service besides gmail. 
 - The UI in the admin panel is still not optimized for mobile and has some usability issues  
 - The _dark_ and _unicorn_ themes are not updated  
 - The backend dummy data needs some refactoring  
@@ -52,6 +53,7 @@ USE_DUMMY_DATA=true                       # set this to false if you want to mak
 EMAIL_SERVICE=gmail                       # your email service (gmail, outlook, yahoo etc)
 EMAIL_PASSWORD=your_email_password        # your email password
 EMAIL_USER=your@gmail.de                  # the email you want to send confirmation emails from to the user
+APP_PASSWORD=ashfndssldievhth             # the app password generated from your Google account to allow third parties to access to gmail
 JWT_SECRET=jwt_secret_key                 # some random string. (https://dev.to/tkirwa/generate-a-random-jwt-secret-key-39j4)
 INITIAL_USER_USERNAME=Hyunbin             # the username of your initial user (it will be an admin with full rights)
 INITIAL_USER_EMAIL=hyunbin@cute.com       # the email of the initial user
@@ -61,6 +63,21 @@ INITIAL_USER_PASSWORD=password123         # the password of the initial user
 ```env
 VITE_API_URL=http://localhost:5000        # use the real url of where your server is running. If you use the backend you started locally, you can use localhost and the port you chose.
 ```
+
+### Email Config
+> 🚨 Sending Emails works only through a **gmail** account at the moment 🚨
+
+There are still some problems with the nodemailer and sending the registration invitation.   
+Right now it works for **gmail** only.  
+If you are using a gmail account to send emails from you need to:
+1. allow 2 factor authentication for your Google account
+2. create an _app password_ 
+3. store the _app password_ as the `APP_PASSWORD` variable in your `.env` file
+
+Look at these if you are confused:  
+- [How to create an app password](https://knowledge.workspace.google.com/kb/how-to-create-app-passwords-000009237?hl=en)
+- [Sending Emails in Node.js with Nodemailer & Gmail | Step-by-Step Tutorial](https://www.youtube.com/watch?v=QDIOBsMBEI0)
+
 
 ### Data Storage 
 
@@ -123,7 +140,7 @@ npm run dev
 project-root   
 ├── api-proxy  // backend api-proxy (Node.js)
 │   ├── index.js    // server entry file
-│   ├── store.json  // don't forget to create this file, it is not in the gitHub repo because of privacy issues
+│   ├── store.json  // will be created and populated automatically when running the server for the first time
 │   ├── .env        // write your environment varibales here     
 │   ├── controllers   // all controllers: logic of the api calls   
 │   ├── routes   // all routes of the api that can be used by the frontend   
