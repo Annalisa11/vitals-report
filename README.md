@@ -43,7 +43,7 @@ Make sure you have the following software installed on your machine:
 
 Create a `.env` file in the root of both the backend (api-proxy) and frontend (web) directories and add the necessary environment variables:
 #### Backend  
-```js
+```env
 PORT=5000                                 // if you change the port, remember to change it in the .env file of the frontend, too
 API_URL=https://api.example.com           // use a real url of the api where you get the vitals data from (if you don't know, use the dummy data)
 FRONTEND_URL=http://localhost:5173        // use the real url of where your frontend is running (for local developing leave localhost)
@@ -58,7 +58,7 @@ INITIAL_USER_EMAIL=hyunbin@cute.com       // the email of the initial user
 INITIAL_USER_PASSWORD=password123         // the password of the initial user
 ```    
 #### Frontend
-```js
+```env
 VITE_API_URL=http://localhost:5000          // use the real url of where your server is running. If you use the backend you started locally, you can use localhost and the port you chose.
 ```
 
