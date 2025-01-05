@@ -44,22 +44,22 @@ Make sure you have the following software installed on your machine:
 Create a `.env` file in the root of both the backend (api-proxy) and frontend (web) directories and add the necessary environment variables:
 #### Backend  
 ```env
-PORT=5000                                 // if you change the port, remember to change it in the .env file of the frontend, too
-API_URL=https://api.example.com           // use a real url of the api where you get the vitals data from (if you don't know, use the dummy data)
-FRONTEND_URL=http://localhost:5173        // use the real url of where your frontend is running (for local developing leave localhost)
-OPENAI_API_KEY=your_openai_api_key        // use a real openAI private api key if you have one (if not use the dummy data)
-USE_DUMMY_DATA=true                       // set this to false if you want to make the actual api calls. Leave it to true if you want to have the dummy data returned                
-EMAIL_SERVICE=gmail                       // your email service (gmail, outlook, yahoo etc)
-EMAIL_PASSWORD=your_email_password        // your email password
-EMAIL_USER=your@gmail.de                  // the email you want to send confirmation emails from to the user
-JWT_SECRET=jwt_secret_key                 // some random string. (https://dev.to/tkirwa/generate-a-random-jwt-secret-key-39j4)
-INITIAL_USER_USERNAME=Hyunbin             // the username of your initial user (it will be an admin with full rights)
-INITIAL_USER_EMAIL=hyunbin@cute.com       // the email of the initial user
-INITIAL_USER_PASSWORD=password123         // the password of the initial user
+PORT=5000                                 # if you change the port, remember to change it in the .env file of the frontend, too
+API_URL=https://api.example.com           # use a real url of the api where you get the vitals data from (if you don't know, use the dummy data)
+FRONTEND_URL=http://localhost:5173        # use the real url of where your frontend is running (for local developing leave localhost)
+OPENAI_API_KEY=your_openai_api_key        # use a real openAI private api key if you have one (if not use the dummy data)
+USE_DUMMY_DATA=true                       # set this to false if you want to make the actual api calls. Leave it to true if you want to have the dummy data returned                
+EMAIL_SERVICE=gmail                       # your email service (gmail, outlook, yahoo etc)
+EMAIL_PASSWORD=your_email_password        # your email password
+EMAIL_USER=your@gmail.de                  # the email you want to send confirmation emails from to the user
+JWT_SECRET=jwt_secret_key                 # some random string. (https://dev.to/tkirwa/generate-a-random-jwt-secret-key-39j4)
+INITIAL_USER_USERNAME=Hyunbin             # the username of your initial user (it will be an admin with full rights)
+INITIAL_USER_EMAIL=hyunbin@cute.com       # the email of the initial user
+INITIAL_USER_PASSWORD=password123         # the password of the initial user
 ```    
 #### Frontend
 ```env
-VITE_API_URL=http://localhost:5000          // use the real url of where your server is running. If you use the backend you started locally, you can use localhost and the port you chose.
+VITE_API_URL=http://localhost:5000        # use the real url of where your server is running. If you use the backend you started locally, you can use localhost and the port you chose.
 ```
 
 ### Data Storage 
