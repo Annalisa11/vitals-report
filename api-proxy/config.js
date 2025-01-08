@@ -43,6 +43,7 @@ module.exports = {
   API_URL: process.env.API_URL,
   FRONTEND_URL: process.env.FRONTEND_URL,
   APP_PASSWORD: process.env.APP_PASSWORD,
+  MONGODB_URI: process.env.MONGODB_URI,
 
   // other
   store,

@@ -5,6 +5,9 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const contentRoutes = require('./routes/contentRoutes');
 
+const connectDB = require('./db');
+const { createUser } = require('./services/userService');
+
 const app = express();
 
 const corsOptions = {
@@ -24,5 +27,14 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Api proxy is running on port ${PORT}`);
   console.log(`> Dummy Data in use: ${USE_DUMMY_DATA === true}`);
 });
+
+connectDB();
+
+const addUser = async () => {
+  const result = await createUser();
+  console.log('user created: ', result);
+};
+
+addUser();
 
 module.exports = app;
