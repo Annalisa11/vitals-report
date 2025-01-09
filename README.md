@@ -53,11 +53,12 @@ USE_DUMMY_DATA=true                       # set this to false if you want to mak
 EMAIL_SERVICE=gmail                       # your email service (gmail, outlook, yahoo etc)
 EMAIL_PASSWORD=your_email_password        # your email password
 EMAIL_USER=your@gmail.de                  # the email you want to send confirmation emails from to the user
-APP_PASSWORD=ashfndssldievhth             # the app password generated from your Google account to allow third parties to access to gmail
+APP_PASSWORD=ashfndssldievhth             # the app password generated from your Google account to allow third parties access to gmail
 JWT_SECRET=jwt_secret_key                 # some random string. (https://dev.to/tkirwa/generate-a-random-jwt-secret-key-39j4)
 INITIAL_USER_USERNAME=Hyunbin             # the username of your initial user (it will be an admin with full rights)
 INITIAL_USER_EMAIL=hyunbin@cute.com       # the email of the initial user
 INITIAL_USER_PASSWORD=password123         # the password of the initial user
+MONGODB_URI=mongodb://cluster             # the key to the MongoDB database (connection string)
 ```    
 #### Frontend
 ```env
@@ -81,6 +82,7 @@ Look at these if you are confused:
 
 ### Data Storage 
 
+#### 🚨 **OLD METHOD** 🚨
 The Node.js backend persists data simply by storing it into a json file.  
 This file is not pushed to github, instead it will be created automatically if it doesn't exist already.  
 It will also create a user with the information you stored in the environmental variables `INITIAL_USER_USERNAME`, `INITIAL_USER_EMAIL`, `INITIAL_USER_PASSWORD` and all the rights there are. The user will thus be an admin with full rights, so choose carefully.
@@ -108,6 +110,12 @@ An example of the content of the `store.json` file after it is created:
   ]
 }
 ```
+
+#### 🚨 **NEW METHOD** 🚨
+
+The backend stores data in a MongoDB database.  
+For the database operations [mongoose](https://mongoosejs.com/) is used instead of the mongodb package.  
+
 
 ## 🚀 Run the Project
 
@@ -142,10 +150,14 @@ project-root
 │   ├── index.js    // server entry file
 │   ├── store.json  // will be created and populated automatically when running the server for the first time
 │   ├── .env        // write your environment varibales here     
-│   ├── controllers   // all controllers: logic of the api calls   
-│   ├── routes   // all routes of the api that can be used by the frontend   
+│   ├── controllers   // all controllers: logic of the api calls
+│   ├── middleware   // middleware software like authorization checks
+│   ├── models   // all models defined to store data in the mongodb database
+│   ├── routes   // all routes of the api that can be used by the frontend
+│   ├── services   // all services that handle interactions with the database
 │   ├── utils   // all utils functions
 │   ├── config.json    // put here any global constants
+│   ├── db.js   // initialization and connection of the database
 │   ├── package.json    
 │   └── ...
 ├── web   // frontend    
