@@ -4,6 +4,7 @@ const { PORT, USE_DUMMY_DATA, FRONTEND_URL } = require('./config');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const contentRoutes = require('./routes/contentRoutes');
+const axios = require('axios');
 const c = require('yoctocolors-cjs');
 
 const connectDB = require('./db');
@@ -22,6 +23,17 @@ app.use(express.json());
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(contentRoutes);
+
+async function getRenderIP() {
+  try {
+    const response = await axios.get('https://api.ipify.org?format=json');
+    console.log('IP address:', response.data.ip);
+  } catch (error) {
+    console.error('Error fetching IP:', error);
+  }
+}
+
+getRenderIP();
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log('-----------------------------------------------------------');
