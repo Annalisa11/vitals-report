@@ -1,6 +1,7 @@
 const { store } = require('../config.js');
 const { sendError } = require('../utils/misc.js');
 const userService = require('../services/userService.js');
+const systemValuesService = require('../services/systemValuesService.js');
 const { logInfo, logError, logSuccess } = require('../logger.js');
 
 //TODO: check for permission?
@@ -8,7 +9,7 @@ const getAdminInfo = async (req, res) => {
   try {
     logInfo('Fetching admin information...');
     const users = await userService.getAllUsers();
-    const guesses = store.get('guesses') ?? 5;
+    const guesses = await systemValuesService.getGuesses();
 
     logSuccess(
       `Admin information retrieved. Total users: ${users.length}, Guesses: ${guesses}`

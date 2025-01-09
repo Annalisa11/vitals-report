@@ -9,12 +9,13 @@ const dummyData = require('../dummyData');
 const fakeData = require('../fakeData.json');
 const OpenAI = require('openai');
 const { OPENAI_API_KEY, API_URL, USE_DUMMY_DATA, store } = require('../config');
+const systemValuesService = require('../services/systemValuesService.js');
 
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 
 const getVitals = async (req, res) => {
   logInfo('Fetching vitals...');
-  const guesses = store.get('guesses') ?? 5;
+  const guesses = await systemValuesService.getGuesses();
 
   if (USE_DUMMY_DATA === true) {
     logSuccess('Using dummy data for vitals.');
@@ -120,9 +121,9 @@ const guess = async (req, res) => {
   }
 };
 
-const setGuessesNumber = (req, res) => {
+const setGuessesNumber = async (req, res) => {
   logInfo('Updating guesses number...');
-  store.set('guesses', req.body.guesses);
+  await systemValuesService.saveGuesses(req.body.guesses);
   logSuccess(`Guesses number updated to: ${req.body.guesses}`);
   res.sendStatus(200);
 };
