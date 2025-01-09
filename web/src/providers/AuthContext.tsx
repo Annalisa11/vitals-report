@@ -7,7 +7,7 @@ import { Right } from '../forms/RightsCheckbox';
 export interface AuthContextProps {
   token: string;
   user: User | undefined;
-  login: (username: string, password: string) => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   isLoggedIn: boolean;
 }
@@ -26,7 +26,7 @@ interface ProviderProps {
 
 export type User = {
   username: string;
-  // TODO: email: string;
+  email?: string; //TODO: make email required, add id??
   rights: Right[];
 };
 
@@ -47,9 +47,9 @@ const AuthProvider = ({ children }: ProviderProps) => {
     console.log('useEffect[user]: ', user);
   }, [user]);
 
-  const login = async (username: string, password: string) => {
+  const login = async (email: string, password: string) => {
     axios
-      .post(`${BASE_URL}/login`, { username, password })
+      .post(`${BASE_URL}/login`, { email, password })
       .then((response) => {
         const { token, user: userResponse } = response.data;
         setToken(token);

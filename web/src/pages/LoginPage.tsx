@@ -5,7 +5,7 @@ import Button from '../components/basic/Button';
 import useAuth from '../hooks/useAuth';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
+  const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const { login, isLoggedIn } = useAuth();
@@ -13,7 +13,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await login(username, password);
+    await login(email, password);
   };
 
   useEffect(() => {
@@ -31,10 +31,10 @@ const LoginPage = () => {
         <h1>Login</h1>
 
         <div>
-          <label>Username</label>
+          <label>Email</label>
           <input
             type='text'
-            value={username}
+            value={email}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>

@@ -3,9 +3,11 @@ const { sendEmail } = require('../utils/email.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { EMAIL_USER, JWT_SECRET, store, FRONTEND_URL } = require('../config');
+const userService = require('../services/userService.js');
 
 // the email html template doesn't work very well... will look at it some other time
 const { emailString } = require('../assets/email/registration-email.js');
+const userService = require('../services/userService');
 
 const createAccount = (req, res) => {
   const { email, rights } = req.body;
@@ -15,13 +17,13 @@ const createAccount = (req, res) => {
     from: EMAIL_USER,
     to: email,
     subject: 'Complete your registration',
-    html: `Click the link to complete your registration: http://${FRONTEND_URL}/register?token=${token}`,
+    html: `Click the link to complete your registration:  http://${FRONTEND_URL}/register?token=${token}`,
   };
 
   sendEmail(mailOptions, res);
 };
 
-const register = (req, res) => {
+const register = async (req, res) => {
   const { token, username, password } = req.body;
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
@@ -33,18 +35,16 @@ const register = (req, res) => {
       password: hashedPassword,
       rights: decoded.rights,
     };
-
-    store.union('users', user);
+    await userService.createUser(user);
     res.send('Registration successful');
   } catch (err) {
     sendError(res, err, 'Invalid token or token expired');
   }
 };
 
-const login = (req, res) => {
-  const { username, password } = req.body;
-  const users = store.get('users');
-  const user = users.find((user) => user.username === username);
+const login = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await userService.getUser(email);
 
   //TODO: think about error codes and messages
   if (!user) {

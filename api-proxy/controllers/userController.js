@@ -1,10 +1,11 @@
 const { store } = require('../config.js');
 const { sendError } = require('../utils/misc.js');
+const userService = require('../services/userService.js');
 
 //TODO: check for permission?
-const getAdminInfo = (req, res) => {
+const getAdminInfo = async (req, res) => {
   try {
-    const users = store.get('users');
+    const users = await userService.getAllUsers();
     const guesses = store.get('guesses') ?? 5;
     res.send({ users: users, guesses });
   } catch (error) {
@@ -12,20 +13,13 @@ const getAdminInfo = (req, res) => {
   }
 };
 
-//user: {email: string, username: string, password: string, rights: string[]}
-
-const updateUserRights = (req, res) => {
+const updateUserRights = async (req, res) => {
   try {
-    const { username } = req.params;
+    const { email } = req.params;
     const { rights } = req.body;
 
-    const users = store.get('users');
+    await userService.updateRights(email, rights);
 
-    const index = users.findIndex((user) => user.username === username);
-    const user = users[index];
-    const userWithNewRights = { ...user, rights: rights };
-    users[index] = userWithNewRights;
-    store.set('users', [...users]);
     // if (!updateUser(username, { rights })) {
     //   return res.status(404).send('User not found');
     // }
@@ -36,13 +30,11 @@ const updateUserRights = (req, res) => {
   }
 };
 
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
   try {
-    const { username } = req.params;
-    const users = store.get('users');
+    const { email } = req.params;
 
-    const filteredUsers = users.filter((user) => user.username !== username);
-    store.set('users', filteredUsers);
+    await userService.deleteUser(email);
 
     res.sendStatus(204);
   } catch (error) {

@@ -6,7 +6,6 @@ const userRoutes = require('./routes/userRoutes');
 const contentRoutes = require('./routes/contentRoutes');
 
 const connectDB = require('./db');
-const { createUser } = require('./services/userService');
 
 const app = express();
 
@@ -29,12 +28,5 @@ app.listen(PORT, '0.0.0.0', () => {
 });
 
 connectDB();
-
-const addUser = async () => {
-  const result = await createUser();
-  console.log('user created: ', result);
-};
-
-addUser();
 
 module.exports = app;

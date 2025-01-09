@@ -1,10 +1,8 @@
-const { store } = require('../config');
 const { User } = require('../models/User');
 
-const getUserRights = (username) => {
+const getUserRights = async (email) => {
   try {
-    const users = store.get('users');
-    const user = users.find((user) => user.username === username);
+    const user = await User.findOne(email);
 
     if (!user) {
       console.log('user not found');
@@ -17,13 +15,13 @@ const getUserRights = (username) => {
   }
 };
 
-const createUser = async () => {
+const createUser = async ({ username, email, password, rights }) => {
   try {
     const newUser = new User({
-      username: 'Hyunbin',
-      email: 'hyunbin@cute.com',
-      password: '$2y$08$B874WKv/or7HPTp41XgvVOC74r2X5RJ5amEsKJTjJhitVrdAQv7eq',
-      rights: ['chart', 'vitals-details', 'create-account'],
+      username: username,
+      email: email,
+      password: password,
+      rights: rights,
     });
 
     await newUser.save();
@@ -33,7 +31,35 @@ const createUser = async () => {
   }
 };
 
-module.exports = {
+const deleteUser = async (email) => {
+  await User.deleteOne({ email: email });
+};
+
+const getUser = async (email) => {
+  console.log('-- getUser param: ', email);
+  const result = await User.findOne({ email });
+  console.log('-- db getUser: ', result);
+  return result;
+};
+
+const getAllUsers = async () => {
+  return await User.find();
+};
+
+const updateRights = async (email, rights) => {
+  const filter = { email };
+  const update = { rights };
+
+  await User.findOneAndUpdate(filter, update);
+};
+
+const userService = {
   createUser,
   getUserRights,
+  deleteUser,
+  getAllUsers,
+  getUser,
+  updateRights,
 };
+
+module.exports = userService;
