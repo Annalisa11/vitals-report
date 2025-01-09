@@ -24,16 +24,6 @@ const logSuccess = (message) => {
   console.log(c.blue('[SUCCESS]') + ` ${fileName} - ${message}`);
 };
 
-const logDatabaseConnection = (status) => {
-  if (status === 'connected') {
-    console.log(
-      c.green('[DATABASE]') + ` ${c.bold('Connected successfully!')} ✅`
-    );
-  } else if (status === 'failed') {
-    console.log(c.red('[DATABASE]') + ` ${c.bold('Connection failed.')} ❌`);
-  }
-};
-
 module.exports = {
   logInfo,
   logError,
