@@ -99,7 +99,6 @@ const guess = async (req, res) => {
 };
 
 const setGuessesNumber = (req, res) => {
-  console.log('set guesses', req.body);
   store.set('guesses', req.body.guesses);
   res.send(200);
 };

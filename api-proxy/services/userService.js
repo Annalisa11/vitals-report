@@ -1,11 +1,12 @@
 const { User } = require('../models/User');
+const { logError } = require('../logger');
 
 const getUserRights = async (email) => {
   try {
     const user = await User.findOne({ email });
 
     if (!user) {
-      console.log('user not found');
+      logError('user not found');
       throw new Error('user not found');
     }
 
@@ -25,9 +26,8 @@ const createUser = async ({ username, email, password, rights }) => {
     });
 
     await newUser.save();
-    console.log('User created:', newUser);
   } catch (error) {
-    console.error('Error creating user:', error);
+    logError('Error creating user:', error);
   }
 };
 
