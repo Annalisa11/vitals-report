@@ -2,12 +2,11 @@ const { signToken, sendError } = require('../utils/misc.js');
 const { sendEmail } = require('../utils/email.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { EMAIL_USER, JWT_SECRET, store, FRONTEND_URL } = require('../config');
+const { EMAIL_USER, JWT_SECRET, FRONTEND_URL } = require('../config');
 const userService = require('../services/userService.js');
 
 // the email html template doesn't work very well... will look at it some other time
 const { emailString } = require('../assets/email/registration-email.js');
-const userService = require('../services/userService');
 
 const createAccount = (req, res) => {
   const { email, rights } = req.body;
