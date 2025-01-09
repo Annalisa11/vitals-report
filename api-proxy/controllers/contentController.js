@@ -15,7 +15,6 @@ const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 const getVitals = async (req, res) => {
   // TODO: write middleware for dummy data?
   const guesses = store.get('guesses') ?? 5;
-  console.log('STORE', guesses);
 
   if (USE_DUMMY_DATA === true) {
     console.log('response: ', { ...dummyData.vitals, guesses });
