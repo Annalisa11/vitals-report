@@ -4,6 +4,7 @@ const { PORT, USE_DUMMY_DATA, FRONTEND_URL } = require('./config');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const contentRoutes = require('./routes/contentRoutes');
+const c = require('yoctocolors-cjs');
 
 const connectDB = require('./db');
 
@@ -23,8 +24,21 @@ app.use(userRoutes);
 app.use(contentRoutes);
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Api proxy is running on port ${PORT}`);
-  console.log(`> Dummy Data in use: ${USE_DUMMY_DATA === true}`);
+  console.log('-----------------------------------------------------------');
+  console.log(`🎉 Server starting up... Let's go! 🎉`);
+  console.log(
+    c.blue(
+      `index.js - Server environment: ${
+        FRONTEND_URL.includes('localhost') ? 'development' : 'production'
+      }`
+    )
+  );
+  console.log(c.yellow(`Api proxy is running on port `) + c.italic(`${PORT}`));
+  console.log(
+    c.yellow(`Dummy Data in use: `) +
+      `${USE_DUMMY_DATA === true ? '✅ Yes' : '❌ No'}`
+  );
+  console.log('-----------------------------------------------------------');
 });
 
 connectDB();

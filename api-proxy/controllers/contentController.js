@@ -4,6 +4,7 @@ const {
   getGlucoseRanges,
   getGuessFeedback,
 } = require('../utils/misc.js');
+const { logInfo } = require('../logger.js');
 const dummyData = require('../dummyData');
 // { history: History[][] }
 const fakeData = require('../fakeData.json');
@@ -17,7 +18,6 @@ const getVitals = async (req, res) => {
   const guesses = store.get('guesses') ?? 5;
 
   if (USE_DUMMY_DATA === true) {
-    console.log('response: ', { ...dummyData.vitals, guesses });
     return res.send({ ...dummyData.vitals, guesses });
   }
   try {
@@ -42,7 +42,7 @@ const getHistory = async (req, res) => {
 };
 
 const getGlucoseScore = (req, res) => {
-  console.log('get glucose score');
+  logInfo('get glucose score');
   if (USE_DUMMY_DATA === true) {
     const response = getGlucoseRanges(fakeData.history[0]);
     return res.send(response);
@@ -57,6 +57,8 @@ const getGlucoseScore = (req, res) => {
 };
 
 const openAi = async (req, res) => {
+  logInfo('get ai comment');
+
   if (USE_DUMMY_DATA === true) {
     return res.send(dummyData.openai);
   }
