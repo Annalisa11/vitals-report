@@ -4,26 +4,34 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { EMAIL_USER, JWT_SECRET, FRONTEND_URL } = require('../config');
 const userService = require('../services/userService.js');
-
-// the email html template doesn't work very well... will look at it some other time
+const { logInfo, logError, logSuccess } = require('../logger.js');
 const { emailString } = require('../assets/email/registration-email.js');
 
 const createAccount = (req, res) => {
   const { email, rights } = req.body;
-  const token = signToken({ email, rights });
+  logInfo(`Creating account initiation email for: ${email}`);
 
-  const mailOptions = {
-    from: EMAIL_USER,
-    to: email,
-    subject: 'Complete your registration',
-    html: `Click the link to complete your registration:  ${FRONTEND_URL}/register?token=${token}`,
-  };
+  try {
+    const token = signToken({ email, rights });
+    const mailOptions = {
+      from: EMAIL_USER,
+      to: email,
+      subject: 'Complete your registration',
+      html: `Click the link to complete your registration: ${FRONTEND_URL}/register?token=${token}`,
+    };
 
-  sendEmail(mailOptions, res);
+    sendEmail(mailOptions, res);
+    logSuccess(`Registration email sent to: ${email}`);
+  } catch (error) {
+    logError(`Error sending registration email to: ${email}`);
+    sendError(res, error, 'Failed to send registration email');
+  }
 };
 
 const register = async (req, res) => {
   const { token, username, password } = req.body;
+  logInfo('Registering new user...');
+
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const hashedPassword = bcrypt.hashSync(password, 8);
@@ -34,30 +42,41 @@ const register = async (req, res) => {
       password: hashedPassword,
       rights: decoded.rights,
     };
+
     await userService.createUser(user);
+    logSuccess(`User registered successfully: ${username} (${decoded.email})`);
     res.send('Registration successful');
-  } catch (err) {
-    sendError(res, err, 'Invalid token or token expired');
+  } catch (error) {
+    logError('Failed to register user: Invalid or expired token.');
+    sendError(res, error, 'Invalid token or token expired');
   }
 };
 
 const login = async (req, res) => {
   const { email, password } = req.body;
-  const user = await userService.getUser(email);
+  logInfo(`Login attempt for user: ${email}`);
 
-  //TODO: think about error codes and messages
-  if (!user) {
-    return res.status(404).send('User not found');
+  try {
+    const user = await userService.getUser(email);
+
+    if (!user) {
+      logError(`Login failed: User not found (${email}).`);
+      return res.status(404).send('User not found');
+    }
+
+    const passwordIsValid = bcrypt.compareSync(password, user.password);
+    if (!passwordIsValid) {
+      logError(`Login failed: Invalid password for user (${email}).`);
+      return res.status(401).send('Invalid password');
+    }
+
+    const token = signToken({ id: user.id, rights: user.rights });
+    logSuccess(`User logged in successfully: ${email}`);
+    res.send({ token, user: { ...user } });
+  } catch (error) {
+    logError(`Error during login for user: ${email}`);
+    sendError(res, error, 'Login failed');
   }
-
-  const passwordIsValid = bcrypt.compareSync(password, user.password);
-  if (!passwordIsValid) {
-    return res.status(401).send('Invalid password');
-  }
-
-  //TODO: what id??? XD
-  const token = signToken({ id: user.id, rights: user.rights });
-  res.send({ token, user: { ...user } });
 };
 
 module.exports = {

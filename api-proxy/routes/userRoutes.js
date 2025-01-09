@@ -8,7 +8,7 @@ const {
 const router = express.Router();
 
 router.post('/admin', getAdminInfo);
-router.put('/admin/rights/:username', updateUserRights);
-router.delete('/admin/:username', deleteUser);
+router.put('/admin/rights/:email', updateUserRights);
+router.delete('/admin/:email', deleteUser);
 
 module.exports = router;

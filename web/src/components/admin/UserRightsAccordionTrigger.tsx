@@ -16,10 +16,10 @@ const UserRightsAccordionTrigger = ({
   getAdminInformation,
   ...props
 }: Props) => {
-  const { username } = user;
+  const { username, email } = user;
   const deleteUser = async () => {
     axios
-      .delete(`${BASE_URL}/admin/${username}`)
+      .delete(`${BASE_URL}/admin/${email}`)
       .then(() => {
         getAdminInformation();
       })

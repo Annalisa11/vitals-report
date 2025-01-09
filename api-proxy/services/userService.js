@@ -1,46 +1,39 @@
 const { User } = require('../models/User');
-const { logError } = require('../logger');
+const { logInfo } = require('../logger');
 
 const getUserRights = async (email) => {
-  try {
-    const user = await User.findOne({ email });
+  const user = await User.findOne({ email });
 
-    if (!user) {
-      logError('user not found');
-      throw new Error('user not found');
-    }
-
-    return user.rights;
-  } catch (error) {
-    console.error('Error fetching user rights:', error);
+  if (!user) {
+    throw new Error('User not found');
   }
+
+  return user.rights;
 };
 
 const createUser = async ({ username, email, password, rights }) => {
-  try {
-    const newUser = new User({
-      username: username,
-      email: email,
-      password: password,
-      rights: rights,
-    });
+  const newUser = new User({
+    username,
+    email,
+    password,
+    rights,
+  });
 
-    await newUser.save();
-  } catch (error) {
-    logError('Error creating user:', error);
-  }
+  await newUser.save();
 };
 
 const deleteUser = async (email) => {
-  await User.deleteOne({ email: email });
+  await User.deleteOne({ email });
 };
 
 const getUser = async (email) => {
-  return await User.findOne({ email }).lean();
+  const user = await User.findOne({ email }).lean();
+  return user;
 };
 
 const getAllUsers = async () => {
-  return await User.find().lean();
+  const users = await User.find().lean();
+  return users;
 };
 
 const updateRights = async (email, rights) => {

@@ -6,7 +6,7 @@ import { BASE_URL } from '../../config';
 import { FormEvent, useEffect, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import UserRightsAccordionContent from './UserRightsAccordionContent';
-import UserRightsAccordionTrigger from './UserRightsAccordionTrigger copy';
+import UserRightsAccordionTrigger from './UserRightsAccordionTrigger';
 import { useNavigate } from 'react-router-dom';
 import AdminLogo from '../../assets/admin-person.svg?react';
 import Button from '../basic/Button';
