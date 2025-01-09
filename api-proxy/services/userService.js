@@ -2,7 +2,7 @@ const { User } = require('../models/User');
 
 const getUserRights = async (email) => {
   try {
-    const user = await User.findOne(email);
+    const user = await User.findOne({ email });
 
     if (!user) {
       console.log('user not found');
@@ -36,14 +36,11 @@ const deleteUser = async (email) => {
 };
 
 const getUser = async (email) => {
-  console.log('-- getUser param: ', email);
-  const result = await User.findOne({ email });
-  console.log('-- db getUser: ', result);
-  return result;
+  return await User.findOne({ email }).lean();
 };
 
 const getAllUsers = async () => {
-  return await User.find();
+  return await User.find().lean();
 };
 
 const updateRights = async (email, rights) => {

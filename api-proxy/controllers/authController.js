@@ -16,7 +16,7 @@ const createAccount = (req, res) => {
     from: EMAIL_USER,
     to: email,
     subject: 'Complete your registration',
-    html: `Click the link to complete your registration:  http://${FRONTEND_URL}/register?token=${token}`,
+    html: `Click the link to complete your registration:  ${FRONTEND_URL}/register?token=${token}`,
   };
 
   sendEmail(mailOptions, res);

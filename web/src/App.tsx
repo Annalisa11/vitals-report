@@ -53,7 +53,6 @@ const App: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const { data: vitals, isLoading: vitalsLoading } = useVitals();
   const { isLoggedIn, checkHasRight } = useAuth();
-  console.log('DATA', vitals);
 
   const [isChecked, setIsChecked] = useState(false);
   const [glucoseValue, setGlucoseValue] = useState<number | undefined>();
