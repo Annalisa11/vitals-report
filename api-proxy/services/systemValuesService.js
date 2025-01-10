@@ -1,7 +1,8 @@
 const { SystemValue } = require('../models/SystemValue');
 
 const getGuesses = async () => {
-  return await SystemValue.findOne({ name: 'guesses' });
+  const guesses = await SystemValue.findOne({ name: 'guesses' });
+  return guesses.value;
 };
 
 const saveGuesses = async (guesses) => {
