@@ -9,10 +9,11 @@ const fetchVitals = async () => {
   return response.data;
 };
 
-export const useVitals = () => {
+export const useVitals = (isLoggedIn: boolean) => {
   return useQuery<VitalsType, Error>({
     queryKey: ['vitals'],
     queryFn: fetchVitals,
     refetchInterval: 5 * 60 * 1000,
+    enabled: isLoggedIn,
   });
 };

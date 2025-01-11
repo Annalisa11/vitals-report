@@ -1,7 +1,5 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
 
-import axios from 'axios';
-
 import Accordion from '@components/Accordion';
 import AiComment from '@components/AiComment';
 import Button from '@components/basic/Button';
@@ -14,12 +12,12 @@ import ScoreEmoji from '@components/ScoreEmoji';
 import ThemeDropdown from '@forms/ThemeDropdown';
 import Vitals from '@components/Vitals';
 
-import { BASE_URL } from '@/config';
 import { useVitals } from '@hooks/useVitals';
 import useAuth from '@hooks/useAuth';
 import { ThemeContext } from '@providers/ThemeContext';
 
 import './App.scss';
+import { useGuesses } from '@hooks/useGuesses';
 
 export type VitalsType = {
   Timestamp: string;
@@ -52,55 +50,23 @@ export type Range = {
 };
 
 const App: React.FC = () => {
-  const { theme } = useContext(ThemeContext);
-  const { data: vitals, isLoading: vitalsLoading } = useVitals();
   const { isLoggedIn, checkHasRight } = useAuth();
+  const { theme } = useContext(ThemeContext);
+  const { data: vitals, isLoading: vitalsLoading } = useVitals(isLoggedIn);
 
   const [isChecked, setIsChecked] = useState(false);
   const [glucoseValue, setGlucoseValue] = useState<number | undefined>();
-  const [score, setScore] = useState<string>('');
-  const [guesses, setGuesses] = useState<number>(0);
+
+  const { guesses, score, tryGuess } = useGuesses();
 
   useEffect(() => {
     document.documentElement.setAttribute('theme', theme);
   }, [theme]);
 
-  useEffect(() => {
-    const initializeGuesses = () => {
-      const storedGuesses = sessionStorage.getItem('guesses');
-      if (storedGuesses) {
-        setGuesses(Number(storedGuesses));
-      } else if (vitals && vitals.guesses !== undefined) {
-        setGuesses(vitals.guesses);
-      }
-    };
-    initializeGuesses();
-  }, [vitals]);
-
-  useEffect(() => {
-    if (guesses) {
-      sessionStorage.setItem('guesses', String(guesses));
-    }
-  }, [guesses]);
-
   const handleGlucoseSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (guesses <= 0) return;
-
-    try {
-      const response = await axios.post(`${BASE_URL}/guess`, {
-        value: glucoseValue,
-      });
-      const message = response.data;
-      setScore(message);
-      setGuesses((prev) => {
-        const newGuesses = prev - 1;
-        sessionStorage.setItem('guesses', String(newGuesses));
-        return newGuesses;
-      });
-    } catch (error) {
-      console.error('Error submitting guess:', error);
-    }
+    if (guesses <= 0 || !glucoseValue) return;
+    tryGuess(glucoseValue);
   };
 
   return (
