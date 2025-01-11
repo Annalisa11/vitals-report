@@ -1,8 +1,8 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/pages/Login.scss';
-import Button from '../components/basic/Button';
-import useAuth from '../hooks/useAuth';
+import '@styles/pages/Login.scss';
+import Button from '@components/basic/Button';
+import useAuth from '@hooks/useAuth';
 
 const LoginPage = () => {
   const [email, setUsername] = useState('');

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import '../styles/Jokes.scss';
+import '@styles/Jokes.scss';
 import Logo from '../assets/whatsapp.svg?react';
 import Button from './basic/Button';
 

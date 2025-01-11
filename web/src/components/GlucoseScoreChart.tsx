@@ -6,8 +6,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import hooks from '../hooks/useHistory';
-import '../styles/GlucoseChart.scss';
+import hooks from '@hooks/useHistory';
+import '@styles/GlucoseChart.scss';
 
 interface Props {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

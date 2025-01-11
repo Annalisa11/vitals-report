@@ -1,6 +1,6 @@
 // Accordion.jsx
 import React from 'react';
-import '../styles/Accordion.scss';
+import '@styles/Accordion.scss';
 
 interface Props {
   isOpen: boolean;

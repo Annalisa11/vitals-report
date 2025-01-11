@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
-import { Theme, ThemeContext } from '../providers/ThemeContext';
-import '../styles/forms/ThemeDropdown.scss';
+import { Theme, ThemeContext } from '@providers/ThemeContext';
+import '@styles/forms/ThemeDropdown.scss';
 
 const ThemeDropdown = () => {
   const { changeTheme, theme } = useContext(ThemeContext);

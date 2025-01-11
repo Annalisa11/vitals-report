@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { FormEvent, useState } from 'react';
-import { BASE_URL } from '../config';
+import { BASE_URL } from '@/config';
 import { useSearchParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Button from '../components/basic/Button';
+import Button from '@components/basic/Button';
 
 const RegisterPage = () => {
   const navigate = useNavigate();

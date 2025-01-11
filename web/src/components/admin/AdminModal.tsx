@@ -2,16 +2,16 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import './AdminModal.scss';
 import axios from 'axios';
-import { BASE_URL } from '../../config';
+import { BASE_URL } from '@/config';
 import { FormEvent, useEffect, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import UserRightsAccordionContent from './UserRightsAccordionContent';
 import UserRightsAccordionTrigger from './UserRightsAccordionTrigger';
 import { useNavigate } from 'react-router-dom';
 import AdminLogo from '../../assets/admin-person.svg?react';
-import Button from '../basic/Button';
-import useAuth from '../../hooks/useAuth';
-import { User } from '../../providers/AuthContext';
+import Button from '@components/basic/Button';
+import useAuth from '@hooks/useAuth';
+import { User } from '@providers/AuthContext';
 
 const AdminModal = () => {
   const navigate = useNavigate();

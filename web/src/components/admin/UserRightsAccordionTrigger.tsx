@@ -1,5 +1,5 @@
 import * as Accordion from '@radix-ui/react-accordion';
-import { User } from '../../providers/AuthContext';
+import { User } from '@providers/AuthContext';
 import './UserAccordion.scss';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
 

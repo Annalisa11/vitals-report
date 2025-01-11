@@ -1,4 +1,4 @@
-import '../styles/Vitals.scss';
+import '@styles/Vitals.scss';
 
 interface Props {
   ValueInMgPerDl?: number;

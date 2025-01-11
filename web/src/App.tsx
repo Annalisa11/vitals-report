@@ -1,22 +1,24 @@
 import React, { FormEvent, useContext, useEffect, useState } from 'react';
+
 import axios from 'axios';
 
-import Vitals from './components/Vitals';
-import Jokes from './components/Jokes';
-import GlucoseChart from './components/GlucoseChart';
-import AiComment from './components/AiComment';
-import GlucoseScoreChart from './components/GlucoseScoreChart';
-import Accordion from './components/Accordion';
-import ScoreEmoji from './components/ScoreEmoji';
-import GlucoseBox from './components/GlucoseBox';
-import Button from './components/basic/Button';
+import Accordion from '@components/Accordion';
+import AiComment from '@components/AiComment';
+import Button from '@components/basic/Button';
+import GlucoseBox from '@components/GlucoseBox';
+import GlucoseChart from '@components/GlucoseChart';
+import GlucoseScoreChart from '@components/GlucoseScoreChart';
+import Header from '@components/Header';
+import Jokes from '@components/Jokes';
+import ScoreEmoji from '@components/ScoreEmoji';
+import ThemeDropdown from '@forms/ThemeDropdown';
+import Vitals from '@components/Vitals';
 
-import { useVitals } from './hooks/useVitals';
-import useAuth from './hooks/useAuth';
-import { ThemeContext } from './providers/ThemeContext';
-import { BASE_URL } from './config';
-import Header from './components/Header';
-import ThemeDropdown from './forms/ThemeDropdown';
+import { BASE_URL } from '@/config';
+import { useVitals } from '@hooks/useVitals';
+import useAuth from '@hooks/useAuth';
+import { ThemeContext } from '@providers/ThemeContext';
+
 import './App.scss';
 
 export type VitalsType = {

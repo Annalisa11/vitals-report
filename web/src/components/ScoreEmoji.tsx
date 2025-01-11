@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
-import hooks from '../hooks/useHistory';
-import '../styles/ScoreEmoji.scss';
+import hooks from '@hooks/useHistory';
+import '@styles/ScoreEmoji.scss';
 import JSConfetti from 'js-confetti';
-import { ThemeContext } from '../providers/ThemeContext';
+import { ThemeContext } from '@providers/ThemeContext';
 
 const ScoreEmoji = () => {
   const { useGlucoseScore } = hooks;

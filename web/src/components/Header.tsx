@@ -1,10 +1,10 @@
 // Header.tsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
+import useAuth from '@hooks/useAuth';
 import AdminModal from './admin/AdminModal';
 import Button from './basic/Button';
-import '../styles/Header.scss';
+import '@styles/Header.scss';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();

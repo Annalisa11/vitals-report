@@ -1,4 +1,4 @@
-import '../styles/forms/RightsCheckbox.scss';
+import '@styles/forms/RightsCheckbox.scss';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;

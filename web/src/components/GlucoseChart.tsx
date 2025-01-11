@@ -17,9 +17,9 @@ import {
   ReferenceLine,
   ReferenceArea,
 } from 'recharts';
-import { useHistory } from '../hooks/useHistory.ts';
-import '../styles/GlucoseChart.scss';
-import { VitalsType } from '../App.tsx';
+import { useHistory } from '@hooks/useHistory.ts';
+import '@styles/GlucoseChart.scss';
+import { VitalsType } from '@/App.tsx';
 import NightLogo from '../assets/moon.svg?react';
 import ToggleSwitch from './ToggleSwitch.tsx';
 

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { useAIComment } from '../hooks/useAIComment';
-import { VitalsType } from '../App';
-import '../styles/AiComment.scss';
+import { useAIComment } from '@hooks/useAIComment';
+import { VitalsType } from '@/App';
+import '@styles/AiComment.scss';
 
 interface Props {
   vitals: VitalsType | undefined;
