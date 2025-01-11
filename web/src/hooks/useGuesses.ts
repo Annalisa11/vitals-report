@@ -23,6 +23,7 @@ export const useGuesses = () => {
     if (storedGuesses) {
       setGuesses(Number(storedGuesses));
     } else {
+      console.log('get guesses');
       getGuesses();
     }
   };

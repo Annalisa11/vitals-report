@@ -121,6 +121,17 @@ const guess = async (req, res) => {
   }
 };
 
+const getGuesses = async (req, res) => {
+  try {
+    logInfo('Getting stored guesses number...');
+
+    const guesses = await systemValuesService.getGuesses();
+    return res.send({ value: guesses });
+  } catch (e) {
+    logError('Error getting stored guesses.', e);
+  }
+};
+
 const setGuessesNumber = async (req, res) => {
   logInfo('Updating guesses number...');
   await systemValuesService.saveGuesses(req.body.guesses);
@@ -135,4 +146,5 @@ module.exports = {
   openAi,
   guess,
   setGuessesNumber,
+  getGuesses,
 };
