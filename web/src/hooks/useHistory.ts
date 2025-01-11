@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { GlucoseScoreResult, VitalsType } from '@/App';
 import axios from 'axios';
 import { BASE_URL } from '@/config';
+import { GlucoseScoreResult, VitalsType } from '@/types/types';
 
 const fetchHistory = async () => {
   const response = await axios.get(`${BASE_URL}/history`);

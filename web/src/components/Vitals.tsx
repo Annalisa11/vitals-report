@@ -1,10 +1,10 @@
 import '@styles/Vitals.scss';
-import { VitalsType } from '@/App';
 import dayjs from 'dayjs';
 import 'dayjs/locale/de';
 import localizedFormat from 'dayjs/plugin/localizedFormat'; // ES 2015
 import GlucoseBox from './GlucoseBox';
 import useAuth from '@hooks/useAuth';
+import { VitalsType } from '@/types/types';
 
 dayjs.extend(localizedFormat);
 

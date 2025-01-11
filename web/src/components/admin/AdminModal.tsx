@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminLogo from '../../assets/admin-person.svg?react';
 import Button from '@components/basic/Button';
 import useAuth from '@hooks/useAuth';
-import { User } from '@providers/AuthContext';
+import { User } from '@/types/types';
 
 const AdminModal = () => {
   const navigate = useNavigate();

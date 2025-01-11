@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { VitalsType } from '@/App';
 import axios from 'axios';
 import { BASE_URL } from '@/config';
+import { VitalsType } from '@/types/types';
 
 const fetchVitals = async () => {
   const response = await axios.get(`${BASE_URL}/vitals`);

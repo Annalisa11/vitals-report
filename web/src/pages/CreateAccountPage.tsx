@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { BASE_URL } from '@/config';
 import { FormEvent, useState } from 'react';
-import RightsCheckbox, { Right } from '@forms/RightsCheckbox';
+import RightsCheckbox from '@forms/RightsCheckbox';
 import Button from '@components/basic/Button';
 import useAuth from '@hooks/useAuth';
 import '@styles/pages/CreateAccount.scss';
+import { Right } from '@/types/types';
 
 const CreateAccountPage = () => {
   const defaultRights: Right[] = ['chart', 'vitals-details'];

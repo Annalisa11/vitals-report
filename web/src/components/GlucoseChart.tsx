@@ -19,9 +19,9 @@ import {
 } from 'recharts';
 import { useHistory } from '@hooks/useHistory.ts';
 import '@styles/GlucoseChart.scss';
-import { VitalsType } from '@/App.tsx';
 import NightLogo from '../assets/moon.svg?react';
 import ToggleSwitch from './ToggleSwitch.tsx';
+import { VitalsType } from '@/types/types.ts';
 
 dayjs.extend(customParseFormat);
 dayjs.extend(isToday);

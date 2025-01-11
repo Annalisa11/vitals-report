@@ -35,6 +35,7 @@
       "@providers/*": ["src/providers/*"],
       "@styles/*": ["src/styles/*"],
       "@pages/*": ["src/pages/*"],
+      "@types/*": ["src/types/*"],
       "@/*": ["src/*"]
     }
   },

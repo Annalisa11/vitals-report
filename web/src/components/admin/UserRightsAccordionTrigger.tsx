@@ -1,7 +1,7 @@
 import * as Accordion from '@radix-ui/react-accordion';
-import { User } from '@providers/AuthContext';
 import './UserAccordion.scss';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { User } from '@/types/types';
 
 interface Props {
   user: User;

@@ -1,3 +1,4 @@
+import { Right } from '@/types/types';
 import '@styles/forms/RightsCheckbox.scss';
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -7,8 +8,6 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   compact?: boolean;
   onCheckboxChange: (value: string, checked: boolean) => void;
 }
-
-export type Right = 'chart' | 'vitals-details' | 'create-account';
 
 const RightsCheckbox = ({
   name,

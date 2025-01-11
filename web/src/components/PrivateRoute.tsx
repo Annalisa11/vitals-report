@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { Right } from '@forms/RightsCheckbox';
 import useAuth from '@hooks/useAuth';
+import { Right } from '@/types/types';
 
 interface Props {
   redirectTo: string;

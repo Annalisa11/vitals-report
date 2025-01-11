@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { BASE_URL } from '@/config';
-import { GlucoseScore, VitalsType } from '@/App';
+import { GlucoseScore, VitalsType } from '@/types/types';
 
 const generateSarcasticComment = async (vitals: VitalsType) => {
   const prompt = `Generate a message with a very short heading with a fitting emoji, followed by a short, funny and sarcastic text that comments on these diabetes vitals: ${JSON.stringify(

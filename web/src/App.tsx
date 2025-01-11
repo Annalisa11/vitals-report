@@ -11,36 +11,6 @@ import './App.scss';
 import LoggedInView from '@components/views/LoggedInView';
 import LoggedOutView from '@components/views/LoggedOutView';
 
-export type VitalsType = {
-  Timestamp: string;
-  ValueInMgPerDl: number;
-  TrendArrow: {
-    value: number;
-    icon: string;
-    message: string;
-  };
-  Value: number;
-  isHigh: boolean;
-  isLow: boolean;
-  guesses?: number;
-};
-
-export type GlucoseScore = {
-  inRange: number;
-  belowRange: number;
-  aboveRange: number;
-};
-
-export type GlucoseScoreResult = {
-  ranges: Range[];
-  emoji: number;
-};
-
-export type Range = {
-  name: string;
-  value: number;
-};
-
 const App: React.FC = () => {
   const { isLoggedIn } = useAuth();
   const { theme } = useContext(ThemeContext);

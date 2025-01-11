@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext, AuthContextProps } from '@providers/AuthContext';
-import { Right } from '@forms/RightsCheckbox';
+import { Right } from '@/types/types';
 
 const useAuth = () => {
   const context = useContext<AuthContextProps>(AuthContext);

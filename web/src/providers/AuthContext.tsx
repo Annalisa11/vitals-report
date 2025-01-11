@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import { BASE_URL } from '@/config';
 import { useNavigate } from 'react-router-dom';
-import { Right } from '@forms/RightsCheckbox';
+import { User } from '../types/types';
 
 export interface AuthContextProps {
   token: string;
@@ -23,12 +23,6 @@ export const AuthContext = createContext<AuthContextProps>({
 interface ProviderProps {
   children?: React.ReactNode;
 }
-
-export type User = {
-  username: string;
-  email?: string; //TODO: make email required, add id??
-  rights: Right[];
-};
 
 const AuthProvider = ({ children }: ProviderProps) => {
   const navigate = useNavigate();

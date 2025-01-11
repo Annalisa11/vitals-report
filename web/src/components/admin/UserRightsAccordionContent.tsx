@@ -2,14 +2,14 @@ import { FormEvent, useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
 import axios from 'axios';
 import { BASE_URL } from '../../config';
-import RightsCheckbox, { Right } from '../../forms/RightsCheckbox';
-import { User } from '@providers/AuthContext';
+import RightsCheckbox from '../../forms/RightsCheckbox';
 import Button from '@components/basic/Button';
 import CloseIcon from '../../assets/close.svg?react';
 import EditIcon from '../../assets/edit.svg?react';
 import SaveIcon from '../../assets/check.svg?react';
 import './UserRightsAccordionContent.scss';
 import TrashIcon from '../../assets/trash.svg?react';
+import { Right, User } from '@/types/types';
 
 interface Props {
   user: User;
