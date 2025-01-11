@@ -8,7 +8,8 @@ import Button from '../basic/Button';
 import CloseIcon from '../../assets/close.svg?react';
 import EditIcon from '../../assets/edit.svg?react';
 import SaveIcon from '../../assets/check.svg?react';
-import './AdminModal.scss';
+import './UserRightsAccordionContent.scss';
+import TrashIcon from '../../assets/trash.svg?react';
 
 interface Props {
   user: User;
@@ -20,7 +21,7 @@ const UserRightsAccordionContent = ({
   getAdminInformation,
   ...props
 }: Props) => {
-  const { username, rights } = user;
+  const { username, rights, email } = user;
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [checkedRights, setCheckedRights] = useState<Right[]>(rights);
   const allRights: Right[] = ['vitals-details', 'chart', 'create-account'];
@@ -47,12 +48,24 @@ const UserRightsAccordionContent = ({
         console.log(error);
       });
   };
+
+  const deleteUser = async () => {
+    axios
+      .delete(`${BASE_URL}/admin/${email}`)
+      .then(() => {
+        getAdminInformation();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <Accordion.Content className='accordion-content' {...props}>
-      <div>
-        <form onSubmit={handleSaveRights}>
+      <div className='accordion-content__container'>
+        <form onSubmit={handleSaveRights} className='rights'>
           {allRights.map((right, i) => (
             <RightsCheckbox
+              compact
               name={right}
               right={right}
               rights={checkedRights}
@@ -62,31 +75,36 @@ const UserRightsAccordionContent = ({
             />
           ))}
           <div className='crud-buttons'>
-            <Button
-              id='special-button'
-              type='button'
-              onClick={() => {
-                if (isEditMode) {
-                  setCheckedRights(rights);
-                }
-                setIsEditMode((prev) => !prev);
-              }}
-              options={{ compact: true }}
-            >
-              {isEditMode ? (
-                <CloseIcon className='icon enter' />
-              ) : (
-                <EditIcon className='icon enter' />
-              )}
+            <Button variant='delete' onClick={() => deleteUser()}>
+              <TrashIcon /> delete User
             </Button>
-            <Button
-              type='submit'
-              variant='green'
-              options={{ compact: true }}
-              disabled={!isEditMode}
-            >
-              <SaveIcon />
-            </Button>
+            <div className='crud-buttons__right'>
+              <Button
+                id='special-button'
+                type='button'
+                onClick={() => {
+                  if (isEditMode) {
+                    setCheckedRights(rights);
+                  }
+                  setIsEditMode((prev) => !prev);
+                }}
+                options={{ compact: true }}
+              >
+                {isEditMode ? (
+                  <CloseIcon className='icon enter' />
+                ) : (
+                  <EditIcon className='icon enter' />
+                )}
+              </Button>
+              <Button
+                type='submit'
+                variant='green'
+                options={{ compact: true }}
+                disabled={!isEditMode}
+              >
+                <SaveIcon />
+              </Button>
+            </div>
           </div>
         </form>
       </div>

@@ -8,6 +8,10 @@
     align-items: center;
     margin: 0.5rem;
 
+    &.compact {
+      margin: 4px;
+    }
+
     input[type='checkbox'] {
       --active: var(--color-secondary);
       --active-inner: #fff;

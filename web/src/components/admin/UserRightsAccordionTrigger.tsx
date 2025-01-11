@@ -1,40 +1,20 @@
 import * as Accordion from '@radix-ui/react-accordion';
-import axios from 'axios';
-import { BASE_URL } from '../../config';
 import { User } from '../../providers/AuthContext';
-import Button from '../basic/Button';
-import TrashIcon from '../../assets/trash.svg?react';
 import './UserAccordion.scss';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
 
 interface Props {
   user: User;
-  getAdminInformation: () => Promise<void>;
 }
 
-const UserRightsAccordionTrigger = ({
-  user,
-  getAdminInformation,
-  ...props
-}: Props) => {
-  const { username, email } = user;
-  const deleteUser = async () => {
-    axios
-      .delete(`${BASE_URL}/admin/${email}`)
-      .then(() => {
-        getAdminInformation();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+const UserRightsAccordionTrigger = ({ user, ...props }: Props) => {
+  const { username } = user;
 
   return (
     <Accordion.Header className='accordion-header' {...props}>
       <Accordion.Trigger className='accordion-trigger'>
         {username}
-        <Button variant='delete' onClick={() => deleteUser()}>
-          <TrashIcon />
-        </Button>
+        <ChevronDownIcon className='AccordionChevron' aria-hidden />
       </Accordion.Trigger>
     </Accordion.Header>
   );

@@ -4,6 +4,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   right: Right;
   rights: Right[];
+  compact?: boolean;
   onCheckboxChange: (value: string, checked: boolean) => void;
 }
 
@@ -15,6 +16,7 @@ const RightsCheckbox = ({
   onCheckboxChange,
   rights,
   disabled = false,
+  compact,
   ...rest
 }: Props) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +25,7 @@ const RightsCheckbox = ({
   };
 
   return (
-    <div className='checkbox'>
+    <div className={`checkbox ${compact ? 'compact' : ''}`}>
       <input
         id={`${right}`}
         type='checkbox'

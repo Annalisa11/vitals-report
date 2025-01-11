@@ -69,7 +69,10 @@ const AdminModal = () => {
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className='DialogOverlay' />
-        <Dialog.Content className='DialogContent'>
+        <Dialog.Content
+          className='DialogContent'
+          onOpenAutoFocus={(e: Event) => e.preventDefault()}
+        >
           <Dialog.Title className='DialogTitle'>
             <div className='DialogTitle__headline'>
               <AdminLogo className='logo' />
@@ -81,7 +84,10 @@ const AdminModal = () => {
           <div className='privacy-settings'>
             <h2>Manage Privacy Settings</h2>
             <small>Number of guesses logged out users have</small>
-            <form onSubmit={handleSubmit}>
+            <form
+              onSubmit={handleSubmit}
+              className='privacy-settings__guess-form'
+            >
               <div>
                 <small>{isGuessEdit && 'not saved'}</small>
                 <input
@@ -114,10 +120,7 @@ const AdminModal = () => {
                       className='accordion-item'
                       value={user.username}
                     >
-                      <UserRightsAccordionTrigger
-                        user={user}
-                        getAdminInformation={getAdminInformation}
-                      />
+                      <UserRightsAccordionTrigger user={user} />
                       <UserRightsAccordionContent
                         user={user}
                         getAdminInformation={getAdminInformation}

@@ -11,15 +11,17 @@
     .accordion-trigger {
       display: flex;
       justify-content: space-between;
+
+      .AccordionChevron {
+        color: var(--violet-10);
+        transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
+      }
+      &[data-state='open'] > .AccordionChevron {
+        transform: rotate(180deg);
+      }
     }
   }
 
   .accordion-content {
-    .crud-buttons {
-      display: flex;
-      justify-content: flex-end;
-      gap: 0.5rem;
-      padding: 0 20px 10px 20px;
-    }
   }
 }
