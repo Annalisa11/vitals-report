@@ -1,0 +1,40 @@
+components:
+  schemas:
+    AdminUser:
+      type: object
+      required:
+        - email
+        - rights
+      properties:
+        username:
+          type: string
+          example: David
+        email:
+          type: string
+          example: admin@example.com
+        rights:
+          type: array
+          items:
+            type: string
+          description: >
+            List of rights assigned to the user. Must include "create-account" to be an admin.
+          example: ['create-account', 'vitals-report', 'chart']
+    User:
+      type: object
+      required:
+        - email
+      properties:
+        username:
+          type: string
+          default: Hyunbin
+        email:
+          type: string
+          default: user@example.com
+        rights:
+          type: array
+          items:
+            type: string
+          default:
+            - vitals-details
+            - chart
+            - create-account

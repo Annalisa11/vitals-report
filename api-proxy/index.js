@@ -6,6 +6,7 @@ const userRoutes = require('./routes/userRoutes');
 const contentRoutes = require('./routes/contentRoutes');
 const axios = require('axios');
 const c = require('yoctocolors-cjs');
+const swaggerDocs = require('./swagger');
 
 const connectDB = require('./db');
 
@@ -36,6 +37,7 @@ async function getRenderIP() {
 getRenderIP();
 
 app.listen(PORT, '0.0.0.0', () => {
+  swaggerDocs(app, PORT);
   console.log('-----------------------------------------------------------');
   console.log(`🎉 Server starting up... Let's go! 🎉`);
   console.log(
