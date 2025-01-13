@@ -87,11 +87,8 @@ The Node.js backend persists data simply by storing it into a json file.
 This file is not pushed to github, instead it will be created automatically if it doesn't exist already.  
 It will also create a user with the information you stored in the environmental variables `INITIAL_USER_USERNAME`, `INITIAL_USER_EMAIL`, `INITIAL_USER_PASSWORD` and all the rights there are. The user will thus be an admin with full rights, so choose carefully.
 
-> project-root   
-> ├── api-proxy  
-> │   ├── index.js   
-> │   ├── store.json   
-> ...
+> **NOTE**
+> only history data is still stored in the `store.json`file. Users and guesses are taken from the database, this means that the initial user is not important anymore and will be removed in the future.
 
 An example of the content of the `store.json` file after it is created:  
 ```json
@@ -115,6 +112,9 @@ An example of the content of the `store.json` file after it is created:
 
 The backend stores data in a MongoDB database.  
 For the database operations [mongoose](https://mongoosejs.com/) is used instead of the mongodb package.  
+
+Since the connection to the database is limited to specific IP addresses, the server logs the current IP address when it is started.  
+If the connection to the database doesn't work, one issue might be that the IP address was changed. In that case copy the logged IP address and grant it access in the MongoDB interface.   
 
 
 ## 🚀 Run the Project
