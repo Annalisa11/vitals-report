@@ -109,8 +109,8 @@ const guess = async (req, res) => {
 
   try {
     const { value } = req.body;
-    const history = store.get('history');
-    const realValue = history[history.length - 1].Value;
+    const response = await axios.get(`${API_URL}/cgm?type=current`);
+    const realValue = response.data.Value;
     const message = getGuessFeedback(value, realValue);
 
     logSuccess('Processed user guess successfully.');

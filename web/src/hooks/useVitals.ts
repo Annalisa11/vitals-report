@@ -3,7 +3,7 @@ import axios from 'axios';
 import { BASE_URL } from '@/config';
 import { VitalsType } from '@/types/types';
 
-const fetchVitals = async () => {
+const fetchVitals = async (): Promise<VitalsType> => {
   const response = await axios.get(`${BASE_URL}/vitals`);
 
   return response.data;
